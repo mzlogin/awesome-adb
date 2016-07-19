@@ -1,6 +1,6 @@
-# awesome-adb
+# Adb 用法大全
 
-Adb 用法大全。
+Adb，即 [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)，它是 Android 开发/测试人员不可替代的强大工具，也是 Android 手机玩家的好玩具。
 
 ## 目录
 
