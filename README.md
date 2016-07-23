@@ -1,6 +1,8 @@
 # Adb 用法大全
 
-Adb，即 [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)，它是 Android 开发/测试人员不可替代的强大工具，也是 Android 手机玩家的好玩具。
+Adb，即 [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)，它是 Android 开发/测试人员不可替代的强大工具，也是 Android 设备玩家的好玩具。
+
+本文档主要参考 adb 的官方文档和网络上的部分网友整理，详情见 [参考链接][#参考链接]。有部分命令的支持情况可能与 Android 系统版本及定制 ROM 的实现有关。
 
 ## 目录
 
@@ -19,9 +21,9 @@ Adb，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 * [调试](#调试)
 	* [查看/过滤日志](#查看过滤日志)
 * [查看设备信息](#查看设备信息)
-	* [查看手机型号](#查看手机型号)
-	* [查看手机电池状况](#查看手机电池状况)
-	* [查看手机分辨率](#查看手机分辨率)
+	* [查看设备型号](#查看设备型号)
+	* [查看设备电池状况](#查看设备电池状况)
+	* [查看设备分辨率](#查看设备分辨率)
 	* [查看 android\_id](#查看-android_id)
 * [其它实用功能](#其它实用功能)
 	* [录制屏幕](#录制屏幕)
@@ -45,7 +47,15 @@ cf264b8f	device
 emulator-5554	device
 ```
 
-该输出显示当前已经连接了两台设备/模拟器，`cf264b8f` 与 `emulator-5554` 分别是它们的 SN。从 `emulator-5554` 这个名字可以看出它是一个 Android 模拟器。
+输出格式为 `[serialNumber] [state]`，serialNumber 即我们常说的 SN，state 有如下几种：
+
+* `offline` —— 表示设备未连接成功或无响应。
+
+* `device` —— 设备已连接。注意这个状态并不能标识 Android 系统已经完全启动和可操作，在设备启动过程中设备实例就可连接到 adb，但启动完毕后系统才处于可操作状态。
+
+* `no device` —— 没有设备/模拟器连接。
+
+以上输出显示当前已经连接了两台设备/模拟器，`cf264b8f` 与 `emulator-5554` 分别是它们的 SN。从 `emulator-5554` 这个名字可以看出它是一个 Android 模拟器。
 
 常见异常输出：
 
@@ -55,7 +65,7 @@ emulator-5554	device
    List of devices attached
    ```
 
-2. 设备/模拟器未连接到 adb 或它无法响应。
+2. 设备/模拟器未连接到 adb 或无响应。
 
    ```
    List of devices attached
@@ -143,9 +153,9 @@ Success
 | INSTALL\_FAILED\_TEST\_ONLY                        | 应用是 test-only 的，但安装时没有指定 `-t` 参数                          |                                                 |
 | INSTALL\_FAILED\_CPU\_ABI\_INCOMPATIBLE            | 包含不兼容设备 CPU 应用程序二进制接口的 native code                      |                                                 |
 | INSTALL\_FAILED\_MISSING\_FEATURE                  | 应用使用了设备不可用的功能                                               |                                                 |
-| INSTALL\_FAILED\_CONTAINER\_ERROR                  | sdcard 访问失败                                                          | 确认 sdcard 可用，或者安装到手机内存            |
+| INSTALL\_FAILED\_CONTAINER\_ERROR                  | sdcard 访问失败                                                          | 确认 sdcard 可用，或者安装到内置存储            |
 | INSTALL\_FAILED\_INVALID\_INSTALL\_LOCATION        | 不能安装到指定位置                                                       | 切换安装位置，添加或删除 `-s` 参数              |
-| INSTALL\_FAILED\_MEDIA\_UNAVAILABLE                | 安装位置不可用                                                           | 一般为 sdcard，确认 sdcard 可用或安装到手机内存 |
+| INSTALL\_FAILED\_MEDIA\_UNAVAILABLE                | 安装位置不可用                                                           | 一般为 sdcard，确认 sdcard 可用或安装到内置存储 |
 | INSTALL\_FAILED\_VERIFICATION\_TIMEOUT             | 验证安装包超时                                                           |                                                 |
 | INSTALL\_FAILED\_VERIFICATION\_FAILURE             | 验证安装包失败                                                           |                                                 |
 | INSTALL\_FAILED\_PACKAGE\_CHANGED                  | 应用与调用程序期望的不一致                                               |                                                 |
@@ -156,7 +166,7 @@ Success
 | INSTALL\_PARSE\_FAILED\_BAD\_MANIFEST              | 无法解析的 AndroidManifest.xml 文件                                      |                                                 |
 | INSTALL\_PARSE\_FAILED\_UNEXPECTED\_EXCEPTION      | 解析器遇到异常                                                           |                                                 |
 | INSTALL\_PARSE\_FAILED\_NO\_CERTIFICATES           | 安装包没有签名                                                           |                                                 |
-| INSTALL\_PARSE\_FAILED\_INCONSISTENT\_CERTIFICATES | 已安装该应用，且签名与 APK 文件不一致                                    | 先卸载手机上的该应用，再安装                    |
+| INSTALL\_PARSE\_FAILED\_INCONSISTENT\_CERTIFICATES | 已安装该应用，且签名与 APK 文件不一致                                    | 先卸载设备上的该应用，再安装                    |
 | INSTALL\_PARSE\_FAILED\_CERTIFICATE\_ENCODING      | 解析 APK 文件时遇到 `CertificateEncodingException`                       |                                                 |
 | INSTALL\_PARSE\_FAILED\_BAD\_PACKAGE\_NAME         | manifest 文件里没有或者使用了无效的包名                                  |                                                 |
 | INSTALL\_PARSE\_FAILED\_BAD\_SHARED\_USER\_ID      | manifest 文件里指定了无效的共享用户 ID                                   |                                                 |
@@ -182,7 +192,21 @@ Success
 
 ### 卸载应用
 
-// TODO
+命令：
+
+```
+adb uninstall [-k] <packagename>
+```
+
+`<packagename>` 表示应用的包名，`-k` 参数可选，表示卸载应用但保留数据和缓存目录。
+
+命令示例：
+
+```
+adb uninstall com.qihoo360.mobilesafe
+```
+
+表示卸载 360 手机卫士。
 
 ### 调起应用
 
@@ -248,7 +272,7 @@ adb push ~/sr.mp4 /sdcard/
 
 ## 查看设备信息
 
-### 查看手机型号
+### 查看设备型号
 
 命令：
 
@@ -262,7 +286,7 @@ adb shell getprop ro.product.model
 Nexus 5
 ```
 
-### 查看手机电池状况
+### 查看设备电池状况
 
 命令：
 
@@ -289,7 +313,7 @@ Current Battery Service state:
 
 其中 `scale` 代表最大电量，`level` 代表当前电量。上面的输出表示还剩下 44% 的电量。
 
-### 查看手机分辨率
+### 查看设备分辨率
 
 命令：
 
@@ -354,3 +378,4 @@ adb pull /sdcard/filename.mp4
 
 * [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)
 * [ADB Shell Commands](https://developer.android.com/studio/command-line/shell.html)
+| INSTALL\_FAILED\_MEDIA\_UNAVAILABLE                | 安装位置不可用                                                           | 一般为 sdcard，确认 sdcard 可用或安装到内存 |
