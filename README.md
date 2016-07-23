@@ -378,4 +378,3 @@ adb pull /sdcard/filename.mp4
 
 * [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)
 * [ADB Shell Commands](https://developer.android.com/studio/command-line/shell.html)
-| INSTALL\_FAILED\_MEDIA\_UNAVAILABLE                | 安装位置不可用                                                           | 一般为 sdcard，确认 sdcard 可用或安装到内存 |
