@@ -2,7 +2,7 @@
 
 Adb，即 [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)，它是 Android 开发/测试人员不可替代的强大工具，也是 Android 设备玩家的好玩具。
 
-本文档主要参考 adb 的官方文档和网络上的部分网友整理，详情见 [参考链接][#参考链接]。有部分命令的支持情况可能与 Android 系统版本及定制 ROM 的实现有关。
+*本文档主要参考 adb 的官方文档和网络上的部分网友整理，详情见 [参考链接](#参考链接)。有部分命令的支持情况可能与 Android 系统版本及定制 ROM 的实现有关。*
 
 ## 目录
 
