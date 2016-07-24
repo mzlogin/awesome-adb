@@ -1,19 +1,26 @@
-# Adb 用法大全
+# adb 用法大全
 
-Adb，即 [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)，它是 Android 开发/测试人员不可替代的强大工具，也是 Android 设备玩家的好玩具。
+adb，即 [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)，它是 Android 开发/测试人员不可替代的强大工具，也是 Android 设备玩家的好玩具。
 
-*本文档主要参考 adb 的官方文档和网络上的部分网友整理，详情见 [参考链接](#参考链接)。有部分命令的支持情况可能与 Android 系统版本及定制 ROM 的实现有关。*
+持续更新中，欢迎补充指正。
+
+**注：**有部分命令的支持情况可能与 Android 系统版本及定制 ROM 的实现有关。
 
 ## 目录
 
+* [基本用法](#基本用法)
+	* [命令格式](#命令格式)
+	* [启动/停止](#启动停止)
 * [设备连接管理](#设备连接管理)
 	* [查询已连接设备/模拟器](#查询已连接设备模拟器)
+	* [USB 连接](#usb-连接)
 	* [无线连接](#无线连接)
 * [应用管理](#应用管理)
 	* [查看所有已安装应用](#查看所有已安装应用)
 	* [安装 APK](#安装-apk)
 	* [卸载应用](#卸载应用)
-	* [调起应用](#调起应用)
+	* [调起 Activity](#调起-activity)
+	* [调起 Service](#调起-service)
 	* [查看前台 Activity](#查看前台-activity)
 * [文件管理](#文件管理)
 	* [复制设备里的文件到电脑](#复制设备里的文件到电脑)
@@ -25,9 +32,34 @@ Adb，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [查看设备电池状况](#查看设备电池状况)
 	* [查看设备分辨率](#查看设备分辨率)
 	* [查看 android\_id](#查看-android_id)
-* [其它实用功能](#其它实用功能)
+* [实用功能](#实用功能)
+	* [屏幕截图](#屏幕截图)
 	* [录制屏幕](#录制屏幕)
+	* [重新挂载 system 分区为可写](#重新挂载-system-分区为可写)
+* [其它常用 adb shell 命令](#其它常用-adb-shell-命令)
 * [参考链接](#参考链接)
+
+## 基本用法
+
+### 命令格式
+
+// TODO
+
+### 启动/停止
+
+启动 adb server 命令：
+
+```
+adb start-server
+```
+
+（一般无需手动执行此命令，在运行 adb 命令时若发现 adb server 没有启动会自动调起。）
+
+停止 adb server 命令：
+
+```
+adb kill-server
+```
 
 ## 设备连接管理
 
@@ -72,6 +104,8 @@ emulator-5554	device
    cf264b8f	offline
    ```
 
+### USB 连接
+
 ### 无线连接
 
 // TODO
@@ -109,7 +143,7 @@ package:com.android.externalstorage
 命令：
 
 ```
-adb install <APK 文件路径>
+adb install <apk file>
 ```
 
 参数：
@@ -208,7 +242,11 @@ adb uninstall com.qihoo360.mobilesafe
 
 表示卸载 360 手机卫士。
 
-### 调起应用
+### 调起 Activity
+
+// TODO
+
+### 调起 Service
 
 // TODO
 
@@ -347,7 +385,30 @@ adb shell settings get secure android_id
 51b6be48bac8c569
 ```
 
-## 其它实用功能
+## 实用功能
+
+### 屏幕截图
+
+命令：
+
+```
+adb shell screencap -p /sdcard/sc.png
+```
+
+然后将 png 文件导出到电脑：
+
+```
+adb pull /sdcard/sc.png
+```
+
+可以使用 `adb shell screencap -h` 查看 `screencap` 命令的帮助信息，下面是两个有意义的参数及含义：
+
+| 参数          | 含义                                       |
+|---------------|--------------------------------------------|
+| -p            | 指定保存文件为 png 格式                    |
+| -d display-id | 指定截图的显示屏编号（有多显示屏的情况下） |
+
+实测如果指定文件名以 `.png` 结尾时可以省略 -p 参数；否则需要使用 -p 参数。如果不指定文件名，截图文件的内容将直接输出到 stdout。
 
 ### 录制屏幕
 
@@ -365,7 +426,7 @@ adb shell screenrecord /sdcard/filename.mp4
 adb pull /sdcard/filename.mp4
 ```
 
-`screenrecord` 命令也支持一些参数，可以使用 `adb shell screenrecord --help` 查看，下面是简介：
+可以使用 `adb shell screenrecord --help` 查看 `screenrecord` 命令的帮助信息，下面是常见参数及含义：
 
 | 参数                | 含义                                            |
 |---------------------|-------------------------------------------------|
@@ -374,7 +435,28 @@ adb pull /sdcard/filename.mp4
 | --time-limit TIME   | 录制时长，单位秒。                              |
 | --verbose           | 输出更多信息。                                  |
 
+### 重新挂载 system 分区为可写
+
+// TODO
+
+## 其它常用 adb shell 命令
+
+Android 系统是基于 Linux 内核的，所以 Linux 里的很多命令在 Android 里也有相同或类似的实现，在 `adb shell` 里可以调用。本文档前面的部分内容已经用到了 `adb shell` 命令。如下是常用命令的简单描述，前文已经专门讲过的命令不再列举：
+
+| 命令         | 功能                        |
+|--------------|-----------------------------|
+| cat          | 显示文件内容                |
+| cd           | 切换目录                    |
+| chmod        | 改变文件的存取模式/访问权限 |
+| grep         | 过滤输出                    |
+| ls           | 列举目录内容                |
+| mount        | 挂载目录的查看和管理        |
+| pm           | 应用管理                    |
+| ps           | 查看正在运行的进程          |
+| top          | 查看进程的资源占用情况      |
+
 ## 参考链接
 
 * [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)
 * [ADB Shell Commands](https://developer.android.com/studio/command-line/shell.html)
+* [logcat Command-line Tool](https://developer.android.com/studio/command-line/logcat.html)
