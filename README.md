@@ -106,6 +106,8 @@ emulator-5554	device
 
 ### USB 连接
 
+// TODO
+
 ### 无线连接
 
 // TODO
@@ -451,7 +453,6 @@ Android 系统是基于 Linux 内核的，所以 Linux 里的很多命令在 And
 | grep         | 过滤输出                    |
 | ls           | 列举目录内容                |
 | mount        | 挂载目录的查看和管理        |
-| pm           | 应用管理                    |
 | ps           | 查看正在运行的进程          |
 | top          | 查看进程的资源占用情况      |
 
