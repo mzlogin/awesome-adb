@@ -32,10 +32,12 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 * [调试](#调试)
 	* [查看/过滤日志](#查看过滤日志)
 * [查看设备信息](#查看设备信息)
-	* [查看设备型号](#查看设备型号)
-	* [查看设备电池状况](#查看设备电池状况)
-	* [查看设备分辨率](#查看设备分辨率)
-	* [查看 android\_id](#查看-android_id)
+	* [型号](#型号)
+	* [电池状况](#电池状况)
+	* [屏幕分辨率](#屏幕分辨率)
+	* [屏幕密度](#屏幕密度)
+	* [显示屏参数](#显示屏参数)
+	* [android\_id](#android_id)
 * [实用功能](#实用功能)
 	* [屏幕截图](#屏幕截图)
 	* [录制屏幕](#录制屏幕)
@@ -368,7 +370,7 @@ adb push ~/sr.mp4 /sdcard/
 
 ## 查看设备信息
 
-### 查看设备型号
+### 型号
 
 命令：
 
@@ -382,7 +384,7 @@ adb shell getprop ro.product.model
 Nexus 5
 ```
 
-### 查看设备电池状况
+### 电池状况
 
 命令：
 
@@ -409,7 +411,39 @@ Current Battery Service state:
 
 其中 `scale` 代表最大电量，`level` 代表当前电量。上面的输出表示还剩下 44% 的电量。
 
-### 查看设备分辨率
+### 屏幕分辨率
+
+命令：
+
+```
+adb shell wm size
+```
+
+输出示例：
+
+```
+Physical size: 1080x1920
+```
+
+设备分辨率为 1080px * 1920px。
+
+### 屏幕密度
+
+命令：
+
+```
+adb shell wm density
+```
+
+输出示例：
+
+```
+Physical density: 420
+```
+
+设备屏幕密度为 420dpi。
+
+### 显示屏参数
 
 命令：
 
@@ -422,14 +456,31 @@ adb shell dumpsys window displays
 ```
 WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
   Display: mDisplayId=0
-    init=1080x1920 480dpi cur=1080x1920 app=1080x1776 rng=1080x1005-1794x1701
+    init=1080x1920 420dpi cur=1080x1920 app=1080x1794 rng=1080x1017-1810x1731
     deferred=false layoutNeeded=false
-    ...
-    // some other output here
-    ...
+  mStacks[0]0
+    mStackId=0
+    mDeferDetach=false
+    {taskId=60 appTokens=[AppWindowToken{973efda token=Token{4ec6585 ActivityRecord{209cafc u0 com.google.android.googlequicksearchbox/com.google.android.launcher.GEL t60}}}] mdr=false}
+
+  Application tokens in top down Z order:
+  mStackId=0
+    mTaskId=60
+    Activity #0 AppWindowToken{973efda token=Token{4ec6585 ActivityRecord{209cafc u0 com.google.android.googlequicksearchbox/com.google.android.launcher.GEL t60}}}:
+      windows=[Window{bd0ea61 u0 com.google.android.googlequicksearchbox/com.google.android.launcher.GEL}]
+      windowType=2 hidden=false hasVisible=true
+      app=true voiceInteraction=false
+      allAppWindows=[Window{bd0ea61 u0 com.google.android.googlequicksearchbox/com.google.android.launcher.GEL}]
+      task={taskId=60 appTokens=[AppWindowToken{973efda token=Token{4ec6585 ActivityRecord{209cafc u0 com.google.android.googlequicksearchbox/com.google.android.launcher.GEL t60}}}] mdr=false}
+       appFullscreen=true requestedOrientation=5
+      hiddenRequested=false clientHidden=false willBeHidden=false reportedDrawn=true reportedVisible=true
+      numInterestingWindows=1 numDrawnWindows=1 inPendingTransaction=false allDrawn=true (animator=true)
+      startingData=null removed=false firstWindowDrawn=true mIsExiting=false
 ```
 
-### 查看 android\_id
+// TODO
+
+### android\_id
 
 命令：
 
