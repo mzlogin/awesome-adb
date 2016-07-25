@@ -425,7 +425,7 @@ adb shell wm size
 Physical size: 1080x1920
 ```
 
-设备分辨率为 1080px * 1920px。
+该设备屏幕分辨率为 1080px * 1920px。
 
 ### 屏幕密度
 
@@ -441,7 +441,7 @@ adb shell wm density
 Physical density: 420
 ```
 
-设备屏幕密度为 420dpi。
+该设备屏幕密度为 420dpi。
 
 ### 显示屏参数
 
