@@ -16,7 +16,11 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [USB 连接](#usb-连接)
 	* [无线连接](#无线连接)
 * [应用管理](#应用管理)
-	* [查看所有已安装应用](#查看所有已安装应用)
+	* [查看应用列表](#查看应用列表)
+		* [所有应用](#所有应用)
+		* [系统应用](#系统应用)
+		* [第三方应用](#第三方应用)
+		* [包名包含某字符串的应用](#包名包含某字符串的应用)
 	* [安装 APK](#安装-apk)
 	* [卸载应用](#卸载应用)
 	* [调起 Activity](#调起-activity)
@@ -114,7 +118,29 @@ emulator-5554	device
 
 ## 应用管理
 
-### 查看所有已安装应用
+### 查看应用列表
+
+查看应用列表的基本命令格式是
+
+```
+adb shell pm list packages [-f] [-d] [-e] [-s] [-3] [-i] [-u] [--user USER_ID] [FILTER]
+```
+
+即在 `adb shell pm list packages` 的基础上可以加一些参数进行过滤查看不同的列表，支持的过滤参数如下：
+
+| 参数   | 显示列表                |
+|--------|-------------------------|
+| 无     | 所有应用                |
+| -f     | 显示应用关联的 apk 文件 |
+| -d     | 只显示 disabled 的应用  |
+| -e     | 只显示 enabled 的应用   |
+| -s     | 只显示系统应用          |
+| -3     | 只显示第三方应用        |
+| -i     | 显示应用的 installer    |
+| -u     | 包含已卸载应用          |
+| FILTER | 包名包含 FILTER 字符串  |
+
+#### 所有应用
 
 命令：
 
@@ -138,6 +164,36 @@ package:com.android.externalstorage
 ...
 // other packages here
 ...
+```
+
+#### 系统应用
+
+命令：
+
+```
+adb shell pm list packages -s
+```
+
+#### 第三方应用
+
+命令：
+
+```
+adb shell pm list packages -3
+```
+
+#### 包名包含某字符串的应用
+
+比如要查看包名包含字符串 `mazhuang` 的应用列表，命令：
+
+```
+adb shell pm list packages mazhuang
+```
+
+当然也可以使用 grep 来过滤：
+
+```
+adb shell pm list packages | grep mazhuang
 ```
 
 ### 安装 APK
