@@ -9,7 +9,8 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 ## 目录
 
 * [基本用法](#基本用法)
-	* [命令格式](#命令格式)
+	* [命令语法](#命令语法)
+	* [为命令指定目标设备](#为命令指定目标设备)
 	* [启动/停止](#启动停止)
 * [设备连接管理](#设备连接管理)
 	* [查询已连接设备/模拟器](#查询已连接设备模拟器)
@@ -23,9 +24,12 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 		* [包名包含某字符串的应用](#包名包含某字符串的应用)
 	* [安装 APK](#安装-apk)
 	* [卸载应用](#卸载应用)
+	* [查看前台 Activity](#查看前台-activity)
+* [与应用交互](#与应用交互)
 	* [调起 Activity](#调起-activity)
 	* [调起 Service](#调起-service)
-	* [查看前台 Activity](#查看前台-activity)
+	* [发送广播](#发送广播)
+	* [强制停止应用](#强制停止应用)
 * [文件管理](#文件管理)
 	* [复制设备里的文件到电脑](#复制设备里的文件到电脑)
 	* [复制电脑里的文件到设备](#复制电脑里的文件到设备)
@@ -47,9 +51,43 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 
 ## 基本用法
 
-### 命令格式
+### 命令语法
 
-// TODO
+adb 命令的基本语法如下：
+
+```
+adb [-d|-e|-s <serialNumber>] <command>
+```
+
+如果只有一个设备/模拟器连接时，可以省略掉 `[-d|-e|-s <serialNumber>]` 这一部分，直接使用 `adb <command>`。
+
+### 为命令指定目标设备
+
+如果有多个设备/模拟器连接，则需要为命令指定目标设备。
+
+| 参数              | 含义                                               |
+|-------------------|----------------------------------------------------|
+| -d                | 指定当前唯一通过 USB 连接的 Android 设备为命令目标 |
+| -e                | 指定当前唯一运行的模拟器为命令目标                 |
+| -s <serialNumber> | 指定相应 serialNumber 号的设备/模拟器为命令目标    |
+
+在多个设备/模拟器连接的情况下较常用的是 `-s <serialNumber>` 参数，serialNumber 可以通过 `adb devices` 命令获取。如：
+
+```
+$ adb devices
+
+List of devices attached
+cf264b8f	device
+emulator-5554	device
+```
+
+输出里的 `cf264b8f` 和 `emulator-5554` 即为 serialNumber。比如这时想指定 `cf264b8f` 这个设备来运行 adb 命令获取屏幕分辨率：
+
+```
+adb -s cf264b8f shell wm size
+```
+
+遇到多设备/模拟器的情况均使用这几个参数为命令指定目标设备，下文中为简化描述，不再重复。
 
 ### 启动/停止
 
@@ -302,14 +340,6 @@ adb uninstall com.qihoo360.mobilesafe
 
 表示卸载 360 手机卫士。
 
-### 调起 Activity
-
-// TODO
-
-### 调起 Service
-
-// TODO
-
 ### 查看前台 Activity
 
 命令：
@@ -325,6 +355,36 @@ mFocusedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.androi
 ```
 
 其中的 `com.cyanogenmod.trebuchet/com.android.launcher3.Launcher` 就是当前处于前台的 Activity。
+
+## 与应用交互
+
+### 调起 Activity
+
+// TODO
+
+### 调起 Service
+
+// TODO
+
+### 发送广播
+
+// TODO
+
+### 强制停止应用
+
+命令：
+
+```
+adb shell am force-stop <packagename>
+```
+
+命令示例：
+
+```
+adb shell am force-stop com.qihoo360.mobilesafe
+```
+
+表示停止 360 安全卫士的一切进程与服务。
 
 ## 文件管理
 
