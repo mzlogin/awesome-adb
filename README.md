@@ -24,6 +24,7 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 		* [包名包含某字符串的应用](#包名包含某字符串的应用)
 	* [安装 APK](#安装-apk)
 	* [卸载应用](#卸载应用)
+	* [清除应用数据与缓存](#清除应用数据与缓存)
 	* [查看前台 Activity](#查看前台-activity)
 * [与应用交互](#与应用交互)
 	* [调起 Activity](#调起-activity)
@@ -342,6 +343,24 @@ adb uninstall com.qihoo360.mobilesafe
 ```
 
 表示卸载 360 手机卫士。
+
+### 清除应用数据与缓存
+
+命令：
+
+```
+adb shell pm clear <packagename>
+```
+
+`<packagename>` 表示应用名包，这条命令的效果相当于在设置里的应用信息界面点击了「清除缓存」和「清除数据」。
+
+命令示例：
+
+```
+adb shell pm clear com.qihoo360.mobilesafe
+```
+
+表示清除 360 手机卫士的数据和缓存。
 
 ### 查看前台 Activity
 
