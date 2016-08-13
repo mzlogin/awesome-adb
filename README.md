@@ -42,6 +42,9 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [屏幕密度](#屏幕密度)
 	* [显示屏参数](#显示屏参数)
 	* [android\_id](#android_id)
+	* [IMEI](#imei)
+	* [Android 系统版本](#android-系统版本)
+	* [更多硬件与系统属性](#更多硬件与系统属性)
 * [实用功能](#实用功能)
 	* [屏幕截图](#屏幕截图)
 	* [录制屏幕](#录制屏幕)
@@ -553,6 +556,83 @@ adb shell settings get secure android_id
 ```
 51b6be48bac8c569
 ```
+
+### IMEI
+
+在 Android 4.4 及以下版本可通过如下命令获取 IMEI：
+
+```
+adb shell dumpsys iphonesubinfo
+```
+
+输入示例：
+
+```
+Phone Subscriber Info:
+  Phone Type = GSM
+  Device ID = 860955027785041
+```
+
+其中的 `Device ID` 就是 IMEI。
+
+而在 Android 5.0 及以上版本里这个命令输出为空，得通过其它方式获取了（需要 root 权限）：
+
+```
+adb shell
+su
+service call iphonesubinfo 1
+```
+
+输出示例：
+
+```
+Result: Parcel(
+  0x00000000: 00000000 0000000f 00360038 00390030 '........8.6.0.9.'
+  0x00000010: 00350035 00320030 00370037 00350038 '5.5.0.2.7.7.8.5.'
+  0x00000020: 00340030 00000031                   '0.4.1...        ')
+```
+
+把里面的有效内容提取出来就是 IMEI 了，比如这里的是 `860955027785041`。
+
+### Android 系统版本
+
+命令：
+
+```
+adb shell getprop ro.build.version.release
+```
+
+输出示例：
+
+```
+5.0.2
+```
+
+### 更多硬件与系统属性
+
+设备的更多硬件与系统属性可以通过如下命令查看：
+
+```
+adb shell cat /system/build.prop
+```
+
+这会输出很多信息，包括前面几个小节提到的「型号」和「Android 系统版本」等。
+
+输出里还包括一些其它有用的信息，它们也可通过 `adb shell getprop <属性名>` 命令单独查看，列举一部分属性如下：
+
+| 属性名                          | 含义                     |
+|---------------------------------|--------------------------|
+| ro.build.version.sdk            | SDK 版本                 |
+| ro.build.version.release        | Android 系统版本         |
+| ro.build.version.security_patch | Android 安全补丁程序级别 |
+| ro.product.model                | 型号                     |
+| ro.product.brand                | 品牌                     |
+| ro.product.name                 | 设备名                   |
+| ro.product.board                | 处理器型号               |
+| ro.product.cpu.abilist          | CPU 支持的 abi 列表      |
+| persist.sys.isUsbOtgEnabled     | 是否支持 OTG             |
+| dalvik.vm.heapsize              | 每个应用程序的内存上限   |
+| ro.sf.lcd_density               | 屏幕密度                 |
 
 ## 实用功能
 
