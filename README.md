@@ -565,7 +565,7 @@ adb shell settings get secure android_id
 adb shell dumpsys iphonesubinfo
 ```
 
-输入示例：
+输出示例：
 
 ```
 Phone Subscriber Info:
@@ -593,6 +593,8 @@ Result: Parcel(
 ```
 
 把里面的有效内容提取出来就是 IMEI 了，比如这里的是 `860955027785041`。
+
+参考：[adb shell dumpsys iphonesubinfo not working since Android 5.0 Lollipop](http://stackoverflow.com/questions/27002663/adb-shell-dumpsys-iphonesubinfo-not-working-since-android-5-0-lollipop)
 
 ### Android 系统版本
 
