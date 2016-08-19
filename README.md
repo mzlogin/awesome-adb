@@ -158,7 +158,53 @@ emulator-5554	device
 
 ### 无线连接
 
-// TODO
+除了可以通过 USB 连接设备与电脑来使用 adb，也可以通过无线连接——虽然连接过程中也有需要使用 USB 的步骤，但是连接成功之后你的设备就可以在一定范围内摆脱 USB 连接线的限制啦！
+
+操作步骤：
+
+1. 将 Android 设备与将运行 adb 的电脑连接到同一个局域网，比如连到同一个 WiFi。
+
+2. 将设备与电脑通过 USB 线连接。
+
+   应确保连接成功（可运行 `adb devices` 看是否能列出该设备）。
+
+3. 让设备在 5555 端口监听 TCP/IP 连接：
+
+   ```sh
+   adb tcpip 5555
+   ```
+
+4. 断开 USB 连接。
+
+5. 找到设备的 IP 地址。
+
+   一般能在「设置」-「关于手机」-「状态信息」-「IP地址」找到。
+
+6. 通过 IP 地址连接设备。
+
+   ```sh
+   adb connect <device-ip-address>
+   ```
+
+   这里的 `<device-ip-address>` 就是上一步中找到的设备 IP 地址。
+
+7. 确认连接状态。
+
+   ```sh
+   adb devices
+   ```
+
+   如果能看到
+
+   ```sh
+   <device-ip-address>:5555 device
+   ```
+
+   说明连接成功。
+
+如果连接不了，请确认 Android 设备与电脑是连接到了同一个 WiFi，然后再次执行 `adb connect <device-ip-address>` 那一步；
+
+如果还是不行的话，通过 `adb kill-server` 重新启动 adb 然后从头再来一次试试。
 
 ## 应用管理
 
