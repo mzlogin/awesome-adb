@@ -206,6 +206,14 @@ emulator-5554	device
 
 如果还是不行的话，通过 `adb kill-server` 重新启动 adb 然后从头再来一次试试。
 
+**断开无线连接**
+
+命令：
+
+```
+adb disconnect <device-ip-address>
+```
+
 ## 应用管理
 
 ### 查看应用列表
