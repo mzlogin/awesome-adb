@@ -761,7 +761,76 @@ adb pull /sdcard/filename.mp4
 
 ### 重新挂载 system 分区为可写
 
-// TODO
+**注：需要 root 权限。**
+
+/system 分区默认挂载为只读，但有些操作比如给 Android 系统添加命令、删除自带应用等需要对 /system 进行写操作，所以需要重新挂载它为可读写。
+
+步骤：
+
+1. 进入 shell 并切换到 root 用户权限。
+
+   命令：
+
+   ```sh
+   adb shell
+   su
+   ```
+
+2. 查看当前分区挂载情况。
+
+   命令：
+
+   ```sh
+   mount
+   ```
+
+   输出示例：
+
+   ```sh
+   rootfs / rootfs ro,relatime 0 0
+   tmpfs /dev tmpfs rw,seclabel,nosuid,relatime,mode=755 0 0
+   devpts /dev/pts devpts rw,seclabel,relatime,mode=600 0 0
+   proc /proc proc rw,relatime 0 0
+   sysfs /sys sysfs rw,seclabel,relatime 0 0
+   selinuxfs /sys/fs/selinux selinuxfs rw,relatime 0 0
+   debugfs /sys/kernel/debug debugfs rw,relatime 0 0
+   none /var tmpfs rw,seclabel,relatime,mode=770,gid=1000 0 0
+   none /acct cgroup rw,relatime,cpuacct 0 0
+   none /sys/fs/cgroup tmpfs rw,seclabel,relatime,mode=750,gid=1000 0 0
+   none /sys/fs/cgroup/memory cgroup rw,relatime,memory 0 0
+   tmpfs /mnt/asec tmpfs rw,seclabel,relatime,mode=755,gid=1000 0 0
+   tmpfs /mnt/obb tmpfs rw,seclabel,relatime,mode=755,gid=1000 0 0
+   none /dev/memcg cgroup rw,relatime,memory 0 0
+   none /dev/cpuctl cgroup rw,relatime,cpu 0 0
+   none /sys/fs/cgroup tmpfs rw,seclabel,relatime,mode=750,gid=1000 0 0
+   none /sys/fs/cgroup/memory cgroup rw,relatime,memory 0 0
+   none /sys/fs/cgroup/freezer cgroup rw,relatime,freezer 0 0
+   /dev/block/platform/msm_sdcc.1/by-name/system /system ext4 ro,seclabel,relatime,data=ordered 0 0
+   /dev/block/platform/msm_sdcc.1/by-name/userdata /data ext4 rw,seclabel,nosuid,nodev,relatime,noauto_da_alloc,data=ordered 0 0
+   /dev/block/platform/msm_sdcc.1/by-name/cache /cache ext4 rw,seclabel,nosuid,nodev,relatime,data=ordered 0 0
+   /dev/block/platform/msm_sdcc.1/by-name/persist /persist ext4 rw,seclabel,nosuid,nodev,relatime,data=ordered 0 0
+   /dev/block/platform/msm_sdcc.1/by-name/modem /firmware vfat ro,context=u:object_r:firmware_file:s0,relatime,uid=1000,gid=1000,fmask=0337,dmask=0227,codepage=cp437,iocharset=iso8859-1,shortname=lower,errors=remount-ro 0 0
+   /dev/fuse /mnt/shell/emulated fuse rw,nosuid,nodev,relatime,user_id=1023,group_id=1023,default_permissions,allow_other 0 0
+   /dev/fuse /mnt/shell/emulated/0 fuse rw,nosuid,nodev,relatime,user_id=1023,group_id=1023,default_permissions,allow_other 0 0
+   ```
+
+   找到其中我们关注的带 /system 的那一行：
+
+   ```sh
+   /dev/block/platform/msm_sdcc.1/by-name/system /system ext4 ro,seclabel,relatime,data=ordered 0 0
+   ```
+
+3. 重新挂载。
+
+   命令：
+
+   ```sh
+   mount -o remount,rw -t yaffs2 /dev/block/platform/msm_sdcc.1/by-name/system /system
+   ```
+
+   这里的 `/dev/block/platform/msm_sdcc.1/by-name/system` 就是我们从上一步的输出里得到的文件路径。
+
+如果输出没有提示错误的话，操作就成功了，可以对 /system 下的文件为所欲为了。
 
 ## 其它常用 adb shell 命令
 
