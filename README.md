@@ -50,6 +50,9 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [屏幕截图](#屏幕截图)
 	* [录制屏幕](#录制屏幕)
 	* [重新挂载 system 分区为可写](#重新挂载-system-分区为可写)
+	* [以 root 权限运行 adbd](#以-root-权限运行-adbd)
+	* [查看已连接过的 WiFi 密码](#查看已连接过的-wifi-密码)
+	* [重启手机](#重启手机)
 * [其它常用 adb shell 命令](#其它常用-adb-shell-命令)
 * [参考链接](#参考链接)
 
@@ -832,23 +835,92 @@ adb pull /sdcard/filename.mp4
 
 如果输出没有提示错误的话，操作就成功了，可以对 /system 下的文件为所欲为了。
 
+### 以 root 权限运行 adbd
+
+adb 的运行原理是 PC 端的 adb server 与手机端的守护进程 adbd 建立连接，然后 PC 端的 adb client 通过 adb server 转发命令，adbd 接收命令后解析运行。
+
+所以如果 adbd 以普通权限执行，有些需要 root 权限才能执行的命令无法直接用 `adb xxx` 执行。这时可以 `adb shell` 然后 `su` 后执行命令，也可以让 adbd 以 root 权限执行，这个就能随意执行高权限命令了。
+
+命令：
+
+```sh
+adb root
+```
+
+正常输出：
+
+```sh
+restarting adbd as root
+```
+
+现在再运行 `adb shell`，看看命令行提示符是不是变成 `#` 了？
+
+有些手机 root 后也无法通过 `adb root` 命令让 adbd 以 root 权限执行，比如三星的部分机型，会提示 `adbd cannot run as root in production builds`，此时可以先安装 adbd Insecure，然后 `adb root` 试试。
+
+### 查看已连接过的 WiFi 密码
+
+**注：需要 root 权限。**
+
+命令：
+
+```sh
+adb shell
+su
+cat /data/misc/wifi/*.conf
+```
+
+输出示例：
+
+```sh
+network={
+	ssid="TP-LINK_9DFC"
+	scan_ssid=1
+	psk="123456789"
+	key_mgmt=WPA-PSK
+	group=CCMP TKIP
+	auth_alg=OPEN
+	sim_num=1
+	priority=13893
+}
+
+network={
+	ssid="TP-LINK_F11E"
+	psk="987654321"
+	key_mgmt=WPA-PSK
+	sim_num=1
+	priority=17293
+}
+```
+
+`ssid` 即为我们在 WLAN 设置里看到的名称，`psk` 为密码，`key_mgmt` 为安全加密方式。
+
+### 重启手机
+
+命令：
+
+```sh
+adb reboot
+```
+
 ## 其它常用 adb shell 命令
 
 Android 系统是基于 Linux 内核的，所以 Linux 里的很多命令在 Android 里也有相同或类似的实现，在 `adb shell` 里可以调用。本文档前面的部分内容已经用到了 `adb shell` 命令。如下是常用命令的简单描述，前文已经专门讲过的命令不再列举：
 
-| 命令         | 功能                        |
-|--------------|-----------------------------|
-| cat          | 显示文件内容                |
-| cd           | 切换目录                    |
-| chmod        | 改变文件的存取模式/访问权限 |
-| grep         | 过滤输出                    |
-| ls           | 列举目录内容                |
-| mount        | 挂载目录的查看和管理        |
-| ps           | 查看正在运行的进程          |
-| top          | 查看进程的资源占用情况      |
+| 命令  | 功能                        |
+|-------|-----------------------------|
+| cat   | 显示文件内容                |
+| cd    | 切换目录                    |
+| chmod | 改变文件的存取模式/访问权限 |
+| grep  | 过滤输出                    |
+| ls    | 列举目录内容                |
+| mount | 挂载目录的查看和管理        |
+| mv    | 移动或重命名文件            |
+| ps    | 查看正在运行的进程          |
+| top   | 查看进程的资源占用情况      |
 
 ## 参考链接
 
 * [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)
 * [ADB Shell Commands](https://developer.android.com/studio/command-line/shell.html)
 * [logcat Command-line Tool](https://developer.android.com/studio/command-line/logcat.html)
+* [Android ADB命令大全](http://zmywly8866.github.io/2015/01/24/all-adb-command.html)
