@@ -45,6 +45,7 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [android\_id](#android_id)
 	* [IMEI](#imei)
 	* [Android 系统版本](#android-系统版本)
+	* [Mac 地址](#mac-地址)
 	* [更多硬件与系统属性](#更多硬件与系统属性)
 * [实用功能](#实用功能)
 	* [屏幕截图](#屏幕截图)
@@ -52,7 +53,6 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [重新挂载 system 分区为可写](#重新挂载-system-分区为可写)
 	* [以 root 权限运行 adbd](#以-root-权限运行-adbd)
 	* [查看连接过的 WiFi 密码](#查看连接过的-wifi-密码)
-	* [获取设备 Mac 地址](#获取设备-mac-地址)
 	* [设置系统日期和时间](#设置系统日期和时间)
 	* [重启手机](#重启手机)
 * [其它常用 adb shell 命令](#其它常用-adb-shell-命令)
@@ -670,6 +670,20 @@ adb shell getprop ro.build.version.release
 5.0.2
 ```
 
+### Mac 地址
+
+命令：
+
+```sh
+adb shell cat /sys/class/net/wlan0/address
+```
+
+输出示例：
+
+```sh
+f8:a9:d0:17:42:4d
+```
+
 ### 更多硬件与系统属性
 
 设备的更多硬件与系统属性可以通过如下命令查看：
@@ -877,20 +891,6 @@ network={
 ```
 
 `ssid` 即为我们在 WLAN 设置里看到的名称，`psk` 为密码，`key_mgmt` 为安全加密方式。
-
-### 获取设备 Mac 地址
-
-命令：
-
-```sh
-adb shell cat /sys/class/net/wlan0/address
-```
-
-输出示例：
-
-```sh
-f8:a9:d0:17:42:4d
-```
 
 ### 设置系统日期和时间
 
