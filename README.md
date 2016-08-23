@@ -51,7 +51,9 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [录制屏幕](#录制屏幕)
 	* [重新挂载 system 分区为可写](#重新挂载-system-分区为可写)
 	* [以 root 权限运行 adbd](#以-root-权限运行-adbd)
-	* [查看已连接过的 WiFi 密码](#查看已连接过的-wifi-密码)
+	* [查看连接过的 WiFi 密码](#查看连接过的-wifi-密码)
+	* [获取设备 Mac 地址](#获取设备-mac-地址)
+	* [设置系统日期和时间](#设置系统日期和时间)
 	* [重启手机](#重启手机)
 * [其它常用 adb shell 命令](#其它常用-adb-shell-命令)
 * [参考链接](#参考链接)
@@ -597,27 +599,9 @@ WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
   Display: mDisplayId=0
     init=1080x1920 420dpi cur=1080x1920 app=1080x1794 rng=1080x1017-1810x1731
     deferred=false layoutNeeded=false
-  mStacks[0]0
-    mStackId=0
-    mDeferDetach=false
-    {taskId=60 appTokens=[AppWindowToken{973efda token=Token{4ec6585 ActivityRecord{209cafc u0 com.google.android.googlequicksearchbox/com.google.android.launcher.GEL t60}}}] mdr=false}
-
-  Application tokens in top down Z order:
-  mStackId=0
-    mTaskId=60
-    Activity #0 AppWindowToken{973efda token=Token{4ec6585 ActivityRecord{209cafc u0 com.google.android.googlequicksearchbox/com.google.android.launcher.GEL t60}}}:
-      windows=[Window{bd0ea61 u0 com.google.android.googlequicksearchbox/com.google.android.launcher.GEL}]
-      windowType=2 hidden=false hasVisible=true
-      app=true voiceInteraction=false
-      allAppWindows=[Window{bd0ea61 u0 com.google.android.googlequicksearchbox/com.google.android.launcher.GEL}]
-      task={taskId=60 appTokens=[AppWindowToken{973efda token=Token{4ec6585 ActivityRecord{209cafc u0 com.google.android.googlequicksearchbox/com.google.android.launcher.GEL t60}}}] mdr=false}
-       appFullscreen=true requestedOrientation=5
-      hiddenRequested=false clientHidden=false willBeHidden=false reportedDrawn=true reportedVisible=true
-      numInterestingWindows=1 numDrawnWindows=1 inPendingTransaction=false allDrawn=true (animator=true)
-      startingData=null removed=false firstWindowDrawn=true mIsExiting=false
 ```
 
-// TODO
+其中 `mDisplayId` 为 显示屏编号，`init` 是初始分辨率和屏幕密度，`app` 的高度比 `init` 里的要小，表示屏幕底部有虚拟按键，高度为 1920 - 1794 = 126px 合 42dp。
 
 ### android\_id
 
@@ -857,7 +841,7 @@ restarting adbd as root
 
 有些手机 root 后也无法通过 `adb root` 命令让 adbd 以 root 权限执行，比如三星的部分机型，会提示 `adbd cannot run as root in production builds`，此时可以先安装 adbd Insecure，然后 `adb root` 试试。
 
-### 查看已连接过的 WiFi 密码
+### 查看连接过的 WiFi 密码
 
 **注：需要 root 权限。**
 
@@ -893,6 +877,34 @@ network={
 ```
 
 `ssid` 即为我们在 WLAN 设置里看到的名称，`psk` 为密码，`key_mgmt` 为安全加密方式。
+
+### 获取设备 Mac 地址
+
+命令：
+
+```sh
+adb shell cat /sys/class/net/wlan0/address
+```
+
+输出示例：
+
+```sh
+f8:a9:d0:17:42:4d
+```
+
+### 设置系统日期和时间
+
+**注：需要 root 权限。**
+
+命令：
+
+```sh
+adb shell
+su
+date -s 20160823.131500
+```
+
+表示将系统日期和时间更改为 2016 年 08 月 23 日 13 点 15 分 00 秒。
 
 ### 重启手机
 
