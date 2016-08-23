@@ -571,7 +571,7 @@ adb shell swipe 300 1000 300 500
 命令：
 
 ```sh
-input text hello
+adb shell input text hello
 ```
 
 现在 `hello` 出现在文本框了。
