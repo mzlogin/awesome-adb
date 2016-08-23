@@ -12,6 +12,9 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [命令语法](#命令语法)
 	* [为命令指定目标设备](#为命令指定目标设备)
 	* [启动/停止](#启动停止)
+	* [查看 adb 版本](#查看-adb-版本)
+	* [以 root 权限运行 adbd](#以-root-权限运行-adbd)
+	* [指定 adb server 的网络端口](#指定-adb-server-的网络端口)
 * [设备连接管理](#设备连接管理)
 	* [查询已连接设备/模拟器](#查询已连接设备模拟器)
 	* [USB 连接](#usb-连接)
@@ -34,7 +37,13 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 * [文件管理](#文件管理)
 	* [复制设备里的文件到电脑](#复制设备里的文件到电脑)
 	* [复制电脑里的文件到设备](#复制电脑里的文件到设备)
-* [模拟输入](#模拟输入)
+* [模拟按键/输入](#模拟按键输入)
+	* [电源键](#电源键)
+	* [菜单键](#菜单键)
+	* [HOME 键](#home-键)
+	* [返回键](#返回键)
+	* [音量控制](#音量控制)
+	* [媒体控制](#媒体控制)
 	* [点亮/熄灭屏幕](#点亮熄灭屏幕)
 	* [滑动解锁](#滑动解锁)
 	* [输入文本](#输入文本)
@@ -55,7 +64,6 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [屏幕截图](#屏幕截图)
 	* [录制屏幕](#录制屏幕)
 	* [重新挂载 system 分区为可写](#重新挂载-system-分区为可写)
-	* [以 root 权限运行 adbd](#以-root-权限运行-adbd)
 	* [查看连接过的 WiFi 密码](#查看连接过的-wifi-密码)
 	* [设置系统日期和时间](#设置系统日期和时间)
 	* [重启手机](#重启手机)
@@ -68,7 +76,7 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 
 adb 命令的基本语法如下：
 
-```
+```sh
 adb [-d|-e|-s <serialNumber>] <command>
 ```
 
@@ -86,7 +94,7 @@ adb [-d|-e|-s <serialNumber>] <command>
 
 在多个设备/模拟器连接的情况下较常用的是 `-s <serialNumber>` 参数，serialNumber 可以通过 `adb devices` 命令获取。如：
 
-```
+```sh
 $ adb devices
 
 List of devices attached
@@ -96,7 +104,7 @@ emulator-5554	device
 
 输出里的 `cf264b8f` 和 `emulator-5554` 即为 serialNumber。比如这时想指定 `cf264b8f` 这个设备来运行 adb 命令获取屏幕分辨率：
 
-```
+```sh
 adb -s cf264b8f shell wm size
 ```
 
@@ -106,7 +114,7 @@ adb -s cf264b8f shell wm size
 
 启动 adb server 命令：
 
-```
+```sh
 adb start-server
 ```
 
@@ -114,9 +122,58 @@ adb start-server
 
 停止 adb server 命令：
 
-```
+```sh
 adb kill-server
 ```
+
+### 查看 adb 版本
+
+命令：
+
+```sh
+adb version
+```
+
+示例输出：
+
+```sh
+Android Debug Bridge version 1.0.32
+Revision 09a0d98bebce-android
+```
+
+### 以 root 权限运行 adbd
+
+adb 的运行原理是 PC 端的 adb server 与手机端的守护进程 adbd 建立连接，然后 PC 端的 adb client 通过 adb server 转发命令，adbd 接收命令后解析运行。
+
+所以如果 adbd 以普通权限执行，有些需要 root 权限才能执行的命令无法直接用 `adb xxx` 执行。这时可以 `adb shell` 然后 `su` 后执行命令，也可以让 adbd 以 root 权限执行，这个就能随意执行高权限命令了。
+
+命令：
+
+```sh
+adb root
+```
+
+正常输出：
+
+```sh
+restarting adbd as root
+```
+
+现在再运行 `adb shell`，看看命令行提示符是不是变成 `#` 了？
+
+有些手机 root 后也无法通过 `adb root` 命令让 adbd 以 root 权限执行，比如三星的部分机型，会提示 `adbd cannot run as root in production builds`，此时可以先安装 adbd Insecure，然后 `adb root` 试试。
+
+相应地，如果要恢复 adbd 为非 root 权限的话，可以使用 `adb unroot` 命令。
+
+### 指定 adb server 的网络端口
+
+命令：
+
+```sh
+adb -P <port> start-server
+```
+
+默认端口为 5037。
 
 ## 设备连接管理
 
@@ -124,13 +181,13 @@ adb kill-server
 
 命令：
 
-```
+```sh
 adb devices
 ```
 
 输出示例：
 
-```
+```sh
 List of devices attached
 cf264b8f	device
 emulator-5554	device
@@ -150,13 +207,13 @@ emulator-5554	device
 
 1. 没有设备/模拟器连接成功。
 
-   ```
+   ```sh
    List of devices attached
    ```
 
 2. 设备/模拟器未连接到 adb 或无响应。
 
-   ```
+   ```sh
    List of devices attached
    cf264b8f	offline
    ```
@@ -219,7 +276,7 @@ emulator-5554	device
 
 命令：
 
-```
+```sh
 adb disconnect <device-ip-address>
 ```
 
@@ -229,7 +286,7 @@ adb disconnect <device-ip-address>
 
 查看应用列表的基本命令格式是
 
-```
+```sh
 adb shell pm list packages [-f] [-d] [-e] [-s] [-3] [-i] [-u] [--user USER_ID] [FILTER]
 ```
 
@@ -251,13 +308,13 @@ adb shell pm list packages [-f] [-d] [-e] [-s] [-3] [-i] [-u] [--user USER_ID] [
 
 命令：
 
-```
+```sh
 adb shell pm list packages
 ```
 
 输出示例：
 
-```
+```sh
 package:com.android.smoketest
 package:com.example.android.livecubes
 package:com.android.providers.telephony
@@ -277,7 +334,7 @@ package:com.android.externalstorage
 
 命令：
 
-```
+```sh
 adb shell pm list packages -s
 ```
 
@@ -285,7 +342,7 @@ adb shell pm list packages -s
 
 命令：
 
-```
+```sh
 adb shell pm list packages -3
 ```
 
@@ -293,13 +350,13 @@ adb shell pm list packages -3
 
 比如要查看包名包含字符串 `mazhuang` 的应用列表，命令：
 
-```
+```sh
 adb shell pm list packages mazhuang
 ```
 
 当然也可以使用 grep 来过滤：
 
-```
+```sh
 adb shell pm list packages | grep mazhuang
 ```
 
@@ -307,7 +364,7 @@ adb shell pm list packages | grep mazhuang
 
 命令：
 
-```
+```sh
 adb install <apk file>
 ```
 
@@ -325,7 +382,7 @@ adb install <apk file>
 
 如果见到类似如下输出（状态为 `Success`）代表安装成功：
 
-```
+```sh
 12040 KB/s (22205609 bytes in 1.801s)
         pkg: /data/local/tmp/SogouInput_android_v8.3_sweb.apk
 Success
@@ -393,7 +450,7 @@ Success
 
 命令：
 
-```
+```sh
 adb uninstall [-k] <packagename>
 ```
 
@@ -401,7 +458,7 @@ adb uninstall [-k] <packagename>
 
 命令示例：
 
-```
+```sh
 adb uninstall com.qihoo360.mobilesafe
 ```
 
@@ -411,7 +468,7 @@ adb uninstall com.qihoo360.mobilesafe
 
 命令：
 
-```
+```sh
 adb shell pm clear <packagename>
 ```
 
@@ -419,7 +476,7 @@ adb shell pm clear <packagename>
 
 命令示例：
 
-```
+```sh
 adb shell pm clear com.qihoo360.mobilesafe
 ```
 
@@ -429,13 +486,13 @@ adb shell pm clear com.qihoo360.mobilesafe
 
 命令：
 
-```
+```sh
 adb shell dumpsys activity activities | grep mFocusedActivity
 ```
 
 输出示例：
 
-```
+```sh
 mFocusedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.android.launcher3.Launcher t42}
 ```
 
@@ -459,13 +516,13 @@ mFocusedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.androi
 
 命令：
 
-```
+```sh
 adb shell am force-stop <packagename>
 ```
 
 命令示例：
 
-```
+```sh
 adb shell am force-stop com.qihoo360.mobilesafe
 ```
 
@@ -477,7 +534,7 @@ adb shell am force-stop com.qihoo360.mobilesafe
 
 命令：
 
-```
+```sh
 adb pull <设备里的文件路径> [电脑上的目录] 
 ```
 
@@ -485,7 +542,7 @@ adb pull <设备里的文件路径> [电脑上的目录]
 
 例：
 
-```
+```sh
 adb pull /sdcard/sr.mp4 ~/tmp/
 ```
 
@@ -495,19 +552,19 @@ adb pull /sdcard/sr.mp4 ~/tmp/
 
 命令：
 
-```
+```sh
 adb push <电脑上的文件路径> <设备里的目录> 
 ```
 
 例：
 
-```
+```sh
 adb push ~/sr.mp4 /sdcard/
 ```
 
 *小技巧：*设备上的文件路径普通权限可能无法直接写入，如果你的设备已经 root 过，可以先 `adb push /path/on/pc /sdcard/filename`，然后 `adb shell` 和 `su` 在 adb shell 里获取 root 权限后，`cp /sdcard/filename /path/on/device`。
 
-## 模拟输入
+## 模拟按键/输入
 
 在 `adb shell` 里有个很实用的命令叫 `input`，通过它可以做一些有趣的事情。
 
@@ -538,9 +595,45 @@ The commands and default sources are:
       roll <dx> <dy> (Default: trackball)
 ```
 
-下面是 `input` 命令的几种用法举例。
+比如使用 `adb shell input keyevent <keycode>` 命令，不同的 keycode 能实现不同的功能，完整的 keycode 列表详见 [KeyEvent](https://developer.android.com/reference/android/view/KeyEvent.html)，摘引部分我觉得有意思的如下：
 
-### 点亮/熄灭屏幕
+| keycode | 含义                           |
+|---------|--------------------------------|
+| 3       | HOME 键                        |
+| 4       | 返回键                         |
+| 5       | 打开拨号应用                   |
+| 6       | 挂断电话                       |
+| 24      | 增加音量                       |
+| 25      | 降低音量                       |
+| 26      | 电源键                         |
+| 27      | 拍照（需要在相机应用里）       |
+| 64      | 打开浏览器                     |
+| 82      | 菜单键                         |
+| 85      | 播放/暂停                      |
+| 86      | 停止播放                       |
+| 87      | 播放下一首                     |
+| 88      | 播放上一首                     |
+| 122     | 移动光标到行首或列表顶部       |
+| 123     | 移动光标到行末或列表底部       |
+| 126     | 恢复播放                       |
+| 127     | 暂停播放                       |
+| 164     | 静音                           |
+| 176     | 打开系统设置                   |
+| 187     | 切换应用                       |
+| 207     | 打开联系人                     |
+| 208     | 打开日历                       |
+| 209     | 打开音乐                       |
+| 210     | 打开计算器                     |
+| 220     | 降低屏幕亮度                   |
+| 221     | 提高屏幕亮度                   |
+| 223     | 系统休眠                       |
+| 224     | 点亮屏幕                       |
+| 231     | 打开语音助手                   |
+| 276     | 如果没有 wakelock 则让系统休眠 |
+
+下面是 `input` 命令的一些用法举例。
+
+### 电源键
 
 命令：
 
@@ -550,9 +643,101 @@ adb shell input keyevent 26
 
 执行效果相当于按电源键。
 
-除了 26，还有很多其它的 keycode 可用，它们的含义如下：
+### 菜单键
 
-// TODO <http://stackoverflow.com/questions/7789826/adb-shell-input-events>
+命令：
+
+```sh
+adb shell input keyevent 82
+```
+
+### HOME 键
+
+命令：
+
+```sh
+adb shell input keyevent 3
+```
+
+### 返回键
+
+命令：
+
+```sh
+adb shell input keyevent 4
+```
+
+### 音量控制
+
+增加音量：
+
+```sh
+adb shell input keyevent 24
+```
+
+降低音量：
+
+```sh
+adb shell input keyevent 25
+```
+
+静音：
+
+```sh
+adb shell input keyevent 164
+```
+
+### 媒体控制
+
+播放/暂停：
+
+```sh
+adb shell input keyevent 85
+```
+
+停止播放：
+
+```sh
+adb shell input keyevent 86
+```
+
+播放下一首：
+
+```sh
+adb shell input keyevent 87
+```
+
+播放上一首：
+
+```sh
+adb shell input keyevent 88
+```
+
+恢复播放：
+
+```sh
+adb shell input keyevent 126
+```
+
+暂停播放：
+
+```sh
+adb shell input keyevent 127
+```
+
+### 点亮/熄灭屏幕
+
+点亮屏幕：
+
+```sh
+adb shell input keyevent 224
+```
+
+熄灭屏幕：
+
+```sh
+adb shell input keyevent 223
+```
 
 ### 滑动解锁
 
@@ -561,8 +746,10 @@ adb shell input keyevent 26
 命令（参数以机型 Nexus 5，向上滑动手势解锁举例）：
 
 ```sh
-adb shell swipe 300 1000 300 500
+adb shell input swipe 300 1000 300 500
 ```
+
+参数 `300 1000 300 500` 分别表示`起始点x坐标 起始点y坐标 结束点x坐标 结束点y坐标`。
 
 ### 输入文本
 
@@ -588,13 +775,13 @@ adb shell input text hello
 
 命令：
 
-```
+```sh
 adb shell getprop ro.product.model
 ```
 
 输出示例：
 
-```
+```sh
 Nexus 5
 ```
 
@@ -602,13 +789,13 @@ Nexus 5
 
 命令：
 
-```
+```sh
 adb shell dumpsys battery
 ```
 
 输入示例：
 
-```
+```sh
 Current Battery Service state:
   AC powered: false
   USB powered: true
@@ -629,13 +816,13 @@ Current Battery Service state:
 
 命令：
 
-```
+```sh
 adb shell wm size
 ```
 
 输出示例：
 
-```
+```sh
 Physical size: 1080x1920
 ```
 
@@ -645,13 +832,13 @@ Physical size: 1080x1920
 
 命令：
 
-```
+```sh
 adb shell wm density
 ```
 
 输出示例：
 
-```
+```sh
 Physical density: 420
 ```
 
@@ -661,13 +848,13 @@ Physical density: 420
 
 命令：
 
-```
+```sh
 adb shell dumpsys window displays
 ```
 
 输出示例：
 
-```
+```sh
 WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
   Display: mDisplayId=0
     init=1080x1920 420dpi cur=1080x1920 app=1080x1794 rng=1080x1017-1810x1731
@@ -680,13 +867,13 @@ WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
 
 命令：
 
-```
+```sh
 adb shell settings get secure android_id
 ```
 
 输出示例：
 
-```
+```sh
 51b6be48bac8c569
 ```
 
@@ -694,13 +881,13 @@ adb shell settings get secure android_id
 
 在 Android 4.4 及以下版本可通过如下命令获取 IMEI：
 
-```
+```sh
 adb shell dumpsys iphonesubinfo
 ```
 
 输出示例：
 
-```
+```sh
 Phone Subscriber Info:
   Phone Type = GSM
   Device ID = 860955027785041
@@ -710,7 +897,7 @@ Phone Subscriber Info:
 
 而在 Android 5.0 及以上版本里这个命令输出为空，得通过其它方式获取了（需要 root 权限）：
 
-```
+```sh
 adb shell
 su
 service call iphonesubinfo 1
@@ -718,7 +905,7 @@ service call iphonesubinfo 1
 
 输出示例：
 
-```
+```sh
 Result: Parcel(
   0x00000000: 00000000 0000000f 00360038 00390030 '........8.6.0.9.'
   0x00000010: 00350035 00320030 00370037 00350038 '5.5.0.2.7.7.8.5.'
@@ -733,13 +920,13 @@ Result: Parcel(
 
 命令：
 
-```
+```sh
 adb shell getprop ro.build.version.release
 ```
 
 输出示例：
 
-```
+```sh
 5.0.2
 ```
 
@@ -761,7 +948,7 @@ f8:a9:d0:17:42:4d
 
 设备的更多硬件与系统属性可以通过如下命令查看：
 
-```
+```sh
 adb shell cat /system/build.prop
 ```
 
@@ -789,13 +976,13 @@ adb shell cat /system/build.prop
 
 命令：
 
-```
+```sh
 adb shell screencap -p /sdcard/sc.png
 ```
 
 然后将 png 文件导出到电脑：
 
-```
+```sh
 adb pull /sdcard/sc.png
 ```
 
@@ -812,7 +999,7 @@ adb pull /sdcard/sc.png
 
 录制屏幕以 mp4 格式保存到 /sdcard：
 
-```
+```sh
 adb shell screenrecord /sdcard/filename.mp4
 ```
 
@@ -820,7 +1007,7 @@ adb shell screenrecord /sdcard/filename.mp4
 
 如果需要导出到电脑：
 
-```
+```sh
 adb pull /sdcard/filename.mp4
 ```
 
@@ -905,28 +1092,6 @@ adb pull /sdcard/filename.mp4
    这里的 `/dev/block/platform/msm_sdcc.1/by-name/system` 就是我们从上一步的输出里得到的文件路径。
 
 如果输出没有提示错误的话，操作就成功了，可以对 /system 下的文件为所欲为了。
-
-### 以 root 权限运行 adbd
-
-adb 的运行原理是 PC 端的 adb server 与手机端的守护进程 adbd 建立连接，然后 PC 端的 adb client 通过 adb server 转发命令，adbd 接收命令后解析运行。
-
-所以如果 adbd 以普通权限执行，有些需要 root 权限才能执行的命令无法直接用 `adb xxx` 执行。这时可以 `adb shell` 然后 `su` 后执行命令，也可以让 adbd 以 root 权限执行，这个就能随意执行高权限命令了。
-
-命令：
-
-```sh
-adb root
-```
-
-正常输出：
-
-```sh
-restarting adbd as root
-```
-
-现在再运行 `adb shell`，看看命令行提示符是不是变成 `#` 了？
-
-有些手机 root 后也无法通过 `adb root` 命令让 adbd 以 root 权限执行，比如三星的部分机型，会提示 `adbd cannot run as root in production builds`，此时可以先安装 adbd Insecure，然后 `adb root` 试试。
 
 ### 查看连接过的 WiFi 密码
 
