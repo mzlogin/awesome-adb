@@ -34,6 +34,10 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 * [文件管理](#文件管理)
 	* [复制设备里的文件到电脑](#复制设备里的文件到电脑)
 	* [复制电脑里的文件到设备](#复制电脑里的文件到设备)
+* [模拟输入](#模拟输入)
+	* [点亮/熄灭屏幕](#点亮熄灭屏幕)
+	* [滑动解锁](#滑动解锁)
+	* [输入文本](#输入文本)
 * [调试](#调试)
 	* [查看/过滤日志](#查看过滤日志)
 * [查看设备信息](#查看设备信息)
@@ -503,6 +507,75 @@ adb push ~/sr.mp4 /sdcard/
 
 *小技巧：*设备上的文件路径普通权限可能无法直接写入，如果你的设备已经 root 过，可以先 `adb push /path/on/pc /sdcard/filename`，然后 `adb shell` 和 `su` 在 adb shell 里获取 root 权限后，`cp /sdcard/filename /path/on/device`。
 
+## 模拟输入
+
+在 `adb shell` 里有个很实用的命令叫 `input`，通过它可以做一些有趣的事情。
+
+`input` 命令的完整 help 信息如下：
+
+```sh
+Usage: input [<source>] <command> [<arg>...]
+
+The sources are:
+      mouse
+      keyboard
+      joystick
+      touchnavigation
+      touchpad
+      trackball
+      stylus
+      dpad
+      gesture
+      touchscreen
+      gamepad
+
+The commands and default sources are:
+      text <string> (Default: touchscreen)
+      keyevent [--longpress] <key code number or name> ... (Default: keyboard)
+      tap <x> <y> (Default: touchscreen)
+      swipe <x1> <y1> <x2> <y2> [duration(ms)] (Default: touchscreen)
+      press (Default: trackball)
+      roll <dx> <dy> (Default: trackball)
+```
+
+下面是 `input` 命令的几种用法举例。
+
+### 点亮/熄灭屏幕
+
+命令：
+
+```sh
+adb shell input keyevent 26
+```
+
+执行效果相当于按电源键。
+
+除了 26，还有很多其它的 keycode 可用，它们的含义如下：
+
+// TODO <http://stackoverflow.com/questions/7789826/adb-shell-input-events>
+
+### 滑动解锁
+
+如果锁屏没有密码，是通过滑动手势解锁，那么可以通过 `input swipe` 来解锁。
+
+命令（参数以机型 Nexus 5，向上滑动手势解锁举例）：
+
+```sh
+adb shell swipe 300 1000 300 500
+```
+
+### 输入文本
+
+在焦点处于某文本框时，可以通过 `input` 命令来输入文本。
+
+命令：
+
+```sh
+input text hello
+```
+
+现在 `hello` 出现在文本框了。
+
 ## 调试
 
 ### 查看/过滤日志
@@ -936,3 +1009,4 @@ Android 系统是基于 Linux 内核的，所以 Linux 里的很多命令在 And
 * [ADB Shell Commands](https://developer.android.com/studio/command-line/shell.html)
 * [logcat Command-line Tool](https://developer.android.com/studio/command-line/logcat.html)
 * [Android ADB命令大全](http://zmywly8866.github.io/2015/01/24/all-adb-command.html)
+* [adb 命令行的使用记录](https://github.com/ZQiang94/StudyRecords/blob/master/other/src/main/java/com/other/adb%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9A%84%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.md)
