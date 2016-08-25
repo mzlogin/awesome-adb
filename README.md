@@ -69,6 +69,7 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [重启手机](#重启手机)
 * [刷机相关命令](#刷机相关命令)
 	* [重启到 Recovery 模式](#重启到-recovery-模式)
+	* [从 Recovery 重启到 Android](#从-recovery-重启到-android)
 	* [重启到 Fastboot 模式](#重启到-fastboot-模式)
 	* [通过 sideload 更新系统](#通过-sideload-更新系统)
 * [其它常用 adb shell 命令](#其它常用-adb-shell-命令)
@@ -1194,6 +1195,14 @@ adb reboot
 
 ```sh
 adb reboot recovery
+```
+
+### 从 Recovery 重启到 Android
+
+命令：
+
+```sh
+adb reboot
 ```
 
 ### 重启到 Fastboot 模式
