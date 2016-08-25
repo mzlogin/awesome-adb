@@ -2,7 +2,7 @@
 
 ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)，它是 Android 开发/测试人员不可替代的强大工具，也是 Android 设备玩家的好玩具。
 
-持续更新中，欢迎补充指正。
+持续更新中，欢迎补充指正，觉得有用的可以将 [此 GitHub 仓库](https://github.com/mzlogin/awesome-adb) Star 收藏。
 
 **注：**有部分命令的支持情况可能与 Android 系统版本及定制 ROM 的实现有关。
 
@@ -67,6 +67,10 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [查看连接过的 WiFi 密码](#查看连接过的-wifi-密码)
 	* [设置系统日期和时间](#设置系统日期和时间)
 	* [重启手机](#重启手机)
+* [刷机相关命令](#刷机相关命令)
+	* [重启到 Recovery 模式](#重启到-recovery-模式)
+	* [重启到 Fastboot 模式](#重启到-fastboot-模式)
+	* [通过 sideload 更新系统](#通过-sideload-更新系统)
 * [其它常用 adb shell 命令](#其它常用-adb-shell-命令)
 * [参考链接](#参考链接)
 
@@ -220,7 +224,35 @@ emulator-5554	device
 
 ### USB 连接
 
-// TODO
+通过 USB 连接来正常使用 adb 需要保证几点：
+
+1. 硬件状态正常。
+
+   包括 Android 设备处于正常开机状态，USB 连接线和各种接口完好。
+
+2. Android 设备的开发者选项和 USB 调试模式已开启。
+
+   可以到「设置」-「开发者选项」-「Android 调试」查看。
+
+   如果在设置里找不到开发者选项，那需要通过一个彩蛋来让它显示出来：在「设置」-「关于手机」连续点击「版本号」7 次。
+
+3. 设备驱动状态正常。
+
+   这一点貌似在 Linux 和 Mac OS X 下不用操心，在 Windows 下有可能遇到需要安装驱动的情况，确认这一点可以右键「计算机」-「属性」，到「设备管理器」里查看相关设备上是否有黄色感叹号或问号，如果没有就说明驱动状态已经好了。否则可以下载一个手机助手类程序来安装驱动先。
+
+4. 通过 USB 线连接好电脑和设备后确认状态。
+
+   ```sh
+   adb devices
+   ```
+
+   如果能看到
+
+   ```sh
+   xxxxxx device
+   ```
+
+   说明连接成功。
 
 ### 无线连接
 
@@ -727,6 +759,8 @@ adb shell input keyevent 127
 
 ### 点亮/熄灭屏幕
 
+可以通过上文讲述过的模拟电源键来切换点亮和熄灭屏幕，但如果明确地想要点亮或者熄灭屏幕，那可以使用如下方法。
+
 点亮屏幕：
 
 ```sh
@@ -1151,6 +1185,50 @@ date -s 20160823.131500
 ```sh
 adb reboot
 ```
+
+## 刷机相关命令
+
+### 重启到 Recovery 模式
+
+命令：
+
+```sh
+adb reboot recovery
+```
+
+### 重启到 Fastboot 模式
+
+命令：
+
+```sh
+adb reboot bootloader
+```
+
+### 通过 sideload 更新系统
+
+如果我们下载了 Android 设备对应的系统更新包到电脑上，那么也可以通过 adb 来完成更新。
+
+以 Recovery 模式下更新为例：
+
+1. 重启到 Recovery 模式。
+
+   命令：
+
+   ```sh
+   adb reboot recovery
+   ```
+
+2. 在设备的 Recovery 界面上操作进入 `Apply update`-`Apply from ADB`。
+
+   注：不同的 Recovery 菜单可能与此有差异，有的是一级菜单就有 `Apply update from ADB`。
+
+3. 通过 adb 上传和更新系统。
+
+   命令：
+
+   ```sh
+   adb sideload <path-to-update.zip>
+   ```
 
 ## 其它常用 adb shell 命令
 
