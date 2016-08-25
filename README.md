@@ -541,11 +541,35 @@ mFocusedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.androi
 
 ### 调起 Activity
 
-// TODO
+命令格式：
+
+```sh
+adb shell am start -n <packagename>/<activityname>
+```
+
+例如：
+
+```sh
+adb shell am start -n com.tencent.mm/.ui.LauncherUI
+```
+
+表示调起微信主界面。
 
 ### 调起 Service
 
-// TODO
+命令格式：
+
+```sh
+adb shell am startservice -n <packagename>/<servicename>
+```
+
+例如：
+
+```sh
+adb shell am startservice -n com.tencent.mm/.plugin.accountsync.model.AccountAuthenticatorService
+```
+
+表示调起微信的某 Service。
 
 ### 发送广播
 
