@@ -47,8 +47,13 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [点亮/熄灭屏幕](#点亮熄灭屏幕)
 	* [滑动解锁](#滑动解锁)
 	* [输入文本](#输入文本)
-* [调试](#调试)
-	* [查看/过滤日志](#查看过滤日志)
+* [查看日志](#查看日志)
+	* [Android 日志](#android-日志)
+		* [按级别过滤日志](#按级别过滤日志)
+		* [按 tag 和级别过滤日志](#按-tag-和级别过滤日志)
+		* [日志格式](#日志格式)
+		* [清空日志](#清空日志)
+	* [内核日志](#内核日志)
 * [查看设备信息](#查看设备信息)
 	* [型号](#型号)
 	* [电池状况](#电池状况)
@@ -59,6 +64,7 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [IMEI](#imei)
 	* [Android 系统版本](#android-系统版本)
 	* [Mac 地址](#mac-地址)
+	* [CPU 信息](#cpu-信息)
 	* [更多硬件与系统属性](#更多硬件与系统属性)
 * [实用功能](#实用功能)
 	* [屏幕截图](#屏幕截图)
@@ -798,11 +804,193 @@ adb shell input text hello
 
 现在 `hello` 出现在文本框了。
 
-## 调试
+## 查看日志
 
-### 查看/过滤日志
+Android 系统的日志分为两部分，底层的 Linux 内核日志输出到 /proc/kmsg，Android 的日志输出到 /dev/log。
 
-// TODO
+### Android 日志
+
+命令格式：
+
+```sh
+[adb] logcat [<option>] ... [<filter-spec>] ...
+```
+
+常用用法列举如下：
+
+#### 按级别过滤日志
+
+Android 的日志分为如下几个级别：
+
+* V —— Verbose（最低，输出得最多）
+* D —— Debug
+* I —— Info
+* W —— Warning
+* E —— Error
+* F —— Fatal
+* S —— Silent（最高，啥也不输出）
+
+按某级别过滤日志则会将该级别及以上的日志输出。
+
+比如，命令：
+
+```sh
+adb logcat *:W
+```
+
+会将 Warning、Error、Fatal 和 Silent 日志输出。
+
+#### 按 tag 和级别过滤日志
+
+比如，命令：
+
+```sh
+adb logcat ActivityManager:I MyApp:D *:S
+```
+
+表示输出 tag `ActivityManager` 的 Info 以上级别日志，输出 tag `MyApp` 的 Debug 以上级别日志，及其它 tag 的 Silent 级别日志（即屏蔽其它 tag 日志）。
+
+#### 日志格式
+
+可以 `adb logcat -v <format>` 选项指定日志输出格式。
+
+日志支持按以下几种 `<format>`：
+
+* brief
+
+  默认格式。格式为：
+
+  ```sh
+  <priority>/<tag>(<pid>): <message>
+  ```
+
+  示例：
+
+  ```sh
+  D/HeadsetStateMachine( 1785): Disconnected process message: 10, size: 0
+  ```
+
+* process
+
+  格式为：
+
+  ```sh
+  <priority>(<pid>) <message>
+  ```
+
+  示例：
+
+  ```sh
+  D( 1785) Disconnected process message: 10, size: 0  (HeadsetStateMachine)
+  ```
+
+* tag
+
+  格式为：
+
+  ```sh
+  <priority>/<tag>: <message>
+  ```
+
+  示例：
+
+  ```sh
+  D/HeadsetStateMachine: Disconnected process message: 10, size: 0
+  ```
+
+* raw
+
+  格式为：
+
+  ```sh
+  <message>
+  ```
+
+  示例：
+
+  ```sh
+  Disconnected process message: 10, size: 0
+  ```
+
+* time
+
+  格式为：
+
+  ```sh
+  <datetime> <priority>/<tag>(<pid>): <message>
+  ```
+
+  示例：
+
+  ```sh
+  08-28 22:39:39.974 D/HeadsetStateMachine( 1785): Disconnected process message: 10, size: 0
+  ```
+
+* threadtime
+
+  格式为：
+
+  ```sh
+  <datetime> <pid> <tid> <priority> <tag>: <message>
+  ```
+
+  示例：
+
+  ```sh
+  08-28 22:39:39.974  1785  1832 D HeadsetStateMachine: Disconnected process message: 10, size: 0
+  ```
+
+* long
+
+  格式为：
+
+  ```sh
+  [ <datetime> <pid>:<tid> <priority>/<tag> ]
+  <message>
+  ```
+
+  示例：
+
+  ```sh
+  [ 08-28 22:39:39.974  1785: 1832 D/HeadsetStateMachine ]
+  Disconnected process message: 10, size: 0
+  ```
+
+指定格式可与上面的过滤同时使用。比如：
+
+```sh
+adb logcat -v long ActivityManager:I *:S
+```
+
+#### 清空日志
+
+```sh
+adb logcat -c
+```
+
+### 内核日志
+
+命令：
+
+```sh
+adb shell dmesg
+```
+
+输出示例：
+
+```sh
+<6>[14201.684016] PM: noirq resume of devices complete after 0.982 msecs
+<6>[14201.685525] PM: early resume of devices complete after 0.838 msecs
+<6>[14201.753642] PM: resume of devices complete after 68.106 msecs
+<4>[14201.755954] Restarting tasks ... done.
+<6>[14201.771229] PM: suspend exit 2016-08-28 13:31:32.679217193 UTC
+<6>[14201.872373] PM: suspend entry 2016-08-28 13:31:32.780363596 UTC
+<6>[14201.872498] PM: Syncing filesystems ... done.
+```
+
+中括号里的 `[14201.684016]` 代表内核开始启动后的时间，单位为秒。
+
+通过内核日志我们可以做一些事情，比如衡量内核启动时间，在系统启动完毕后的内核日志里找到 `Freeing init memory` 那一行前面的时间就是。
 
 ## 查看设备信息
 
@@ -978,6 +1166,44 @@ adb shell cat /sys/class/net/wlan0/address
 ```sh
 f8:a9:d0:17:42:4d
 ```
+
+### CPU 信息
+
+命令：
+
+```sh
+adb shell cat /proc/cpuinfo
+```
+
+输出示例：
+
+```sh
+Processor       : ARMv7 Processor rev 0 (v7l)
+processor       : 0
+BogoMIPS        : 38.40
+
+processor       : 1
+BogoMIPS        : 38.40
+
+processor       : 2
+BogoMIPS        : 38.40
+
+processor       : 3
+BogoMIPS        : 38.40
+
+Features        : swp half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt
+CPU implementer : 0x51
+CPU architecture: 7
+CPU variant     : 0x2
+CPU part        : 0x06f
+CPU revision    : 0
+
+Hardware        : Qualcomm MSM 8974 HAMMERHEAD (Flattened Device Tree)
+Revision        : 000b
+Serial          : 0000000000000000
+```
+
+这是 Nexus 5 的 CPU 信息，我们从输出里可以看到使用的硬件是 `Qualcomm MSM 8974`，processor 的编号是 0 到 3，所以它是四核的，采用的架构是 `ARMv7 Processor rev 0 (v71)`。
 
 ### 更多硬件与系统属性
 
@@ -1263,3 +1489,4 @@ Android 系统是基于 Linux 内核的，所以 Linux 里的很多命令在 And
 * [Android ADB命令大全](http://zmywly8866.github.io/2015/01/24/all-adb-command.html)
 * [adb 命令行的使用记录](https://github.com/ZQiang94/StudyRecords/blob/master/other/src/main/java/com/other/adb%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9A%84%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.md)
 * [Android ADB命令大全(通过ADB命令查看wifi密码、MAC地址、设备信息、操作文件、查看文件、日志信息、卸载、启动和安装APK等)](http://www.jianshu.com/p/860bc2bf1a6a)
+* [那些做Android开发必须知道的ADB命令](http://yifeiyuan.me/2016/06/30/ADB%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86/)
