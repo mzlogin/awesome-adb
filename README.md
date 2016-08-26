@@ -73,6 +73,7 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [查看连接过的 WiFi 密码](#查看连接过的-wifi-密码)
 	* [设置系统日期和时间](#设置系统日期和时间)
 	* [重启手机](#重启手机)
+	* [检测设备是否已 root](#检测设备是否已-root)
 	* [使用 Monkey 进行压力测试](#使用-monkey-进行压力测试)
 * [刷机相关命令](#刷机相关命令)
 	* [重启到 Recovery 模式](#重启到-recovery-模式)
@@ -932,7 +933,7 @@ adb logcat ActivityManager:I MyApp:D *:S
 
 #### 日志格式
 
-可以 `adb logcat -v <format>` 选项指定日志输出格式。
+可以用 `adb logcat -v <format>` 选项指定日志输出格式。
 
 日志支持按以下几种 `<format>`：
 
@@ -1493,6 +1494,17 @@ date -s 20160823.131500
 adb reboot
 ```
 
+### 检测设备是否已 root
+
+命令：
+
+```sh
+adb shell
+su
+```
+
+此时命令行提示符是 `$` 则表示没有 root 权限，是 `#` 则表示已 root。
+
 ### 使用 Monkey 进行压力测试
 
 Monkey 可以生成伪随机用户事件来模拟单击、触摸、手势等操作，可以对正在开发中的程序进行随机压力测试。
@@ -1656,7 +1668,9 @@ Usage: top [ -m max_procs ] [ -n iterations ] [ -d delay ] [ -s sort_column ] [ 
 | cat   | 显示文件内容                |
 | cd    | 切换目录                    |
 | chmod | 改变文件的存取模式/访问权限 |
+| df    | 查看磁盘空间使用情况        |
 | grep  | 过滤输出                    |
+| kill  | 杀死指定 PID 的进程         |
 | ls    | 列举目录内容                |
 | mount | 挂载目录的查看和管理        |
 | mv    | 移动或重命名文件            |
