@@ -2,7 +2,7 @@
 
 ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)，它是 Android 开发/测试人员不可替代的强大工具，也是 Android 设备玩家的好玩具。
 
-持续更新中，欢迎补充指正，觉得有用的可以将 [此 GitHub 仓库](https://github.com/mzlogin/awesome-adb) Star 收藏。
+持续更新中，欢迎补充指正，觉得有用的可以将 [此 GitHub 仓库](https://github.com/mzlogin/awesome-adb) Star 收藏备用。
 
 **注：**有部分命令的支持情况可能与 Android 系统版本及定制 ROM 的实现有关。
 
@@ -73,12 +73,16 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [查看连接过的 WiFi 密码](#查看连接过的-wifi-密码)
 	* [设置系统日期和时间](#设置系统日期和时间)
 	* [重启手机](#重启手机)
+	* [使用 Monkey 进行压力测试](#使用-monkey-进行压力测试)
 * [刷机相关命令](#刷机相关命令)
 	* [重启到 Recovery 模式](#重启到-recovery-模式)
 	* [从 Recovery 重启到 Android](#从-recovery-重启到-android)
 	* [重启到 Fastboot 模式](#重启到-fastboot-模式)
 	* [通过 sideload 更新系统](#通过-sideload-更新系统)
-* [其它常用 adb shell 命令](#其它常用-adb-shell-命令)
+* [更多 adb shell 命令](#更多-adb-shell-命令)
+	* [查看进程](#查看进程)
+	* [查看实时资源占用情况](#查看实时资源占用情况)
+	* [其它](#其它)
 * [参考链接](#参考链接)
 
 ## 基本用法
@@ -539,12 +543,46 @@ mFocusedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.androi
 
 ## 与应用交互
 
+主要是使用 `am <command>` 命令，常用的 `<command>` 如下：
+
+| command                           | 用途                            |
+|-----------------------------------|---------------------------------|
+| `start [options] <INTENT>`        | 启动 `<INTENT>` 指定的 Activity |
+| `startservice [options] <INTENT>` | 启动 `<INTENT>` 指定的 Service  |
+| `broadcast [options] <INTENT>`    | 发送 `<INTENT>` 指定的广播      |
+| `force-stop <packagename>`        | 停止 `<packagename>` 相关的进程 |
+
+`<INTENT>` 参数很灵活，和写 Android 程序时代码里的 Intent 相对应。
+
+用于决定 intent 对象的选项如下：
+
+| 参数             | 含义                                                                                        |
+|------------------|---------------------------------------------------------------------------------------------|
+| `-a <ACTION>`    | 指定 action，比如 `android.intent.action.VIEW`                                              |
+| `-c <CATEGORY>`  | 指定 category，比如 `android.intent.category.APP_CONTACTS`                                  |
+| `-n <COMPONENT>` | 指定完整 component 名，用于明确指定启动哪个 Activity，如 `com.example.app/.ExampleActivity` |
+
+`<INTENT>` 里还能带数据，就像写代码时的 Bundle 一样：
+
+| 参数                                                          | 含义                                   |
+|---------------------------------------------------------------|----------------------------------------|
+| `--esn <EXTRA_KEY>`                                           | null 值（只有 key 名）                 |
+| `-e\|--es <EXTRA_KEY> <EXTRA_STRING_VALUE>`                   | string 值                              |
+| `--ez <EXTRA_KEY> <EXTRA_BOOLEAN_VALUE>`                      | boolean 值                             |
+| `--ei <EXTRA_KEY> <EXTRA_INT_VALUE>`                          | integer 值                             |
+| `--el <EXTRA_KEY> <EXTRA_LONG_VALUE>`                         | long 值                                |
+| `--ef <EXTRA_KEY> <EXTRA_FLOAT_VALUE>`                        | float 值                               |
+| `--eu <EXTRA_KEY> <EXTRA_URI_VALUE>`                          | URI                                    |
+| `--ecn <EXTRA_KEY> <EXTRA_COMPONENT_NAME_VALUE>`              | component name                         |
+| `--eia <EXTRA_KEY> <EXTRA_INT_VALUE>[,<EXTRA_INT_VALUE...]`   | integer 数组                           |
+| `--ela <EXTRA_KEY> <EXTRA_LONG_VALUE>[,<EXTRA_LONG_VALUE...]` | long 数组                              |
+
 ### 调起 Activity
 
 命令格式：
 
 ```sh
-adb shell am start -n <packagename>/<activityname>
+adb shell am start [options] <INTENT>
 ```
 
 例如：
@@ -555,12 +593,18 @@ adb shell am start -n com.tencent.mm/.ui.LauncherUI
 
 表示调起微信主界面。
 
+```sh
+adb shell am start -n org.mazhuang.boottimemeasure/.MainActivity --es "toast" "hello, world"
+```
+
+表示调起 `org.mazhuang.boottimemeasure/.MainActivity` 并传给它 string 数据键值对 `toast - hello, world`。
+
 ### 调起 Service
 
 命令格式：
 
 ```sh
-adb shell am startservice -n <packagename>/<servicename>
+adb shell am startservice [options] <INTENT>
 ```
 
 例如：
@@ -573,7 +617,19 @@ adb shell am startservice -n com.tencent.mm/.plugin.accountsync.model.AccountAut
 
 ### 发送广播
 
-// TODO
+命令格式：
+
+```sh
+adb shell am broadcast [options] <INTENT>
+```
+
+例如：
+
+```sh
+adb shell am broadcast -a android.intent.action.BOOT_COMPLETED -n org.mazhuang.boottimemeasure/.BootCompletedReceiver
+```
+
+表示向 `org.mazhuang.boottimemeasure/.BootCompletedReceiver` 发送一个 `BOOT_COMPLETED` 广播，这类用法在测试的时候很实用，比如某个广播的场景很难制造，可以考虑通过这种方式来发送广播。
 
 ### 强制停止应用
 
@@ -1437,6 +1493,20 @@ date -s 20160823.131500
 adb reboot
 ```
 
+### 使用 Monkey 进行压力测试
+
+Monkey 可以生成伪随机用户事件来模拟单击、触摸、手势等操作，可以对正在开发中的程序进行随机压力测试。
+
+简单用法：
+
+```sh
+adb shell monkey -p <packagename> -v 500
+```
+
+表示向 `<packagename>` 指定的应用程序发送 500 个伪随机事件。
+
+Monkey 的详细用法参考 [官方文档](https://developer.android.com/studio/test/monkey.html)。
+
 ## 刷机相关命令
 
 ### 重启到 Recovery 模式
@@ -1489,9 +1559,97 @@ adb reboot bootloader
    adb sideload <path-to-update.zip>
    ```
 
-## 其它常用 adb shell 命令
+## 更多 adb shell 命令
 
-Android 系统是基于 Linux 内核的，所以 Linux 里的很多命令在 Android 里也有相同或类似的实现，在 `adb shell` 里可以调用。本文档前面的部分内容已经用到了 `adb shell` 命令。如下是常用命令的简单描述，前文已经专门讲过的命令不再列举：
+Android 系统是基于 Linux 内核的，所以 Linux 里的很多命令在 Android 里也有相同或类似的实现，在 `adb shell` 里可以调用。本文档前面的部分内容已经用到了 `adb shell` 命令。
+
+### 查看进程
+
+命令：
+
+```sh
+adb shell ps
+```
+
+输出示例：
+
+```sh
+USER     PID   PPID  VSIZE  RSS     WCHAN    PC        NAME
+root      1     0     8904   788   ffffffff 00000000 S /init
+root      2     0     0      0     ffffffff 00000000 S kthreadd
+...
+u0_a71    7779  5926  1538748 48896 ffffffff 00000000 S com.sohu.inputmethod.sogou:classic
+u0_a58    7963  5926  1561916 59568 ffffffff 00000000 S org.mazhuang.boottimemeasure
+...
+shell     8750  217   10640  740   00000000 b6f28340 R ps
+```
+
+各列含义：
+
+| 列名 | 含义      |
+|------|-----------|
+| USER | 所属用户  |
+| PID  | 进程 ID   |
+| PPID | 父进程 ID |
+| NAME | 进程名    |
+
+### 查看实时资源占用情况
+
+命令：
+
+```sh
+adb shell top
+```
+
+输出示例：
+
+```sh
+User 0%, System 6%, IOW 0%, IRQ 0%
+User 3 + Nice 0 + Sys 21 + Idle 280 + IOW 0 + IRQ 0 + SIRQ 3 = 307
+
+  PID PR CPU% S  #THR     VSS     RSS PCY UID      Name
+ 8763  0   3% R     1  10640K   1064K  fg shell    top
+  131  0   3% S     1      0K      0K  fg root     dhd_dpc
+ 6144  0   0% S   115 1682004K 115916K  fg system   system_server
+  132  0   0% S     1      0K      0K  fg root     dhd_rxf
+ 1731  0   0% S     6  20288K    788K  fg root     /system/bin/mpdecision
+  217  0   0% S     6  18008K    356K  fg shell    /sbin/adbd
+ ...
+ 7779  2   0% S    19 1538748K  48896K  bg u0_a71   com.sohu.inputmethod.sogou:classic
+ 7963  0   0% S    18 1561916K  59568K  fg u0_a58   org.mazhuang.boottimemeasure
+ ...
+```
+
+各列含义：
+
+| 列名 | 含义                                                       |
+|------|------------------------------------------------------------|
+| PID  | 进程 ID                                                    |
+| PR   | 优先级                                                     |
+| CPU% | 当前瞬间占用 CPU 百分比                                    |
+| S    | 进程状态（R=运行，S=睡眠，T=跟踪/停止，Z=僵尸进程）        |
+| #THR | 线程数                                                     |
+| VSS  | Virtual Set Size 虚拟耗用内存（包含共享库占用的内存）      |
+| RSS  | Resident Set Size 实际使用物理内存（包含共享库占用的内存） |
+| PCY  | 调度策略优先级，SP_BACKGROUND/SPFOREGROUND                 |
+| UID  | 进程所有者的用户 ID                                        |
+| NAME | 进程名                                                     |
+
+`top` 命令还支持一些命令行参数，详细用法如下：
+
+```sh
+Usage: top [ -m max_procs ] [ -n iterations ] [ -d delay ] [ -s sort_column ] [ -t ] [ -h ]
+    -m num  最多显示多少个进程
+    -n num  刷新多少次后退出
+    -d num  刷新时间间隔（单位秒，默认值 5）
+    -s col  按某列排序（可用 col 值：cpu, vss, rss, thr）
+    -t      显示线程信息
+    -h      显示帮助文档
+```
+
+### 其它
+
+如下是其它常用命令的简单描述，前文已经专门讲过的命令不再额外说明：
 
 | 命令  | 功能                        |
 |-------|-----------------------------|
@@ -1503,6 +1661,7 @@ Android 系统是基于 Linux 内核的，所以 Linux 里的很多命令在 And
 | mount | 挂载目录的查看和管理        |
 | mv    | 移动或重命名文件            |
 | ps    | 查看正在运行的进程          |
+| rm    | 删除文件                    |
 | top   | 查看进程的资源占用情况      |
 
 ## 参考链接
@@ -1514,3 +1673,5 @@ Android 系统是基于 Linux 内核的，所以 Linux 里的很多命令在 And
 * [adb 命令行的使用记录](https://github.com/ZQiang94/StudyRecords/blob/master/other/src/main/java/com/other/adb%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9A%84%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95.md)
 * [Android ADB命令大全(通过ADB命令查看wifi密码、MAC地址、设备信息、操作文件、查看文件、日志信息、卸载、启动和安装APK等)](http://www.jianshu.com/p/860bc2bf1a6a)
 * [那些做Android开发必须知道的ADB命令](http://yifeiyuan.me/2016/06/30/ADB%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86/)
+* [adb shell top](http://blog.csdn.net/kittyboy0001/article/details/38562515)
+* [像高手一样使用ADB命令行（2）](http://cabins.github.io/2016/03/25/UseAdbLikeAPro-2/)
