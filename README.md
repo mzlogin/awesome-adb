@@ -102,11 +102,11 @@ adb [-d|-e|-s <serialNumber>] <command>
 
 如果有多个设备/模拟器连接，则需要为命令指定目标设备。
 
-| 参数              | 含义                                               |
-|-------------------|----------------------------------------------------|
-| -d                | 指定当前唯一通过 USB 连接的 Android 设备为命令目标 |
-| -e                | 指定当前唯一运行的模拟器为命令目标                 |
-| -s <serialNumber> | 指定相应 serialNumber 号的设备/模拟器为命令目标    |
+| 参数                | 含义                                               |
+|---------------------|----------------------------------------------------|
+| -d                  | 指定当前唯一通过 USB 连接的 Android 设备为命令目标 |
+| -e                  | 指定当前唯一运行的模拟器为命令目标                 |
+| `-s <serialNumber>` | 指定相应 serialNumber 号的设备/模拟器为命令目标    |
 
 在多个设备/模拟器连接的情况下较常用的是 `-s <serialNumber>` 参数，serialNumber 可以通过 `adb devices` 命令获取。如：
 
@@ -336,17 +336,17 @@ adb shell pm list packages [-f] [-d] [-e] [-s] [-3] [-i] [-u] [--user USER_ID] [
 
 即在 `adb shell pm list packages` 的基础上可以加一些参数进行过滤查看不同的列表，支持的过滤参数如下：
 
-| 参数   | 显示列表                |
-|--------|-------------------------|
-| 无     | 所有应用                |
-| -f     | 显示应用关联的 apk 文件 |
-| -d     | 只显示 disabled 的应用  |
-| -e     | 只显示 enabled 的应用   |
-| -s     | 只显示系统应用          |
-| -3     | 只显示第三方应用        |
-| -i     | 显示应用的 installer    |
-| -u     | 包含已卸载应用          |
-| FILTER | 包名包含 FILTER 字符串  |
+| 参数       | 显示列表                   |
+|------------|----------------------------|
+| 无         | 所有应用                   |
+| -f         | 显示应用关联的 apk 文件    |
+| -d         | 只显示 disabled 的应用     |
+| -e         | 只显示 enabled 的应用      |
+| -s         | 只显示系统应用             |
+| -3         | 只显示第三方应用           |
+| -i         | 显示应用的 installer       |
+| -u         | 包含已卸载应用             |
+| `<FILTER>` | 包名包含 `<FILTER>` 字符串 |
 
 #### 所有应用
 
@@ -568,7 +568,7 @@ mFocusedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.androi
 | 参数                                                          | 含义                                   |
 |---------------------------------------------------------------|----------------------------------------|
 | `--esn <EXTRA_KEY>`                                           | null 值（只有 key 名）                 |
-| `-e\|--es <EXTRA_KEY> <EXTRA_STRING_VALUE>`                   | string 值                              |
+| `-e|--es <EXTRA_KEY> <EXTRA_STRING_VALUE>`                    | string 值                              |
 | `--ez <EXTRA_KEY> <EXTRA_BOOLEAN_VALUE>`                      | boolean 值                             |
 | `--ei <EXTRA_KEY> <EXTRA_INT_VALUE>`                          | integer 值                             |
 | `--el <EXTRA_KEY> <EXTRA_LONG_VALUE>`                         | long 值                                |
