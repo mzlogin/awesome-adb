@@ -2,7 +2,7 @@
 
 ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)，它是 Android 开发/测试人员不可替代的强大工具，也是 Android 设备玩家的好玩具。
 
-持续更新中，欢迎补充指正，觉得有用的可以将 [此 GitHub 仓库](https://github.com/mzlogin/awesome-adb) Star 收藏备用。
+持续更新中，欢迎提 PR 和 Issue 补充指正，觉得有用的可以将 [此 GitHub 仓库](https://github.com/mzlogin/awesome-adb) Star 收藏备用。
 
 **注：**有部分命令的支持情况可能与 Android 系统版本及定制 ROM 的实现有关。
 
@@ -1338,7 +1338,7 @@ VmallocUsed:       61004 kB
 VmallocChunk:     209668 kB
 ```
 
-其中，MemTotal就是设备的总内存，MemFree是当前空闲内存。
+其中，`MemTotal` 就是设备的总内存，`MemFree` 是当前空闲内存。
 
 ### 更多硬件与系统属性
 
@@ -1575,13 +1575,25 @@ Monkey 的详细用法参考 [官方文档](https://developer.android.com/studio
 
 ### 开启/关闭 WiFi
 
-有时需要控制设备的 WiFi 状态，可以用以下指令完成。需要 root 权限
+**注：需要 root 权限。**
+
+有时需要控制设备的 WiFi 状态，可以用以下指令完成。
+
+开启 WiFi：
 
 ```sh
 adb root
-adb shell svc wifi enable #开启WiFi
-adb shell svc wifi disable #关闭WiFi
+adb shell svc wifi enable
 ```
+
+关闭 WiFi：
+
+```sh
+adb root
+adb shell svc wifi disable
+```
+
+若执行成功，输出为空；若未取得 root 权限执行此命令，将执行失败，输出 `Killed`。
 
 ## 刷机相关命令
 
