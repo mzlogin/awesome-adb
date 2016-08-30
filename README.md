@@ -65,6 +65,7 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [Android 系统版本](#android-系统版本)
 	* [Mac 地址](#mac-地址)
 	* [CPU 信息](#cpu-信息)
+	* [内存信息](#内存信息)
 	* [更多硬件与系统属性](#更多硬件与系统属性)
 * [实用功能](#实用功能)
 	* [屏幕截图](#屏幕截图)
@@ -75,6 +76,7 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [重启手机](#重启手机)
 	* [检测设备是否已 root](#检测设备是否已-root)
 	* [使用 Monkey 进行压力测试](#使用-monkey-进行压力测试)
+	* [开启/关闭 WiFi](#开启关闭-wifi)
 * [刷机相关命令](#刷机相关命令)
 	* [重启到 Recovery 模式](#重启到-recovery-模式)
 	* [从 Recovery 重启到 Android](#从-recovery-重启到-android)
@@ -655,7 +657,7 @@ adb shell am force-stop com.qihoo360.mobilesafe
 命令：
 
 ```sh
-adb pull <设备里的文件路径> [电脑上的目录] 
+adb pull <设备里的文件路径> [电脑上的目录]
 ```
 
 其中 `电脑上的目录` 参数可以省略，默认复制到当前目录。
@@ -673,7 +675,7 @@ adb pull /sdcard/sr.mp4 ~/tmp/
 命令：
 
 ```sh
-adb push <电脑上的文件路径> <设备里的目录> 
+adb push <电脑上的文件路径> <设备里的目录>
 ```
 
 例：
@@ -1286,6 +1288,58 @@ Serial          : 0000000000000000
 
 这是 Nexus 5 的 CPU 信息，我们从输出里可以看到使用的硬件是 `Qualcomm MSM 8974`，processor 的编号是 0 到 3，所以它是四核的，采用的架构是 `ARMv7 Processor rev 0 (v71)`。
 
+### 内存信息
+
+命令：
+
+```sh
+adb shell cat /proc/meminfo
+```
+
+输出示例：
+
+```sh
+MemTotal:        1027424 kB
+MemFree:          486564 kB
+Buffers:           15224 kB
+Cached:            72464 kB
+SwapCached:        24152 kB
+Active:           110572 kB
+Inactive:         259060 kB
+Active(anon):      79176 kB
+Inactive(anon):   207736 kB
+Active(file):      31396 kB
+Inactive(file):    51324 kB
+Unevictable:        3948 kB
+Mlocked:               0 kB
+HighTotal:        409600 kB
+HighFree:         132612 kB
+LowTotal:         617824 kB
+LowFree:          353952 kB
+SwapTotal:        262140 kB
+SwapFree:         207572 kB
+Dirty:                 0 kB
+Writeback:             0 kB
+AnonPages:        265324 kB
+Mapped:            47072 kB
+Shmem:              1020 kB
+Slab:              57372 kB
+SReclaimable:       7692 kB
+SUnreclaim:        49680 kB
+KernelStack:        4512 kB
+PageTables:         5912 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:      775852 kB
+Committed_AS:   13520632 kB
+VmallocTotal:     385024 kB
+VmallocUsed:       61004 kB
+VmallocChunk:     209668 kB
+```
+
+其中，MemTotal就是设备的总内存，MemFree是当前空闲内存。
+
 ### 更多硬件与系统属性
 
 设备的更多硬件与系统属性可以通过如下命令查看：
@@ -1518,6 +1572,16 @@ adb shell monkey -p <packagename> -v 500
 表示向 `<packagename>` 指定的应用程序发送 500 个伪随机事件。
 
 Monkey 的详细用法参考 [官方文档](https://developer.android.com/studio/test/monkey.html)。
+
+### 开启/关闭 WiFi
+
+有时需要控制设备的 WiFi 状态，可以用以下指令完成。需要 root 权限
+
+```sh
+adb root
+adb shell svc wifi enable #开启WiFi
+adb shell svc wifi disable #关闭WiFi
+```
 
 ## 刷机相关命令
 
