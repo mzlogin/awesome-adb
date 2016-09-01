@@ -18,7 +18,8 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 * [设备连接管理](#设备连接管理)
 	* [查询已连接设备/模拟器](#查询已连接设备模拟器)
 	* [USB 连接](#usb-连接)
-	* [无线连接](#无线连接)
+	* [无线连接（需要借助 USB 线）](#无线连接需要借助-usb-线)
+	* [无线连接（无需借助 USB 线）](#无线连接无需借助-usb-线)
 * [应用管理](#应用管理)
 	* [查看应用列表](#查看应用列表)
 		* [所有应用](#所有应用)
@@ -87,6 +88,7 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [查看实时资源占用情况](#查看实时资源占用情况)
 	* [其它](#其它)
 * [adb 的非官方实现](#adb-的非官方实现)
+* [致谢](#致谢)
 * [参考链接](#参考链接)
 
 ## 基本用法
@@ -269,7 +271,7 @@ emulator-5554	device
 
    说明连接成功。
 
-### 无线连接
+### 无线连接（需要借助 USB 线）
 
 除了可以通过 USB 连接设备与电脑来使用 adb，也可以通过无线连接——虽然连接过程中也有需要使用 USB 的步骤，但是连接成功之后你的设备就可以在一定范围内摆脱 USB 连接线的限制啦！
 
@@ -326,6 +328,45 @@ emulator-5554	device
 ```sh
 adb disconnect <device-ip-address>
 ```
+
+### 无线连接（无需借助 USB 线）
+
+**注：需要 root 权限。**
+
+上一节「无线连接（需要借助 USB 线）」是官方文档里介绍的方法，需要借助于 USB 数据线来实现无线连接。
+
+既然我们想要实现无线连接，那能不能所有步骤下来都是无线的呢？答案是能的。
+
+1. 在 Android 设备上安装一个终端模拟器。
+
+   已经安装过的设备可以路过此步。
+
+   我使用的终端模拟器下载地址是：[Terminal Emulator for Android Downloads](https://jackpal.github.io/Android-Terminal-Emulator/)
+
+2. 将 Android 设备与将运行 adb 的电脑连接到同一个局域网，比如连到同一个 WiFi。
+
+3. 打开 Android 设备上的终端模拟器，在里面依次运行命令：
+
+   ```sh
+   su
+   setprop service.adb.tcp.port 5555
+   ```
+
+4. 找到 Android 设备的 IP 地址。
+
+   一般能在「设置」-「关于手机」-「状态信息」-「IP地址」找到。
+
+5. 在电脑上通过 adb 和 IP 地址连接 Android 设备。
+
+   ```sh
+   adb connect <device-ip-address>
+   ```
+
+   这里的 `<device-ip-address>` 就是上一步中找到的设备 IP 地址。
+
+   如果能看到 `connected to <device-ip-address>:5555` 这样的输出则表示连接成功。
+
+*（感谢 @seasonyuu 同学分享本方法！)*
 
 ## 应用管理
 
@@ -1789,6 +1830,15 @@ Usage: top [ -m max_procs ] [ -n iterations ] [ -d delay ] [ -s sort_column ] [ 
 ## adb 的非官方实现
 
 * [fb-adb](https://github.com/facebook/fb-adb) - A better shell for Android devices (for Mac).
+
+## 致谢
+
+感谢朋友们无私的分享与补充。
+
+* @zxning
+* @linhua55
+* @codeskyblue
+* @seasonyuu
 
 ## 参考链接
 
