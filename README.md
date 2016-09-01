@@ -277,7 +277,7 @@ emulator-5554	device
 
 操作步骤：
 
-1. 将 Android 设备与将运行 adb 的电脑连接到同一个局域网，比如连到同一个 WiFi。
+1. 将 Android 设备与要运行 adb 的电脑连接到同一个局域网，比如连到同一个 WiFi。
 
 2. 将设备与电脑通过 USB 线连接。
 
@@ -339,11 +339,9 @@ adb disconnect <device-ip-address>
 
 1. 在 Android 设备上安装一个终端模拟器。
 
-   已经安装过的设备可以路过此步。
+   已经安装过的设备可以跳过此步。我使用的终端模拟器下载地址是：[Terminal Emulator for Android Downloads](https://jackpal.github.io/Android-Terminal-Emulator/)
 
-   我使用的终端模拟器下载地址是：[Terminal Emulator for Android Downloads](https://jackpal.github.io/Android-Terminal-Emulator/)
-
-2. 将 Android 设备与将运行 adb 的电脑连接到同一个局域网，比如连到同一个 WiFi。
+2. 将 Android 设备与要运行 adb 的电脑连接到同一个局域网，比如连到同一个 WiFi。
 
 3. 打开 Android 设备上的终端模拟器，在里面依次运行命令：
 
