@@ -366,8 +366,6 @@ adb disconnect <device-ip-address>
 
    如果能看到 `connected to <device-ip-address>:5555` 这样的输出则表示连接成功。
 
-*（感谢 @seasonyuu 同学分享本方法！)*
-
 ## 应用管理
 
 ### 查看应用列表
@@ -1835,10 +1833,10 @@ Usage: top [ -m max_procs ] [ -n iterations ] [ -d delay ] [ -s sort_column ] [ 
 
 感谢朋友们无私的分享与补充。
 
-* @zxning
-* @linhua55
-* @codeskyblue
-* @seasonyuu
+* [zxning](https://github.com/zxning)
+* [linhua55](https://github.com/linhua55)
+* [codeskyblue](https://github.com/codeskyblue)
+* [seasonyuu](https://github.com/seasonyuu)
 
 ## 参考链接
 
