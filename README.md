@@ -86,6 +86,7 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [查看进程](#查看进程)
 	* [查看实时资源占用情况](#查看实时资源占用情况)
 	* [其它](#其它)
+* [adb 的非官方实现](#adb-的非官方实现)
 * [参考链接](#参考链接)
 
 ## 基本用法
@@ -155,8 +156,8 @@ adb version
 示例输出：
 
 ```sh
-Android Debug Bridge version 1.0.32
-Revision 09a0d98bebce-android
+Android Debug Bridge version 1.0.36
+Revision 8f855a3d9b35-android
 ```
 
 ### 以 root 权限运行 adbd
@@ -418,14 +419,14 @@ adb install [-lrtsdg] <path_to_apk>
 
 `adb install` 后面可以跟一些可选参数来控制安装 APK 的行为，可用参数及含义如下：
 
-| 参数 | 含义                 |
-|------|----------------------|
-| -l   | 将应用安装到保护目录 |
-| -r   | 允许覆盖安装         |
-| -t   |
-| -s   | 将应用安装到 sdcard  |
-| -d   | 允许降级覆盖安装     |
-| -g   | 授予所有运行时权限   |
+| 参数 | 含义                                                                              |
+|------|-----------------------------------------------------------------------------------|
+| -l   | 将应用安装到保护目录 /mnt/asec                                                    |
+| -r   | 允许覆盖安装                                                                      |
+| -t   | 允许安装 AndroidManifest.xml 里 application 指定 `android:testOnly="true"` 的应用 |
+| -s   | 将应用安装到 sdcard                                                               |
+| -d   | 允许降级覆盖安装                                                                  |
+| -g   | 授予所有运行时权限                                                                |
 
 运行命令后如果见到类似如下输出（状态为 `Success`）代表安装成功：
 
@@ -445,7 +446,15 @@ Success
 Success
 ```
 
-而如果状态为 `Failure` 则表示安装失败。常见安装失败输出代码、含义及可能的解决办法如下：
+而如果状态为 `Failure` 则表示安装失败，比如：
+
+```sh
+[100%] /data/local/tmp/map-20160831.apk
+        pkg: /data/local/tmp/map-20160831.apk
+Failure [INSTALL_FAILED_ALREADY_EXISTS]
+```
+
+常见安装失败输出代码、含义及可能的解决办法如下：
 
 | 输出                                               | 含义                                                                     | 解决办法                                        |
 |----------------------------------------------------|--------------------------------------------------------------------------|-------------------------------------------------|
@@ -502,6 +511,18 @@ Success
 | Permission denied ... sdcard ...                   | sdcard 不可用                                                            |                                                 |
 
 参考：[PackageManager.java](https://github.com/android/platform_frameworks_base/blob/master/core%2Fjava%2Fandroid%2Fcontent%2Fpm%2FPackageManager.java)
+
+*`adb install` 内部原理简介*
+
+`adb install` 实际是分三步完成：
+
+1. push apk 文件到 /data/local/tmp。
+
+2. 调用 pm install 安装。
+
+3. 删除 /data/local/tmp 下的对应 apk 文件。
+
+所以，必要的时候也可以根据这个步骤，手动分步执行安装过程。
 
 ### 卸载应用
 
@@ -1764,6 +1785,10 @@ Usage: top [ -m max_procs ] [ -n iterations ] [ -d delay ] [ -s sort_column ] [ 
 | ps    | 查看正在运行的进程          |
 | rm    | 删除文件                    |
 | top   | 查看进程的资源占用情况      |
+
+## adb 的非官方实现
+
+* [fb-adb](https://github.com/facebook/fb-adb) - A better shell for Android devices (for Mac).
 
 ## 参考链接
 
