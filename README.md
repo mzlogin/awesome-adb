@@ -408,25 +408,36 @@ adb shell pm list packages | grep mazhuang
 
 ### 安装 APK
 
-命令：
+命令格式：
 
 ```sh
-adb install <apk file>
+adb install [-lrtsdg] <path_to_apk>
 ```
 
 参数：
 
-`adb install` 后面可以跟一些参数来控制安装 APK 的行为，常用参数及含义如下：
+`adb install` 后面可以跟一些可选参数来控制安装 APK 的行为，可用参数及含义如下：
 
-| 参数 | 含义                  |
-|------|-----------------------|
-| -r   | 允许覆盖安装。        |
-| -s   | 将应用安装到 sdcard。 |
-| -d   | 允许降级覆盖安装。    |
+| 参数 | 含义                 |
+|------|----------------------|
+| -l   | 将应用安装到保护目录 |
+| -r   | 允许覆盖安装         |
+| -t   |
+| -s   | 将应用安装到 sdcard  |
+| -d   | 允许降级覆盖安装     |
+| -g   | 授予所有运行时权限   |
 
-完整参数列表及含义可以直接运行 `adb` 命令然后查看 `adb install [-lrtsdg] <file>` 一节。
+运行命令后如果见到类似如下输出（状态为 `Success`）代表安装成功：
 
-如果见到类似如下输出（状态为 `Success`）代表安装成功：
+```sh
+[100%] /data/local/tmp/1.apk
+	pkg: /data/local/tmp/1.apk
+Success
+```
+
+上面是当前最新版 v1.0.36 的 adb 的输出，会显示 push apk 文件到手机的进度百分比。
+
+使用旧版本 adb 的输出则是这样的：
 
 ```sh
 12040 KB/s (22205609 bytes in 1.801s)
