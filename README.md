@@ -87,6 +87,8 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [查看进程](#查看进程)
 	* [查看实时资源占用情况](#查看实时资源占用情况)
 	* [其它](#其它)
+* [常见问题](#常见问题)
+	* [启动 adb server 失败](#启动-adb-server-失败)
 * [adb 的非官方实现](#adb-的非官方实现)
 * [致谢](#致谢)
 * [参考链接](#参考链接)
@@ -1822,6 +1824,40 @@ Usage: top [ -m max_procs ] [ -n iterations ] [ -d delay ] [ -s sort_column ] [ 
 | ps    | 查看正在运行的进程          |
 | rm    | 删除文件                    |
 | top   | 查看进程的资源占用情况      |
+
+## 常见问题
+
+### 启动 adb server 失败
+
+**出错提示**
+
+```sh
+error: protocol fault (couldn't read status): No error
+```
+
+**可能原因**
+
+adb server 进程想使用的 5037 端口被占用。
+
+**解决方案**
+
+找到占用 5037 端口的进程，然后终止它。以 Windows 下为例：
+
+```sh
+netstat -ano | findstr LISTENING
+
+...
+TCP    0.0.0.0:5037           0.0.0.0:0              LISTENING       1548
+...
+```
+
+这里 1548 即为进程 ID，用命令结束该进程：
+
+```sh
+taskkill /PID 1548
+```
+
+然后再启动 adb 就没问题了。
 
 ## adb 的非官方实现
 
