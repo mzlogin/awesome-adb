@@ -697,13 +697,50 @@ adb shell am startservice -n com.tencent.mm/.plugin.accountsync.model.AccountAut
 adb shell am broadcast [options] <INTENT>
 ```
 
-例如：
+可以向所有组件广播，也可以只向指定组件广播。
+
+例如，向所有组件广播 `BOOT_COMPLETED`：
+
+```sh
+adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
+```
+
+又例如，只向 `org.mazhuang.boottimemeasure/.BootCompletedReceiver` 广播 `BOOT_COMPLETED`：
 
 ```sh
 adb shell am broadcast -a android.intent.action.BOOT_COMPLETED -n org.mazhuang.boottimemeasure/.BootCompletedReceiver
 ```
 
-表示向 `org.mazhuang.boottimemeasure/.BootCompletedReceiver` 发送一个 `BOOT_COMPLETED` 广播，这类用法在测试的时候很实用，比如某个广播的场景很难制造，可以考虑通过这种方式来发送广播。
+这类用法在测试的时候很实用，比如某个广播的场景很难制造，可以考虑通过这种方式来发送广播。
+
+可以发送系统预定义的广播，也可以发送自定义广播。如下是部分系统预定义广播及正常触发时机：
+
+| action                                          | 触发时机                                      |
+|-------------------------------------------------|-----------------------------------------------|
+| android.net.conn.CONNECTIVITY_CHANGE            | 网络连接发生变化                              |
+| android.intent.action.SCREEN_ON                 | 屏幕点亮                                      |
+| android.intent.action.SCREEN_OFF                | 屏幕熄灭                                      |
+| android.intent.action.BATTERY_LOW               | 电量低，会弹出电量低提示框                    |
+| android.intent.action.BATTERY_OKAY              | 电量恢复了                                    |
+| android.intent.action.BOOT_COMPLETED            | 设备启动完毕                                  |
+| android.intent.action.DEVICE_STORAGE_LOW        | 存储空间过低                                  |
+| android.intent.action.DEVICE_STORAGE_OK         | 存储空间恢复                                  |
+| android.intent.action.PACKAGE_ADDED             | 安装了新的应用                                |
+| android.net.wifi.STATE_CHANGE                   | WiFi 连接状态发生变化                         |
+| android.net.wifi.WIFI_STATE_CHANGED             | WiFi 状态变为启用/关闭/正在启动/正在关闭/未知 |
+| android.intent.action.BATTERY_CHANGED           | 电池电量发生变化                              |
+| android.intent.action.INPUT_METHOD_CHANGED      | 系统输入法发生变化                            |
+| android.intent.action.ACTION_POWER_CONNECTED    | 外部电源连接                                  |
+| android.intent.action.ACTION_POWER_DISCONNECTED | 外部电源断开连接                              |
+| android.intent.action.DREAMING_STARTED          | 系统开始休眠                                  |
+| android.intent.action.DREAMING_STOPPED          | 系统停止休眠                                  |
+| android.intent.action.WALLPAPER_CHANGED         | 壁纸发生变化                                  |
+| android.intent.action.HEADSET_PLUG              | 插入耳机                                      |
+| android.intent.action.MEDIA_UNMOUNTED           | 卸载外部介质                                  |
+| android.intent.action.MEDIA_MOUNTED             | 挂载外部介质                                  |
+| android.os.action.POWER_SAVE_MODE_CHANGED       | 省电模式开启                                  |
+
+*（以上广播均可使用 adb 触发）*
 
 ### 强制停止应用
 
