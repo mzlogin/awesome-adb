@@ -296,7 +296,7 @@ emulator-5554	device
 
 5. 找到设备的 IP 地址。
 
-   一般能在「设置」-「关于手机」-「状态信息」-「IP地址」找到。
+   一般能在「设置」-「关于手机」-「状态信息」-「IP地址」找到，也可以使用下文里 [查看设备信息 - IP 地址][1] 一节里的方法用 adb 命令来查看。
 
 6. 通过 IP 地址连接设备。
 
@@ -355,7 +355,7 @@ adb disconnect <device-ip-address>
 
 4. 找到 Android 设备的 IP 地址。
 
-   一般能在「设置」-「关于手机」-「状态信息」-「IP地址」找到。
+   一般能在「设置」-「关于手机」-「状态信息」-「IP地址」找到，也可以使用下文里 [查看设备信息 - IP 地址][1] 一节里的方法用 adb 命令来查看。
 
 5. 在电脑上通过 adb 和 IP 地址连接 Android 设备。
 
@@ -2002,3 +2002,5 @@ taskkill /PID 1548
 * [那些做Android开发必须知道的ADB命令](http://yifeiyuan.me/2016/06/30/ADB%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86/)
 * [adb shell top](http://blog.csdn.net/kittyboy0001/article/details/38562515)
 * [像高手一样使用ADB命令行（2）](http://cabins.github.io/2016/03/25/UseAdbLikeAPro-2/)
+
+[1]: #ip-地址
