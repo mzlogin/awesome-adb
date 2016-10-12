@@ -64,6 +64,7 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 	* [android\_id](#android_id)
 	* [IMEI](#imei)
 	* [Android 系统版本](#android-系统版本)
+	* [IP 地址](#ip-地址)
 	* [Mac 地址](#mac-地址)
 	* [CPU 信息](#cpu-信息)
 	* [内存信息](#内存信息)
@@ -1344,6 +1345,84 @@ adb shell getprop ro.build.version.release
 5.0.2
 ```
 
+### IP 地址
+
+每次想知道设备的 IP 地址的时候都得「设置」-「关于手机」-「状态信息」-「IP地址」很烦对不对？通过 adb 可以方便地查看。
+
+命令：
+
+```sh
+adb shell ifconfig | grep Mask
+```
+
+输出示例：
+
+```sh
+inet addr:10.130.245.230  Mask:255.255.255.252
+inet addr:127.0.0.1  Mask:255.0.0.0
+```
+
+那么 `10.130.245.230` 就是设备 IP 地址。
+
+在有的设备上这个命令没有输出，如果设备连着 WiFi，可以使用如下命令来查看局域网 IP：
+
+```sh
+adb shell ifconfig wlan0
+```
+
+输出示例：
+
+```sh
+wlan0: ip 10.129.160.99 mask 255.255.240.0 flags [up broadcast running multicast]
+```
+
+或
+
+```sh
+wlan0     Link encap:UNSPEC
+          inet addr:10.129.168.57  Bcast:10.129.175.255  Mask:255.255.240.0
+          inet6 addr: fe80::66cc:2eff:fe68:b6b6/64 Scope: Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:496520 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:68215 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:3000
+          RX bytes:116266821 TX bytes:8311736
+```
+
+如果以上命令仍然不能得到期望的信息，那可以试试以下命令（部分系统版本里可用）：
+
+```sh
+adb shell netcfg
+```
+
+输出示例：
+
+```sh
+wlan0    UP                               10.129.160.99/20  0x00001043 f8:a9:d0:17:42:4d
+lo       UP                                   127.0.0.1/8   0x00000049 00:00:00:00:00:00
+p2p0     UP                                     0.0.0.0/0   0x00001003 fa:a9:d0:17:42:4d
+sit0     DOWN                                   0.0.0.0/0   0x00000080 00:00:00:00:00:00
+rmnet0   DOWN                                   0.0.0.0/0   0x00000000 00:00:00:00:00:00
+rmnet1   DOWN                                   0.0.0.0/0   0x00000000 00:00:00:00:00:00
+rmnet3   DOWN                                   0.0.0.0/0   0x00000000 00:00:00:00:00:00
+rmnet2   DOWN                                   0.0.0.0/0   0x00000000 00:00:00:00:00:00
+rmnet4   DOWN                                   0.0.0.0/0   0x00000000 00:00:00:00:00:00
+rmnet6   DOWN                                   0.0.0.0/0   0x00000000 00:00:00:00:00:00
+rmnet5   DOWN                                   0.0.0.0/0   0x00000000 00:00:00:00:00:00
+rmnet7   DOWN                                   0.0.0.0/0   0x00000000 00:00:00:00:00:00
+rev_rmnet3 DOWN                                   0.0.0.0/0   0x00001002 4e:b7:e4:2e:17:58
+rev_rmnet2 DOWN                                   0.0.0.0/0   0x00001002 4e:f0:c8:bf:7a:cf
+rev_rmnet4 DOWN                                   0.0.0.0/0   0x00001002 a6:c0:3b:6b:c4:1f
+rev_rmnet6 DOWN                                   0.0.0.0/0   0x00001002 66:bb:5d:64:2e:e9
+rev_rmnet5 DOWN                                   0.0.0.0/0   0x00001002 0e:1b:eb:b9:23:a0
+rev_rmnet7 DOWN                                   0.0.0.0/0   0x00001002 7a:d9:f6:81:40:5a
+rev_rmnet8 DOWN                                   0.0.0.0/0   0x00001002 4e:e2:a9:bb:d0:1b
+rev_rmnet0 DOWN                                   0.0.0.0/0   0x00001002 fe:65:d0:ca:82:a9
+rev_rmnet1 DOWN                                   0.0.0.0/0   0x00001002 da:d8:e8:4f:2e:fe
+```
+
+可以看到网络连接名称、启用状态、IP 地址和 Mac 地址等信息。
+
 ### Mac 地址
 
 命令：
@@ -1357,6 +1436,8 @@ adb shell cat /sys/class/net/wlan0/address
 ```sh
 f8:a9:d0:17:42:4d
 ```
+
+这查看的是局域网 Mac 地址，移动网络或其它连接的信息可以通过前面的小节「IP 地址」里提到的 `adb shell netcfg` 命令来查看。
 
 ### CPU 信息
 
