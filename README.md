@@ -8,6 +8,7 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 
 # ![Table of Contents](./assets/toc.png)
 
+<!-- vim-markdown-toc GFM -->
 * [基本用法](#基本用法)
 	* [命令语法](#命令语法)
 	* [为命令指定目标设备](#为命令指定目标设备)
@@ -93,6 +94,8 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 * [adb 的非官方实现](#adb-的非官方实现)
 * [致谢](#致谢)
 * [参考链接](#参考链接)
+
+<!-- vim-markdown-toc -->
 
 ## 基本用法
 
