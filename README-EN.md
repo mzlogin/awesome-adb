@@ -501,7 +501,7 @@ Failure [INSTALL_FAILED_ALREADY_EXISTS]
 Common Installation failed output code, the meaning and possible solutions are as follows:
 
 | Output | Meaning | solutions |
-| ------------------------------------------------- --- | ---------------------------------------------- ---------------------------- | --------------------- ---------------------------- |
+|----------------------------------------------------|--------------------------------------------------------------------------|-------------------------------------------------|
 | INSTALL\_FAILED\_ALREADY\_EXISTS | application already exists | use `-r` parameters |
 | INSTALL\_FAILED\_INVALID\_APK | invalid APK file | |
 | INSTALL\_FAILED\_INVALID\_URI | invalid filename APK | APK file names to ensure no Chinese |
@@ -721,7 +721,7 @@ Such usage is very practical in the test, such as a broadcast scenes difficult t
 Both predefined broadcast transmission system can also send a custom broadcast. The following is part of the normal pre-defined radio and Trigger timing:
 
 | Action | trigger timing |
-| ------------------------------------------------- | ----------------------------------------------- |
+|-------------------------------------------------|-----------------------------------------------|
 | Android.net.conn.CONNECTIVITY_CHANGE | Fi changes |
 | Android.intent.action.SCREEN_ON | screen lit |
 | Android.intent.action.SCREEN_OFF | screen off |
@@ -833,7 +833,7 @@ The commands and default sources are:
 Such as using `adb shell input keyevent <keycode>` command, different keycode to achieve different functions, keycode complete list see [KeyEvent] (https://developer.android.com/reference/android/view/KeyEvent. html), I think the interesting part of the quote is as follows:
 
 | Keycode | Meaning |
-| --------- | -------------------------------- |
+|---------|--------------------------------|
 | 3 | HOME button |
 | 4 | return key |
 | 5 | open dialing application |
@@ -1546,7 +1546,7 @@ This will output a lot of information, including the previously mentioned severa
 In output also includes some other useful information, they can also be `adb shell getprop <attribute name>` command alone, part of the property include the following:
 
 | Attribute name | Meaning |
-| --------------------------------- | --------------- ----------- |
+|---------------------------------|--------------------------|
 | Ro.build.version.sdk | SDK version |
 | Ro.build.version.release | Android system version |
 | Ro.build.version.security_patch | Android security patch level |
