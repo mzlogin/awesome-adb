@@ -1,8 +1,9 @@
 #![Awesome Adb](./assets/title.png)
 
-ADB, namely [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html), it is Android developers / testers irreplaceable powerful tool, but also a good player Toys Android devices .
-
-Continuously updated, please mention the PR and Issue supplementary correction, that may be useful [this GitHub repository](https://github.com/mzlogin/awesome-adb) Star collection backup.
+ADB [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html), it is not only irreplaceable powerful tool for Android developers/testers, but also a good toy to play with Android devices.
+This repo is continuously updated, if you found mistake/issue please create issue or create pull request.
+If you found that info useful [this GitHub repository](https://github.com/mzlogin/awesome-adb) please star this repo.
+Thanks.
 
 **Note:** There may be supported by part of the command and the version of Android and custom ROM implementation-dependent.
 
