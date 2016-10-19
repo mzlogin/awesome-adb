@@ -502,48 +502,48 @@ Common Installation failed output code, the meaning and possible solutions are a
 
 | Output | Meaning | solutions |
 | ------------------------------------------------- --- | ---------------------------------------------- ---------------------------- | --------------------- ---------------------------- |
-| INSTALL \ _FAILED \ _ALREADY \ _EXISTS | application already exists | use `-r` parameters |
-| INSTALL \ _FAILED \ _INVALID \ _APK | invalid APK file | |
-| INSTALL \ _FAILED \ _INVALID \ _URI | invalid filename APK | APK file names to ensure no Chinese |
-| INSTALL \ _FAILED \ _INSUFFICIENT \ _STORAGE | lack of space | cleanup space |
-| INSTALL \ _FAILED \ _DUPLICATE \ _PACKAGE | program of the same name already exists | |
-| INSTALL \ _FAILED \ _NO \ _SHARED \ _USER | shared user requested does not exist | |
-| INSTALL \ _FAILED \ _UPDATE \ _INCOMPATIBLE | already installed signature is not the same application with the same name, and the data is not removed | |
-| INSTALL \ _FAILED \ _SHARED \ _USER \ _INCOMPATIBLE | shared user request exists but the signatures do not match | |
-| INSTALL \ _FAILED \ _MISSING \ _SHARED \ _LIBRARY | installation package used on the device unusable shared library | |
-| INSTALL \ _FAILED \ _REPLACE \ _COULDNT \ _DELETE | can not be deleted when replacing | |
-| INSTALL \ _FAILED \ _DEXOPT | dex optimization validation failure or lack of space | |
-| INSTALL \ _FAILED \ _OLDER \ _SDK | equipment system version is lower than the application requirements | |
-| INSTALL \ _FAILED \ _CONFLICTING \ _PROVIDER | equipment already exists with the same name in application content provider | |
-| INSTALL \ _FAILED \ _NEWER \ _SDK | equipment system version higher than the application requirements | |
-| INSTALL \ _FAILED \ _TEST \ _ONLY | test-only applications, but when you install `-t` parameter is not specified | |
-| INSTALL \ _FAILED \ _CPU \ _ABI \ _INCOMPATIBLE | contains incompatible device CPU Application Binary Interface for native code | |
-| INSTALL \ _FAILED \ _MISSING \ _FEATURE | application uses device features that are unavailable | |
-| INSTALL \ _FAILED \ _CONTAINER \ _ERROR | sdcard access failure | confirm sdcard is available, or to install built-in storage |
-| INSTALL \ _FAILED \ _INVALID \ _INSTALL \ _LOCATION | can not be installed to the specified location | switch mounting position, add or delete `-s` parameters |
-| INSTALL \ _FAILED \ _MEDIA \ _UNAVAILABLE | installation location is unavailable | generally sdcard, confirm sdcard is available or to install built-in storage |
-| INSTALL \ _FAILED \ _VERIFICATION \ _TIMEOUT | Installation Timeout verify | |
-| INSTALL \ _FAILED \ _VERIFICATION \ _FAILURE | verify the installation package fails | |
-| INSTALL \ _FAILED \ _PACKAGE \ _CHANGED | calling application program expects inconsistent | |
-| INSTALL \ _FAILED \ _UID \ _CHANGED | previously installed the app, and this assignment UID inconsistent | remove residual files previously installed |
-| INSTALL \ _FAILED \ _VERSION \ _DOWNGRADE | already installed the application later | use `-d` parameters |
-| INSTALL \ _FAILED \ _PERMISSION \ _MODEL \ _DOWNGRADE | installed target SDK runtime support for application permissions of the same name, to install the runtime version does not support permission | |
-| INSTALL \ _PARSE \ _FAILED \ _NOT \ _APK | specified path is not a file or not to `.apk` end | |
-| INSTALL \ _PARSE \ _FAILED \ _BAD \ _MANIFEST | unresolved AndroidManifest.xml file | |
-| INSTALL \ _PARSE \ _FAILED \ _UNEXPECTED \ _EXCEPTION | parser encounters an exception | |
-| INSTALL \ _PARSE \ _FAILED \ _NO \ _CERTIFICATES | installation package is not signed | |
-| INSTALL \ _PARSE \ _FAILED \ _INCONSISTENT \ _CERTIFICATES | already installed the app, and signed with the APK files are inconsistent | first uninstall the application on the device, then install |
-| INSTALL \ _PARSE \ _FAILED \ _CERTIFICATE \ _ENCODING | encountered while parsing APK file `CertificateEncodingException` | |
-| INSTALL \ _PARSE \ _FAILED \ _BAD \ _PACKAGE \ _NAME | manifest file no or an invalid package name | |
-| INSTALL \ _PARSE \ _FAILED \ _BAD \ _SHARED \ _USER \ _ID | manifest file specifies an invalid shared user ID | |
-| INSTALL \ _PARSE \ _FAILED \ _MANIFEST \ _MALFORMED | encountered while parsing file manifest error structural | |
-| INSTALL \ _PARSE \ _FAILED \ _MANIFEST \ _EMPTY | in the manifest file can not be found to find operable label (instrumentation or application) | |
-| INSTALL \ _FAILED \ _INTERNAL \ _ERROR | installation fails because of system problems | |
-| INSTALL \ _FAILED \ _USER \ _RESTRICTED | Users are limited to installing applications | |
-| INSTALL \ _FAILED \ _DUPLICATE \ _PERMISSION | application attempts to define an existing permission name | |
-| INSTALL \ _FAILED \ _NO \ _MATCHING \ _ABIS | applications include device application binary interface does not support the native code | |
-| INSTALL \ _CANCELED \ _BY \ _USER | applications installed on the device needs confirmation, but not operate the device or the point of cancellation | agree to install on the device |
-| INSTALL \ _FAILED \ _ACWF \ _INCOMPATIBLE | applications are not compatible with the device | |
+| INSTALL\_FAILED\_ALREADY\_EXISTS | application already exists | use `-r` parameters |
+| INSTALL\_FAILED\_INVALID\_APK | invalid APK file | |
+| INSTALL\_FAILED\_INVALID\_URI | invalid filename APK | APK file names to ensure no Chinese |
+| INSTALL\_FAILED\_INSUFFICIENT\_STORAGE | lack of space | cleanup space |
+| INSTALL\_FAILED\_DUPLICATE\_PACKAGE | program of the same name already exists | |
+| INSTALL\_FAILED\_NO\_SHARED\_USER | shared user requested does not exist | |
+| INSTALL\_FAILED\_UPDATE\_INCOMPATIBLE | already installed signature is not the same application with the same name, and the data is not removed | |
+| INSTALL\_FAILED\_SHARED\_USER\_INCOMPATIBLE | shared user request exists but the signatures do not match | |
+| INSTALL\_FAILED\_MISSING\_SHARED\_LIBRARY | installation package used on the device unusable shared library | |
+| INSTALL\_FAILED\_REPLACE\_COULDNT\_DELETE | can not be deleted when replacing | |
+| INSTALL\_FAILED\_DEXOPT | dex optimization validation failure or lack of space | |
+| INSTALL\_FAILED\_OLDER\_SDK | equipment system version is lower than the application requirements | |
+| INSTALL\_FAILED\_CONFLICTING\_PROVIDER | equipment already exists with the same name in application content provider | |
+| INSTALL\_FAILED\_NEWER\_SDK | equipment system version higher than the application requirements | |
+| INSTALL\_FAILED\_TEST\_ONLY | test-only applications, but when you install `-t` parameter is not specified | |
+| INSTALL\_FAILED\_CPU\_ABI\_INCOMPATIBLE | contains incompatible device CPU Application Binary Interface for native code | |
+| INSTALL\_FAILED\_MISSING\_FEATURE | application uses device features that are unavailable | |
+| INSTALL\_FAILED\_CONTAINER\_ERROR | sdcard access failure | confirm sdcard is available, or to install built-in storage |
+| INSTALL\_FAILED\_INVALID\_INSTALL\_LOCATION | can not be installed to the specified location | switch mounting position, add or delete `-s` parameters |
+| INSTALL\_FAILED\_MEDIA\_UNAVAILABLE | installation location is unavailable | generally sdcard, confirm sdcard is available or to install built-in storage |
+| INSTALL\_FAILED\_VERIFICATION\_TIMEOUT | Installation Timeout verify | |
+| INSTALL\_FAILED\_VERIFICATION\_FAILURE | verify the installation package fails | |
+| INSTALL\_FAILED\_PACKAGE\_CHANGED | calling application program expects inconsistent | |
+| INSTALL\_FAILED\_UID\_CHANGED | previously installed the app, and this assignment UID inconsistent | remove residual files previously installed |
+| INSTALL\_FAILED\_VERSION\_DOWNGRADE | already installed the application later | use `-d` parameters |
+| INSTALL\_FAILED\_PERMISSION\_MODEL\_DOWNGRADE | installed target SDK runtime support for application permissions of the same name, to install the runtime version does not support permission | |
+| INSTALL\_PARSE\_FAILED\_NOT\_APK | specified path is not a file or not to `.apk` end | |
+| INSTALL\_PARSE\_FAILED\_BAD\_MANIFEST | unresolved AndroidManifest.xml file | |
+| INSTALL\_PARSE\_FAILED\_UNEXPECTED\_EXCEPTION | parser encounters an exception | |
+| INSTALL\_PARSE\_FAILED\_NO\_CERTIFICATES | installation package is not signed | |
+| INSTALL\_PARSE\_FAILED\_INCONSISTENT\_CERTIFICATES | already installed the app, and signed with the APK files are inconsistent | first uninstall the application on the device, then install |
+| INSTALL\_PARSE\_FAILED\_CERTIFICATE\_ENCODING | encountered while parsing APK file `CertificateEncodingException` | |
+| INSTALL\_PARSE\_FAILED\_BAD\_PACKAGE\_NAME | manifest file no or an invalid package name | |
+| INSTALL\_PARSE\_FAILED\_BAD\_SHARED\_USER\_ID | manifest file specifies an invalid shared user ID | |
+| INSTALL\_PARSE\_FAILED\_MANIFEST\_MALFORMED | encountered while parsing file manifest error structural | |
+| INSTALL\_PARSE\_FAILED\_MANIFEST\_EMPTY | in the manifest file can not be found to find operable label (instrumentation or application) | |
+| INSTALL\_FAILED\_INTERNAL\_ERROR | installation fails because of system problems | |
+| INSTALL\_FAILED\_USER\_RESTRICTED | Users are limited to installing applications | |
+| INSTALL\_FAILED\_DUPLICATE\_PERMISSION | application attempts to define an existing permission name | |
+| INSTALL\_FAILED\_NO\_MATCHING\_ABIS | applications include device application binary interface does not support the native code | |
+| INSTALL\_CANCELED\_BY\_USER | applications installed on the device needs confirmation, but not operate the device or the point of cancellation | agree to install on the device |
+| INSTALL\_FAILED\_ACWF\_INCOMPATIBLE | applications are not compatible with the device | |
 | Does not contain AndroidManifest.xml | invalid APK file | |
 | Is not a valid zip file | invalid APK file | |
 | Offline | device is not connected successfully | first device with adb successful connection |
@@ -625,7 +625,7 @@ Where `com.cyanogenmod.trebuchet / com.android.launcher3.Launcher` is currently 
 Primarily using `am <command>` command commonly used `<command>` as follows:
 
 | Command | use |
-| ----------------------------------- | ------------- -------------------- |
+|-----------------------------------|---------------------------------|
 | `Start [options] <INTENT>` | Start `<INTENT>` specified Activity |
 | `Startservice [options] <INTENT>` | Start `<INTENT>` designated Service |
 | `Broadcast [options] <INTENT>` | Send `<INTENT>` designated broadcast |
@@ -636,7 +636,7 @@ Primarily using `am <command>` command commonly used `<command>` as follows:
 Options for determining intent objects as follows:
 
 | Parameter | Meaning |
-| ------------------ | ------------------------------ -------------------------------------------------- ------------- |
+|------------------|---------------------------------------------------------------------------------------------|
 | `-a <ACTION>` | specified action, such as `android.intent.action.VIEW` |
 | `-c <CATEGORY>` | specify a category, such as `android.intent.category.APP_CONTACTS` |
 | `-n <COMPONENT>` | specify the full component name, which is used to explicitly specify the start Activity, such as `com.example.app / .ExampleActivity` |
@@ -644,7 +644,7 @@ Options for determining intent objects as follows:
 `<INTENT>` can bring in data, like Bundle write code like:
 
 | Parameter | Meaning |
-| ------------------------------------------------- -------------- | ----------------------------------- ----- |
+|---------------------------------------------------------------|----------------------------------------|
 | `--esn <EXTRA_KEY>` | null value (only key name) |
 | `-e | --es <EXTRA_KEY> <EXTRA_STRING_VALUE>` | string value |
 | `--ez <EXTRA_KEY> <EXTRA_BOOLEAN_VALUE>` | boolean value |
@@ -1904,7 +1904,7 @@ User 3 + Nice 0 + Sys 21 + Idle 280 + IOW 0 + IRQ 0 + SIRQ 3 = 307
 Meaning of each column:
 
 | Listing | Meaning |
-| ------ | ------------------------------------------ ------------------ |
+|------|------------------------------------------------------------|
 | PID | Process ID |
 | PR | Priority |
 | CPU% | instantaneous current occupancy percentage of CPU |
@@ -1934,18 +1934,18 @@ The following is a brief description of other commonly used commands, has previo
 
 | Command | function |
 | ------- | ----------------------------- |
-| Cat | display file contents |
-| Cd | Change directory |
-| Chmod | change file access mode / access |
-| Df | View disk space usage |
-| Grep | output filter |
-| Kill | kill the specified process PID |
-| Ls | list directory contents |
-| Mount | Mount View and manage directory |
-| Mv | move or rename a file |
-| Ps | View running processes |
-| Rm | delete files |
-| Top | Check process resource consumption |
+| cat | display file contents |
+| cd | change directory |
+| chmod | change file access mode / access |
+| df | view disk space usage |
+| grep | output filter |
+| kill | kill the specified process PID |
+| ls | list directory contents |
+| mount | Mount View and manage directory |
+| mv | move or rename a file |
+| ps | view running processes |
+| rm | delete files |
+| top | Check process resource consumption |
 
 ## common problem
 
