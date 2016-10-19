@@ -28,9 +28,42 @@ Other languages:
 	* [Wireless connection (need to use the USB cable)](#wireless-connection-need-to-use-the-usb-cable)
 	* [Wireless connection (without using the USB cable)](#wireless-connection-without-using-the-usb-cable)
 * [Application Management](#application-management)
+	* [Check the list of](#check-the-list-of)
 		* [All applications](#all-applications)
+		* [system applications](#system-applications)
+		* [third-party usage](#third-party-usage)
+		* [Application package name contains a string](#application-package-name-contains-a-string)
+	* [Install APK](#install-apk)
+	* [Uninstalling](#uninstalling)
+	* [Clear app cache data](#clear-app-cache-data)
+	* [View Reception Activity](#view-reception-activity)
+* [Applications to interact with](#applications-to-interact-with)
+	* [Transferred from Activity](#transferred-from-activity)
+	* [Transferred from the Service](#transferred-from-the-service)
+	* [Transmits broadcast](#transmits-broadcast)
+	* [Forcibly stop the application](#forcibly-stop-the-application)
+* [File Management](#file-management)
+	* [Copy files to the computer equipment in](#copy-files-to-the-computer-equipment-in)
+	* [Copy computer files to the device](#copy-computer-files-to-the-device)
+* [Analog Keys / inputs](#analog-keys--inputs)
+	* [Power button](#power-button)
+	* [menu](#menu)
+	* [HOME key](#home-key)
+	* [return key](#return-key)
+	* [volume control](#volume-control)
+	* [Media Control](#media-control)
+	* [On / Off screen](#on--off-screen)
+	* [Slide to unlock](#slide-to-unlock)
+	* [Enter text](#enter-text)
+* [View Log](#view-log)
+	* [Android log](#android-log)
+	* [Filter the log by level](#filter-the-log-by-level)
+		* [Filter by tag and log level](#filter-by-tag-and-log-level)
+		* [Log format](#log-format)
+		* [Clear log](#clear-log)
 	* [Kernel log](#kernel-log)
 * [View device information](#view-device-information)
+	* [Model](#model)
 	* [Battery Status](#battery-status)
 	* [Screen Resolution](#screen-resolution)
 	* [Screen density](#screen-density)
@@ -300,7 +333,7 @@ If you can not connect, verify that Android devices and the computer is connecte
 
 If that does not work, by `adb kill-server` restart the adb and then try it all over again.
 
-** ** The wireless connection
+**The wireless connection**
 
 command:
 
@@ -310,7 +343,7 @@ adb disconnect <device-ip-address>
 
 ### Wireless connection (without using the USB cable)
 
-** Note: You need root privileges. **
+**Note: You need root privileges.**
 
 On a "wireless connection (need to use USB cable)" method is described in official documents, need the help of a USB cable to enable the wireless connection.
 
@@ -318,7 +351,7 @@ Since we want to achieve a wireless connection, it can all step down are wireles
 
 1. Install a terminal emulator on the Android device.
 
-   Equipment already installed you can skip this step. Terminal emulator download address I use is: [Terminal Emulator for Android Downloads] (https://jackpal.github.io/Android-Terminal-Emulator/)
+   Equipment already installed you can skip this step. Terminal emulator download address I use is: [Terminal Emulator for Android Downloads](https://jackpal.github.io/Android-Terminal-Emulator/)
 
 2. To run the Android device and computer adb is connected to the same local area network, such as connected to the same WiFi.
 
@@ -345,7 +378,7 @@ Since we want to achieve a wireless connection, it can all step down are wireles
 
 ## Application Management
 
-Check the list of ###
+### Check the list of
 
 Check the list of basic commands format
 
@@ -391,7 +424,7 @@ package:com.android.externalstorage
 ...
 // other packages here
 ...
-`` `
+```
 
 #### system applications
 
@@ -526,7 +559,7 @@ Common Installation failed output code, the meaning and possible solutions are a
 | No space left on devicerm                          | lack of space                                                                                                                                 | cleanup space                                                                |
 | Permission denied ... sdcard ...                   | sdcard unavailable                                                                                                                            |                                                                              |
 
-Reference: [PackageManager.java] (https://github.com/android/platform_frameworks_base/blob/master/core%2Fjava%2Fandroid%2Fcontent%2Fpm%2FPackageManager.java)
+Reference: [PackageManager.java](https://github.com/android/platform_frameworks_base/blob/master/core%2Fjava%2Fandroid%2Fcontent%2Fpm%2FPackageManager.java)
 
 *`Adb install` internal principle Introduction*
 
@@ -802,7 +835,7 @@ The commands and default sources are:
       roll <dx> <dy> (Default: trackball)
 ```
 
-Such as using `adb shell input keyevent <keycode>` command, different keycode to achieve different functions, keycode complete list see [KeyEvent] (https://developer.android.com/reference/android/view/KeyEvent. html), I think the interesting part of the quote is as follows:
+Such as using `adb shell input keyevent <keycode>` command, different keycode to achieve different functions, keycode complete list see [KeyEvent](https://developer.android.com/reference/android/view/KeyEvent.html), I think the interesting part of the quote is as follows:
 
 | Keycode | Meaning                                                      |
 |---------|--------------------------------------------------------------|
@@ -954,21 +987,21 @@ If no password lock screen is unlocked by sliding gestures, so you can `input sw
 
 Command (parameter models Nexus 5, swipe up to unlock, for example):
 
-`` `Sh
+```sh
 adb shell input swipe 300 1000 300 500
-`` `
+```
 
 `3001000300 parameters represent` 500` starting x coordinate of the start point y coordinate of the end point x coordinate y coordinate of the end point '.
 
-Enter text ###
+### Enter text
 
 When the focus is in a text box, you can enter text by `input` command.
 
 command:
 
-`` `Sh
+```sh
 adb shell input text hello
-`` `
+```
 
 `Hello` now appear in the text box.
 
@@ -986,7 +1019,7 @@ Format:
 
 Common usage are listed below:
 
-Filter the log level by ####
+### Filter the log by level
 
 Android log divided into the following levels:
 
@@ -1078,7 +1111,7 @@ Log supported by the following `<format>`:
 
   ```sh
   Disconnected process message: 10, size: 0
-  `` `
+  ```
 
 * time
 
@@ -1122,7 +1155,7 @@ Log supported by the following `<format>`:
   ```sh
   [ 08-28 22:39:39.974  1785: 1832 D/HeadsetStateMachine ]
   Disconnected process message: 10, size: 0
-  `` `
+  ```
 
 Specified format can be used simultaneously with the above filter. such as:
 
@@ -1134,7 +1167,7 @@ adb logcat -v long ActivityManager:I *:S
 
 ```sh
 adb logcat -c
-`` `
+```
 
 ### Kernel log
 
@@ -1162,7 +1195,7 @@ By kernel log, we can do some things, such as a measure of the kernel boot time,
 
 ## View device information
 
-Model ###
+### Model
 
 command:
 
@@ -1305,7 +1338,7 @@ Result: Parcel(
 
 The effective content is extracted from the inside of the IMEI, such as here is `860955027785041`.
 
-Reference: [adb shell dumpsys iphonesubinfo not working since Android 5.0 Lollipop] (http://stackoverflow.com/questions/27002663/adb-shell-dumpsys-iphonesubinfo-not-working-since-android-5-0-lollipop)
+Reference: [adb shell dumpsys iphonesubinfo not working since Android 5.0 Lollipop](http://stackoverflow.com/questions/27002663/adb-shell-dumpsys-iphonesubinfo-not-working-since-android-5-0-lollipop)
 
 ### Android system version
 
@@ -1736,7 +1769,7 @@ adb shell monkey -p <packagename> -v 500
 
 He told `<packagename>` specific application to send 500 pseudo-random events.
 
-Monkey in detail with reference to the use of [official document] (https://developer.android.com/studio/test/monkey.html).
+Monkey in detail with reference to the use of [official document](https://developer.android.com/studio/test/monkey.html).
 
 ### On / off WiFi
 
@@ -1943,7 +1976,7 @@ netstat -ano | findstr LISTENING
 ...
 TCP    0.0.0.0:5037           0.0.0.0:0              LISTENING       1548
 ...
-`` `
+```
 
 1548 Here is the process ID, the process ends with the command:
 
