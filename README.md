@@ -6,6 +6,10 @@ ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-li
 
 **注：**有部分命令的支持情况可能与 Android 系统版本及定制 ROM 的实现有关。
 
+Other languages:
+
+* [English](./README.en.md)
+
 # ![Table of Contents](./assets/toc.png)
 
 <!-- vim-markdown-toc GFM -->
@@ -1994,6 +1998,7 @@ taskkill /PID 1548
 * [seasonyuu](https://github.com/seasonyuu)
 * [fan123199](https://github.com/fan123199)
 * [zhEdward](https://github.com/zhEdward)
+* [0x8BADFOOD](https://github.com/0x8BADFOOD)
 
 ## 参考链接
 

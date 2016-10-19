@@ -1,103 +1,73 @@
 #![Awesome Adb](./assets/title.png)
 
-ADB [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html), it is not only irreplaceable powerful tool for Android developers/testers, but also a good toy to play with Android devices.
-This repo is continuously updated, if you found mistake/issue please create issue or create pull request.
-If you found that info useful [this GitHub repository](https://github.com/mzlogin/awesome-adb) please star this repo.
-Thanks.
+ADB ([Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)), it is not only irreplaceable powerful tool for Android developers/testers, but also a good toy to play with Android devices.
 
-**Note:** There may be supported by part of the command and the version of Android and custom ROM implementation-dependent.
+This repo is continuously updated, if you found mistake/issue please create issue or create pull request.
+
+If you found [this GitHub repository](https://github.com/mzlogin/awesome-adb) is useful, please star this repo. Thanks.
+
+**Note:** Some commands may not supported well depends on the version of Android and ROM.
+
+Other languages:
+
+* [Chinese](./README.md)
 
 #![Table of Contents](./assets/toc.png)
 
-
 <!-- vim-markdown-toc GFM -->
-* [Basic Usage](#Basic Usage)
-	* [Command Syntax](#command syntax)
-	* [Targeting equipment for command](#targeting equipment for command)
-	* [Start / stop](#start stop)
-	* [See adb version](#View -adb- version)
-	* [Running as root adbd](#-root- permission to run -adbd)
-	* [Specify adb server network port](#designated -adb-server- network port)
-* [Device connection management](#device connection management)
-	* [Query connected device / simulator](#query connected device emulator)
-	* [USB connection](#usb- connected)
-	* [Wireless connection (need to use USB cable)](#-usb- wireless connection needs the line)
-	* [Wireless connection (without using the USB cable)](#wireless connection without using -usb- line)
-* [Application Management](#application management)
-	* [Check the list](#Check the list)
-		* [All Applications](#all applications)
-		* [System](#System)
-		* [Third-party applications](#third-party applications)
-		* [Application package name contains a string](#application package name contains a string)
-	* [Install APK](#Installation -apk)
-	* [Uninstall Application](#uninstalling)
-	* [Clear app data and cache](#Clear app data and cache)
-	* [See the foreground Activity](#View Reception -activity)
-* [Application interacts with](#interact with an application)
-	* [Transfer from the Activity](#tone from -activity)
-	* [Transfer from Service](#tone from -service)
-	* [Sending broadcast](#sending broadcast)
-	* [Forcibly stop the application](#forcibly stop the application)
-* [File management](#File Manager)
-	* [Copy device in the file to your computer](#copy files to a computer inside the machine)
-	* [Computer files copied to the device](#copy computer files to the device)
-* [Simulation key / input](#analog key input)
-	* [Power button](#Power key)
-	* [MENU button](#menu key)
-	* [HOME key](#home- key)
-	* [Return key](#Return key)
-	* [Volume Control](#Volume Control)
-	* [Media Control](#Media Control)
-	* [On / Off screen](#on off screen)
-	* [Slide to unlock](#slide to unlock)
-	* [Enter Text](#input text)
-* [View Log](#View log)
-	* [Android Log](#android- log)
-		* [Filter log by level](#filter log by level)
-		* [Filter by tag and log level](#filter log and press -tag- level)
-		* [Log formats](#log format)
-		* [Clear Log](#empty the log)
-	* [Kernel log](#kernel log)
-* [View Device Information](#view device information)
-	* [Model] (#Model )
-	* [Battery status](#battery status)
-	* [Screen resolution](#screen resolution)
-	* [Screen density](#screen density)
-	* [Screen parameter](#display parameters)
-	* [Android\_id](#android_id)
+* [Basic Usage](#basic-usage)
+	* [Command syntax](#command-syntax)
+	* [Targeting equipment for command](#targeting-equipment-for-command)
+	* [Start/Stop](#startstop)
+	* [View adb version](#view-adb-version)
+	* [Run adbd as root](#run-adbd-as-root)
+	* [Designated adb server network port](#designated-adb-server-network-port)
+* [Device connection management](#device-connection-management)
+	* [Inquiries connected device / simulator](#inquiries-connected-device--simulator)
+	* [USB connection](#usb-connection)
+	* [Wireless connection (need to use the USB cable)](#wireless-connection-need-to-use-the-usb-cable)
+	* [Wireless connection (without using the USB cable)](#wireless-connection-without-using-the-usb-cable)
+* [Application Management](#application-management)
+		* [All applications](#all-applications)
+	* [Kernel log](#kernel-log)
+* [View device information](#view-device-information)
+	* [Battery Status](#battery-status)
+	* [Screen Resolution](#screen-resolution)
+	* [Screen density](#screen-density)
+	* [Display Parameters](#display-parameters)
+	* [android\_id](#android_id)
 	* [IMEI](#imei)
-	* [Android system version](#android- system version)
+	* [Android system version](#android-system-version)
 	* [IP address](#ip-address)
 	* [Mac Address](#mac-address)
-	* [CPU information](#cpu-information)
-	* [Memory Information](#memory information)
-	* [More hardware and system attributes](#More hardware, and system attributes)
-* [Useful features](#utility function)
-	* [Screenshot](#screenshot)
-	* [Recording Screen](#recording screen)
-	* [Remount system partition as writable](#remount -system- partition writable)
-	* [See connection over WiFi password](#see if the connection had -wifi- password)
-	* [Set the system date and time](#Set the system date and time)
-	* [Restart the phone](#to restart the phone)
-	* [Testing equipment whether root](#detect whether a device is -root)
-	* [Use Monkey pressure tested](#-monkey- use stress testing)
-	* [On / Off WiFi](#open and close -wifi)
-* [Brush related commands](#Brush related commands)
-	* [Restart to Recovery mode](#-recovery- to restart mode)
-	* [From Recovery to restart Android](#reboot from -recovery- to -android)
-	* [Restart to Fastboot Mode](#-fastboot- to restart mode)
-	* [Update via sideload system](#-sideload- by ​​updating the system)
-* [More adb shell command](#More -adb-shell- command)
-	* [See the process](#view the process)
-	* [View real-time resource consumption](#view real-time resource consumption)
-	* [Other](#others)
-* [FAQ](#Frequently Asked Questions)
-	* [Start adb server failure](#start -adb-server- failure)
-* [Adb unofficial implement](#adb- unofficial realization)
-* [Credits](#Credits)
-* [Reference Links](#reference links)
+	* [CPU Information](#cpu-information)
+	* [Memory Information](#memory-information)
+	* [More hardware and system properties](#more-hardware-and-system-properties)
+* [Utility functions](#utility-functions)
+	* [Screenshots](#screenshots)
+	* [Recording Screen](#recording-screen)
+	* [Remount system partition as writable](#remount-system-partition-as-writable)
+	* [Check connection over WiFi password](#check-connection-over-wifi-password)
+	* [To set the system date and time](#to-set-the-system-date-and-time)
+	* [restart cellphone](#restart-cellphone)
+	* [Detect whether the device is root](#detect-whether-the-device-is-root)
+	* [Monkey use stress testing](#monkey-use-stress-testing)
+	* [On / off WiFi](#on--off-wifi)
+* [Brush related commands](#brush-related-commands)
+	* [Restart to Recovery mode](#restart-to-recovery-mode)
+	* [To restart from the Recovery Android](#to-restart-from-the-recovery-android)
+	* [Restart to Fastboot mode](#restart-to-fastboot-mode)
+	* [Through sideload system update](#through-sideload-system-update)
+* [More adb shell command](#more-adb-shell-command)
+	* [See process](#see-process)
+	* [View real-time resource consumption](#view-real-time-resource-consumption)
+* [common problem](#common-problem)
+	* [Start adb server failure](#start-adb-server-failure)
+* [adb unofficial implementation](#adb-unofficial-implementation)
+* [Acknowledgements](#acknowledgements)
+* [Reference Links](#reference-links)
 
-<!-- vim-markdown-toc GFM -->
+<!-- vim-markdown-toc -->
 
 ## Basic Usage
 
@@ -115,10 +85,10 @@ If only one device / emulator connection, you can omit the `[-d | -e | -s <seria
 
 If you have more than one device / emulator connection, you need to specify the target device for the command.
 
-| Parameter | Meaning |
-|---------------------|----------------------------------------------------|
-| -d | Specifies currently the only Android device USB connector as the command target |
-| -e | Specify currently the only goal for the command to run the simulator |
+| Parameter           | Meaning                                                                           |
+|---------------------|-----------------------------------------------------------------------------------|
+| -d                  | Specifies currently the only Android device USB connector as the command target   |
+| -e                  | Specify currently the only goal for the command to run the simulator              |
 | `-s <SerialNumber>` | Specifies the device number corresponding serialNumber / simulator command target |
 
 In the case of multiple devices / simulators are connected to the more common `-s <serialNumber>` parameters, serialNumber can be obtained through `adb devices` command. Such as:
@@ -170,7 +140,7 @@ Android Debug Bridge version 1.0.36
 Revision 8f855a3d9b35-android
 ```
 
-### To run as root adbd
+### Run adbd as root
 
 The operating principle is adb adb server daemon and the phone side PC side adbd establish a connection, then the PC side adb client via adb server forward command parsing after running adbd receive commands.
 
@@ -301,7 +271,7 @@ Steps:
 
 5. Find the IP address of the device.
 
-   Generally the 'Settings' in - "About phone" - "state information" - "IP address" is found, you can also use the following in the [View device information - IP address] [1] a Lane method adb command.
+   Generally the 'Settings' in - "About phone" - "state information" - "IP address" is found, you can also use the following in the [View device information - IP address][1] a Lane method adb command.
 
 6. Connect the device via IP address.
 
@@ -360,7 +330,7 @@ Since we want to achieve a wireless connection, it can all step down are wireles
 
 4. Find the IP address of the Android device.
 
-   Generally the 'Settings' in - "About phone" - "state information" - "IP address" is found, you can also use the following in the [View device information - IP address] [1] a Lane method adb command.
+   Generally the 'Settings' in - "About phone" - "state information" - "IP address" is found, you can also use the following in the [View device information - IP address][1] a Lane method adb command.
 
 5. Connect Android device on a computer via adb and IP addresses.
 
@@ -384,16 +354,16 @@ adb shell pm list packages [-f] [-d] [-e] [-s] [-3] [-i] [-u] [--user USER_ID] [
 
 That is the basis of `adb shell pm list packages` can add some parameters on the filter to view different lists, supports filtering parameters are as follows:
 
-| Parameter | display list |
-|------------|----------------------------|
-| No | all applications |
-| -f | Display apk file application association |
-| -d | Show only applications disabled |
-| -e | Show only enabled applications |
-| -s | Display only System |
-| -3 | Show only third-party application |
-| -i | Display applications installer |
-| -u | Contains uninstall applications |
+| Parameter  | display list                             |
+|------------|------------------------------------------|
+| No         | all applications                         |
+| -f         | Display apk file application association |
+| -d         | Show only applications disabled          |
+| -e         | Show only enabled applications           |
+| -s         | Display only System                      |
+| -3         | Show only third-party application        |
+| -i         | Display applications installer           |
+| -u         | Contains uninstall applications          |
 | `<FILTER>` | package name contains `<FILTER>` strings |
 
 #### All applications
@@ -464,14 +434,14 @@ parameter:
 
 `Adb install` may be followed by some optional parameters to control the behavior of the installation APK, available parameters and their meanings are as follows:
 
-| Parameter | Meaning |
-|------|-----------------------------------------------------------------------------------|
-| -l | Will be applied to protect the installation directory / mnt / asec |
-| -r | Allowed to cover the installation |
-| -t | Allowed to install application specified in AndroidManifest.xml `android: testOnly =" true "` Application |
-| -s | Install apps to sdcard |
-| -d | Downgrade coverage allows installation |
-| -g | Grant all runtime permissions |
+| Parameter | Meaning                                                                                                   |
+|-----------|-----------------------------------------------------------------------------------------------------------|
+| -l        | Will be applied to protect the installation directory / mnt / asec                                        |
+| -r        | Allowed to cover the installation                                                                         |
+| -t        | Allowed to install application specified in AndroidManifest.xml `android: testOnly =" true "` Application |
+| -s        | Install apps to sdcard                                                                                    |
+| -d        | Downgrade coverage allows installation                                                                    |
+| -g        | Grant all runtime permissions                                                                             |
 
 After you run the command to see if similar to the following output (status is `Success`) represents the installation was successful:
 
@@ -501,59 +471,59 @@ Failure [INSTALL_FAILED_ALREADY_EXISTS]
 
 Common Installation failed output code, the meaning and possible solutions are as follows:
 
-| Output | Meaning | solutions |
-|----------------------------------------------------|--------------------------------------------------------------------------|-------------------------------------------------|
-| INSTALL\_FAILED\_ALREADY\_EXISTS | application already exists | use `-r` parameters |
-| INSTALL\_FAILED\_INVALID\_APK | invalid APK file | |
-| INSTALL\_FAILED\_INVALID\_URI | invalid filename APK | APK file names to ensure no Chinese |
-| INSTALL\_FAILED\_INSUFFICIENT\_STORAGE | lack of space | cleanup space |
-| INSTALL\_FAILED\_DUPLICATE\_PACKAGE | program of the same name already exists | |
-| INSTALL\_FAILED\_NO\_SHARED\_USER | shared user requested does not exist | |
-| INSTALL\_FAILED\_UPDATE\_INCOMPATIBLE | already installed signature is not the same application with the same name, and the data is not removed | |
-| INSTALL\_FAILED\_SHARED\_USER\_INCOMPATIBLE | shared user request exists but the signatures do not match | |
-| INSTALL\_FAILED\_MISSING\_SHARED\_LIBRARY | installation package used on the device unusable shared library | |
-| INSTALL\_FAILED\_REPLACE\_COULDNT\_DELETE | can not be deleted when replacing | |
-| INSTALL\_FAILED\_DEXOPT | dex optimization validation failure or lack of space | |
-| INSTALL\_FAILED\_OLDER\_SDK | equipment system version is lower than the application requirements | |
-| INSTALL\_FAILED\_CONFLICTING\_PROVIDER | equipment already exists with the same name in application content provider | |
-| INSTALL\_FAILED\_NEWER\_SDK | equipment system version higher than the application requirements | |
-| INSTALL\_FAILED\_TEST\_ONLY | test-only applications, but when you install `-t` parameter is not specified | |
-| INSTALL\_FAILED\_CPU\_ABI\_INCOMPATIBLE | contains incompatible device CPU Application Binary Interface for native code | |
-| INSTALL\_FAILED\_MISSING\_FEATURE | application uses device features that are unavailable | |
-| INSTALL\_FAILED\_CONTAINER\_ERROR | sdcard access failure | confirm sdcard is available, or to install built-in storage |
-| INSTALL\_FAILED\_INVALID\_INSTALL\_LOCATION | can not be installed to the specified location | switch mounting position, add or delete `-s` parameters |
-| INSTALL\_FAILED\_MEDIA\_UNAVAILABLE | installation location is unavailable | generally sdcard, confirm sdcard is available or to install built-in storage |
-| INSTALL\_FAILED\_VERIFICATION\_TIMEOUT | Installation Timeout verify | |
-| INSTALL\_FAILED\_VERIFICATION\_FAILURE | verify the installation package fails | |
-| INSTALL\_FAILED\_PACKAGE\_CHANGED | calling application program expects inconsistent | |
-| INSTALL\_FAILED\_UID\_CHANGED | previously installed the app, and this assignment UID inconsistent | remove residual files previously installed |
-| INSTALL\_FAILED\_VERSION\_DOWNGRADE | already installed the application later | use `-d` parameters |
-| INSTALL\_FAILED\_PERMISSION\_MODEL\_DOWNGRADE | installed target SDK runtime support for application permissions of the same name, to install the runtime version does not support permission | |
-| INSTALL\_PARSE\_FAILED\_NOT\_APK | specified path is not a file or not to `.apk` end | |
-| INSTALL\_PARSE\_FAILED\_BAD\_MANIFEST | unresolved AndroidManifest.xml file | |
-| INSTALL\_PARSE\_FAILED\_UNEXPECTED\_EXCEPTION | parser encounters an exception | |
-| INSTALL\_PARSE\_FAILED\_NO\_CERTIFICATES | installation package is not signed | |
-| INSTALL\_PARSE\_FAILED\_INCONSISTENT\_CERTIFICATES | already installed the app, and signed with the APK files are inconsistent | first uninstall the application on the device, then install |
-| INSTALL\_PARSE\_FAILED\_CERTIFICATE\_ENCODING | encountered while parsing APK file `CertificateEncodingException` | |
-| INSTALL\_PARSE\_FAILED\_BAD\_PACKAGE\_NAME | manifest file no or an invalid package name | |
-| INSTALL\_PARSE\_FAILED\_BAD\_SHARED\_USER\_ID | manifest file specifies an invalid shared user ID | |
-| INSTALL\_PARSE\_FAILED\_MANIFEST\_MALFORMED | encountered while parsing file manifest error structural | |
-| INSTALL\_PARSE\_FAILED\_MANIFEST\_EMPTY | in the manifest file can not be found to find operable label (instrumentation or application) | |
-| INSTALL\_FAILED\_INTERNAL\_ERROR | installation fails because of system problems | |
-| INSTALL\_FAILED\_USER\_RESTRICTED | Users are limited to installing applications | |
-| INSTALL\_FAILED\_DUPLICATE\_PERMISSION | application attempts to define an existing permission name | |
-| INSTALL\_FAILED\_NO\_MATCHING\_ABIS | applications include device application binary interface does not support the native code | |
-| INSTALL\_CANCELED\_BY\_USER | applications installed on the device needs confirmation, but not operate the device or the point of cancellation | agree to install on the device |
-| INSTALL\_FAILED\_ACWF\_INCOMPATIBLE | applications are not compatible with the device | |
-| Does not contain AndroidManifest.xml | invalid APK file | |
-| Is not a valid zip file | invalid APK file | |
-| Offline | device is not connected successfully | first device with adb successful connection |
-| Unauthorized | unauthorized device allows debugging | |
-| Error: device not found | not successfully connected equipment | equipment and adb first successful connection |
-| Protocol failure | device is disconnected | first device with adb successful connection |
-| Unknown option: -s | Android 2.2 does not support the following installation to sdcard | do not use `-s` parameters |
-| No space left on devicerm | lack of space | cleanup space |
-| Permission denied ... sdcard ... | sdcard unavailable | |
+| Output                                             | Meaning                                                                                                                                       | solutions                                                                    |
+|----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| INSTALL\_FAILED\_ALREADY\_EXISTS                   | application already exists                                                                                                                    | use `-r` parameters                                                          |
+| INSTALL\_FAILED\_INVALID\_APK                      | invalid APK file                                                                                                                              |                                                                              |
+| INSTALL\_FAILED\_INVALID\_URI                      | invalid filename APK                                                                                                                          | APK file names to ensure no Chinese                                          |
+| INSTALL\_FAILED\_INSUFFICIENT\_STORAGE             | lack of space                                                                                                                                 | cleanup space                                                                |
+| INSTALL\_FAILED\_DUPLICATE\_PACKAGE                | program of the same name already exists                                                                                                       |                                                                              |
+| INSTALL\_FAILED\_NO\_SHARED\_USER                  | shared user requested does not exist                                                                                                          |                                                                              |
+| INSTALL\_FAILED\_UPDATE\_INCOMPATIBLE              | already installed signature is not the same application with the same name, and the data is not removed                                       |                                                                              |
+| INSTALL\_FAILED\_SHARED\_USER\_INCOMPATIBLE        | shared user request exists but the signatures do not match                                                                                    |                                                                              |
+| INSTALL\_FAILED\_MISSING\_SHARED\_LIBRARY          | installation package used on the device unusable shared library                                                                               |                                                                              |
+| INSTALL\_FAILED\_REPLACE\_COULDNT\_DELETE          | can not be deleted when replacing                                                                                                             |                                                                              |
+| INSTALL\_FAILED\_DEXOPT                            | dex optimization validation failure or lack of space                                                                                          |                                                                              |
+| INSTALL\_FAILED\_OLDER\_SDK                        | equipment system version is lower than the application requirements                                                                           |                                                                              |
+| INSTALL\_FAILED\_CONFLICTING\_PROVIDER             | equipment already exists with the same name in application content provider                                                                   |                                                                              |
+| INSTALL\_FAILED\_NEWER\_SDK                        | equipment system version higher than the application requirements                                                                             |                                                                              |
+| INSTALL\_FAILED\_TEST\_ONLY                        | test-only applications, but when you install `-t` parameter is not specified                                                                  |                                                                              |
+| INSTALL\_FAILED\_CPU\_ABI\_INCOMPATIBLE            | contains incompatible device CPU Application Binary Interface for native code                                                                 |                                                                              |
+| INSTALL\_FAILED\_MISSING\_FEATURE                  | application uses device features that are unavailable                                                                                         |                                                                              |
+| INSTALL\_FAILED\_CONTAINER\_ERROR                  | sdcard access failure                                                                                                                         | confirm sdcard is available, or to install built-in storage                  |
+| INSTALL\_FAILED\_INVALID\_INSTALL\_LOCATION        | can not be installed to the specified location                                                                                                | switch mounting position, add or delete `-s` parameters                      |
+| INSTALL\_FAILED\_MEDIA\_UNAVAILABLE                | installation location is unavailable                                                                                                          | generally sdcard, confirm sdcard is available or to install built-in storage |
+| INSTALL\_FAILED\_VERIFICATION\_TIMEOUT             | Installation Timeout verify                                                                                                                   |                                                                              |
+| INSTALL\_FAILED\_VERIFICATION\_FAILURE             | verify the installation package fails                                                                                                         |                                                                              |
+| INSTALL\_FAILED\_PACKAGE\_CHANGED                  | calling application program expects inconsistent                                                                                              |                                                                              |
+| INSTALL\_FAILED\_UID\_CHANGED                      | previously installed the app, and this assignment UID inconsistent                                                                            | remove residual files previously installed                                   |
+| INSTALL\_FAILED\_VERSION\_DOWNGRADE                | already installed the application later                                                                                                       | use `-d` parameters                                                          |
+| INSTALL\_FAILED\_PERMISSION\_MODEL\_DOWNGRADE      | installed target SDK runtime support for application permissions of the same name, to install the runtime version does not support permission |                                                                              |
+| INSTALL\_PARSE\_FAILED\_NOT\_APK                   | specified path is not a file or not to `.apk` end                                                                                             |                                                                              |
+| INSTALL\_PARSE\_FAILED\_BAD\_MANIFEST              | unresolved AndroidManifest.xml file                                                                                                           |                                                                              |
+| INSTALL\_PARSE\_FAILED\_UNEXPECTED\_EXCEPTION      | parser encounters an exception                                                                                                                |                                                                              |
+| INSTALL\_PARSE\_FAILED\_NO\_CERTIFICATES           | installation package is not signed                                                                                                            |                                                                              |
+| INSTALL\_PARSE\_FAILED\_INCONSISTENT\_CERTIFICATES | already installed the app, and signed with the APK files are inconsistent                                                                     | first uninstall the application on the device, then install                  |
+| INSTALL\_PARSE\_FAILED\_CERTIFICATE\_ENCODING      | encountered while parsing APK file `CertificateEncodingException`                                                                             |                                                                              |
+| INSTALL\_PARSE\_FAILED\_BAD\_PACKAGE\_NAME         | manifest file no or an invalid package name                                                                                                   |                                                                              |
+| INSTALL\_PARSE\_FAILED\_BAD\_SHARED\_USER\_ID      | manifest file specifies an invalid shared user ID                                                                                             |                                                                              |
+| INSTALL\_PARSE\_FAILED\_MANIFEST\_MALFORMED        | encountered while parsing file manifest error structural                                                                                      |                                                                              |
+| INSTALL\_PARSE\_FAILED\_MANIFEST\_EMPTY            | in the manifest file can not be found to find operable label (instrumentation or application)                                                 |                                                                              |
+| INSTALL\_FAILED\_INTERNAL\_ERROR                   | installation fails because of system problems                                                                                                 |                                                                              |
+| INSTALL\_FAILED\_USER\_RESTRICTED                  | Users are limited to installing applications                                                                                                  |                                                                              |
+| INSTALL\_FAILED\_DUPLICATE\_PERMISSION             | application attempts to define an existing permission name                                                                                    |                                                                              |
+| INSTALL\_FAILED\_NO\_MATCHING\_ABIS                | applications include device application binary interface does not support the native code                                                     |                                                                              |
+| INSTALL\_CANCELED\_BY\_USER                        | applications installed on the device needs confirmation, but not operate the device or the point of cancellation                              | agree to install on the device                                               |
+| INSTALL\_FAILED\_ACWF\_INCOMPATIBLE                | applications are not compatible with the device                                                                                               |                                                                              |
+| Does not contain AndroidManifest.xml               | invalid APK file                                                                                                                              |                                                                              |
+| Is not a valid zip file                            | invalid APK file                                                                                                                              |                                                                              |
+| Offline                                            | device is not connected successfully                                                                                                          | first device with adb successful connection                                  |
+| Unauthorized                                       | unauthorized device allows debugging                                                                                                          |                                                                              |
+| Error: device not found                            | not successfully connected equipment                                                                                                          | equipment and adb first successful connection                                |
+| Protocol failure                                   | device is disconnected                                                                                                                        | first device with adb successful connection                                  |
+| Unknown option: -s                                 | Android 2.2 does not support the following installation to sdcard                                                                             | do not use `-s` parameters                                                   |
+| No space left on devicerm                          | lack of space                                                                                                                                 | cleanup space                                                                |
+| Permission denied ... sdcard ...                   | sdcard unavailable                                                                                                                            |                                                                              |
 
 Reference: [PackageManager.java] (https://github.com/android/platform_frameworks_base/blob/master/core%2Fjava%2Fandroid%2Fcontent%2Fpm%2FPackageManager.java)
 
@@ -625,37 +595,37 @@ Where `com.cyanogenmod.trebuchet / com.android.launcher3.Launcher` is currently 
 
 Primarily using `am <command>` command commonly used `<command>` as follows:
 
-| Command | use |
-|-----------------------------------|---------------------------------|
-| `Start [options] <INTENT>` | Start `<INTENT>` specified Activity |
-| `Startservice [options] <INTENT>` | Start `<INTENT>` designated Service |
-| `Broadcast [options] <INTENT>` | Send `<INTENT>` designated broadcast |
-| `Force-stop <packagename>` | stop `<packagename>` related processes |
+| Command                           | use                                    |
+|-----------------------------------|----------------------------------------|
+| `Start [options] <INTENT>`        | Start `<INTENT>` specified Activity    |
+| `Startservice [options] <INTENT>` | Start `<INTENT>` designated Service    |
+| `Broadcast [options] <INTENT>`    | Send `<INTENT>` designated broadcast   |
+| `Force-stop <packagename>`        | stop `<packagename>` related processes |
 
 `<INTENT>` very flexible parameters, and write Android program code corresponding to the Intent.
 
 Options for determining intent objects as follows:
 
-| Parameter | Meaning |
-|------------------|---------------------------------------------------------------------------------------------|
-| `-a <ACTION>` | specified action, such as `android.intent.action.VIEW` |
-| `-c <CATEGORY>` | specify a category, such as `android.intent.category.APP_CONTACTS` |
+| Parameter        | Meaning                                                                                                                               |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| `-a <ACTION>`    | specified action, such as `android.intent.action.VIEW`                                                                                |
+| `-c <CATEGORY>`  | specify a category, such as `android.intent.category.APP_CONTACTS`                                                                    |
 | `-n <COMPONENT>` | specify the full component name, which is used to explicitly specify the start Activity, such as `com.example.app / .ExampleActivity` |
 
 `<INTENT>` can bring in data, like Bundle write code like:
 
-| Parameter | Meaning |
-|---------------------------------------------------------------|----------------------------------------|
-| `--esn <EXTRA_KEY>` | null value (only key name) |
-| `-e | --es <EXTRA_KEY> <EXTRA_STRING_VALUE>` | string value |
-| `--ez <EXTRA_KEY> <EXTRA_BOOLEAN_VALUE>` | boolean value |
-| `--ei <EXTRA_KEY> <EXTRA_INT_VALUE>` | integer value |
-| `--el <EXTRA_KEY> <EXTRA_LONG_VALUE>` | long value |
-| `--ef <EXTRA_KEY> <EXTRA_FLOAT_VALUE>` | float value |
-| `--eu <EXTRA_KEY> <EXTRA_URI_VALUE>` | URI |
-| `--ecn <EXTRA_KEY> <EXTRA_COMPONENT_NAME_VALUE>` | component name |
-| `--eia <EXTRA_KEY> <EXTRA_INT_VALUE> [, <EXTRA_INT_VALUE ...]` | integer array |
-| `--ela <EXTRA_KEY> <EXTRA_LONG_VALUE> [, <EXTRA_LONG_VALUE ...]` | long array |
+| Parameter                                                        | Meaning                                |
+|------------------------------------------------------------------|----------------------------------------|
+| `--esn <EXTRA_KEY>`                                              | null value (only key name)             |
+| `-e|--es <EXTRA_KEY> <EXTRA_STRING_VALUE>`                       | string value                           |
+| `--ez <EXTRA_KEY> <EXTRA_BOOLEAN_VALUE>`                         | boolean value                          |
+| `--ei <EXTRA_KEY> <EXTRA_INT_VALUE>`                             | integer value                          |
+| `--el <EXTRA_KEY> <EXTRA_LONG_VALUE>`                            | long value                             |
+| `--ef <EXTRA_KEY> <EXTRA_FLOAT_VALUE>`                           | float value                            |
+| `--eu <EXTRA_KEY> <EXTRA_URI_VALUE>`                             | URI                                    |
+| `--ecn <EXTRA_KEY> <EXTRA_COMPONENT_NAME_VALUE>`                 | component name                         |
+| `--eia <EXTRA_KEY> <EXTRA_INT_VALUE> [, <EXTRA_INT_VALUE ...]`   | integer array                          |
+| `--ela <EXTRA_KEY> <EXTRA_LONG_VALUE> [, <EXTRA_LONG_VALUE ...]` | long array                             |
 
 ### Transferred from Activity
 
@@ -721,30 +691,30 @@ Such usage is very practical in the test, such as a broadcast scenes difficult t
 
 Both predefined broadcast transmission system can also send a custom broadcast. The following is part of the normal pre-defined radio and Trigger timing:
 
-| Action | trigger timing |
-|-------------------------------------------------|-----------------------------------------------|
-| android.net.conn.CONNECTIVITY_CHANGE | Fi changes |
-| android.intent.action.SCREEN_ON | screen lit |
-| android.intent.action.SCREEN_OFF | screen off |
-| android.intent.action.BATTERY_LOW | low battery, low battery prompt box will pop up |
-| android.intent.action.BATTERY_OKAY | electricity restored |
-| android.intent.action.BOOT_COMPLETED | equipment Booted |
-| android.intent.action.DEVICE_STORAGE_LOW | storage space is running low |
-| android.intent.action.DEVICE_STORAGE_OK | storage space recovery |
-| android.intent.action.PACKAGE_ADDED | install a new application |
-| android.net.wifi.STATE_CHANGE | WiFi connection status change |
-| android.net.wifi.WIFI_STATE_CHANGED | WiFi state to the On / Off / Starting up / shutting down / Unknown |
-| android.intent.action.BATTERY_CHANGED | battery level changes |
-| android.intent.action.INPUT_METHOD_CHANGED | system input method changes |
-| android.intent.action.ACTION_POWER_CONNECTED | external power connector |
-| android.intent.action.ACTION_POWER_DISCONNECTED | disconnected from external power |
-| android.intent.action.DREAMING_STARTED | system began Sleep |
-| android.intent.action.DREAMING_STOPPED | system stops Sleep |
-| android.intent.action.WALLPAPER_CHANGED | wallpaper changes |
-| android.intent.action.HEADSET_PLUG | insert earphone |
-| android.intent.action.MEDIA_UNMOUNTED | unload external media |
-| android.intent.action.MEDIA_MOUNTED | mount external media |
-| android.os.action.POWER_SAVE_MODE_CHANGED | power-saving mode is turned on |
+| Action                                          | trigger timing                                                     |
+|-------------------------------------------------|--------------------------------------------------------------------|
+| android.net.conn.CONNECTIVITY_CHANGE            | Fi changes                                                         |
+| android.intent.action.SCREEN_ON                 | screen lit                                                         |
+| android.intent.action.SCREEN_OFF                | screen off                                                         |
+| android.intent.action.BATTERY_LOW               | low battery, low battery prompt box will pop up                    |
+| android.intent.action.BATTERY_OKAY              | electricity restored                                               |
+| android.intent.action.BOOT_COMPLETED            | equipment Booted                                                   |
+| android.intent.action.DEVICE_STORAGE_LOW        | storage space is running low                                       |
+| android.intent.action.DEVICE_STORAGE_OK         | storage space recovery                                             |
+| android.intent.action.PACKAGE_ADDED             | install a new application                                          |
+| android.net.wifi.STATE_CHANGE                   | WiFi connection status change                                      |
+| android.net.wifi.WIFI_STATE_CHANGED             | WiFi state to the On / Off / Starting up / shutting down / Unknown |
+| android.intent.action.BATTERY_CHANGED           | battery level changes                                              |
+| android.intent.action.INPUT_METHOD_CHANGED      | system input method changes                                        |
+| android.intent.action.ACTION_POWER_CONNECTED    | external power connector                                           |
+| android.intent.action.ACTION_POWER_DISCONNECTED | disconnected from external power                                   |
+| android.intent.action.DREAMING_STARTED          | system began Sleep                                                 |
+| android.intent.action.DREAMING_STOPPED          | system stops Sleep                                                 |
+| android.intent.action.WALLPAPER_CHANGED         | wallpaper changes                                                  |
+| android.intent.action.HEADSET_PLUG              | insert earphone                                                    |
+| android.intent.action.MEDIA_UNMOUNTED           | unload external media                                              |
+| android.intent.action.MEDIA_MOUNTED             | mount external media                                               |
+| android.os.action.POWER_SAVE_MODE_CHANGED       | power-saving mode is turned on                                     |
 
 * (Above broadcast can be used to trigger adb) *
 
@@ -833,39 +803,39 @@ The commands and default sources are:
 
 Such as using `adb shell input keyevent <keycode>` command, different keycode to achieve different functions, keycode complete list see [KeyEvent] (https://developer.android.com/reference/android/view/KeyEvent. html), I think the interesting part of the quote is as follows:
 
-| Keycode | Meaning |
-|---------|--------------------------------|
-| 3 | HOME button |
-| 4 | return key |
-| 5 | open dialing application |
-| 6 | hang up |
-| 24 | increase volume |
-| 25 | Volume Down |
-| 26 | Power button |
-| 27 | taking pictures (in the camera application needs in) |
-| 64 | Open Browser |
-| 82 | menu button |
-| 85 | Play / Pause |
-| 86 | stop playing |
-| 87 | play the next |
-| 88 | played on a |
-| 122 | Move the cursor to the beginning or top of the list |
-| 123 | Move the cursor to the end of the line or bottom of the list |
-| 126 | resume playing |
-| 127 | pause play |
-| 164 | Mute |
-| 176 | Open the System Setup |
-| 187 | switching applications |
-| 207 | Open Contacts |
-| 208 | Open calendar |
-| 209 | Open Music |
-| 210 | Open Calculator |
-| 220 | Decrease screen brightness |
-| 221 | Increase screen brightness |
-| 223 | System Sleep |
-| 224 | light up the screen |
-| 231 | Open the voice assistant |
-| 276 | If no wakelock allow the system to sleep |
+| Keycode | Meaning                                                      |
+|---------|--------------------------------------------------------------|
+| 3       | HOME button                                                  |
+| 4       | return key                                                   |
+| 5       | open dialing application                                     |
+| 6       | hang up                                                      |
+| 24      | increase volume                                              |
+| 25      | Volume Down                                                  |
+| 26      | Power button                                                 |
+| 27      | taking pictures (in the camera application needs in)         |
+| 64      | Open Browser                                                 |
+| 82      | menu button                                                  |
+| 85      | Play / Pause                                                 |
+| 86      | stop playing                                                 |
+| 87      | play the next                                                |
+| 88      | played on a                                                  |
+| 122     | Move the cursor to the beginning or top of the list          |
+| 123     | Move the cursor to the end of the line or bottom of the list |
+| 126     | resume playing                                               |
+| 127     | pause play                                                   |
+| 164     | Mute                                                         |
+| 176     | Open the System Setup                                        |
+| 187     | switching applications                                       |
+| 207     | Open Contacts                                                |
+| 208     | Open calendar                                                |
+| 209     | Open Music                                                   |
+| 210     | Open Calculator                                              |
+| 220     | Decrease screen brightness                                   |
+| 221     | Increase screen brightness                                   |
+| 223     | System Sleep                                                 |
+| 224     | light up the screen                                          |
+| 231     | Open the voice assistant                                     |
+| 276     | If no wakelock allow the system to sleep                     |
 
 Here are some examples of the use of `input` command.
 
@@ -1546,19 +1516,19 @@ This will output a lot of information, including the previously mentioned severa
 
 In output also includes some other useful information, they can also be `adb shell getprop <attribute name>` command alone, part of the property include the following:
 
-| Attribute name  | Meaning |
-|---------------------------------|--------------------------|
-| ro.build.version.sdk | SDK version |
-| ro.build.version.release | Android system version |
-| ro.build.version.security_patch | Android security patch level |
-| ro.product.model | Type |
-| ro.product.brand | Brands |
-| ro.product.name | device name |
-| ro.product.board | Processor Model |
-| ro.product.cpu.abilist | CPU support list abi |
-| persist.sys.isUsbOtgEnabled | supports OTG |
-| dalvik.vm.heapsize | each application's memory cap |
-| ro.sf.lcd_density | screen density |
+| Attribute name                  | Meaning                       |
+|---------------------------------|-------------------------------|
+| ro.build.version.sdk            | SDK version                   |
+| ro.build.version.release        | Android system version        |
+| ro.build.version.security_patch | Android security patch level  |
+| ro.product.model                | Type                          |
+| ro.product.brand                | Brands                        |
+| ro.product.name                 | device name                   |
+| ro.product.board                | Processor Model               |
+| ro.product.cpu.abilist          | CPU support list abi          |
+| persist.sys.isUsbOtgEnabled     | supports OTG                  |
+| dalvik.vm.heapsize              | each application's memory cap |
+| ro.sf.lcd_density               | screen density                |
 
 ## Utility functions
 
@@ -1578,9 +1548,9 @@ adb pull /sdcard/sc.png
 
 You can use the `adb shell screencap -h` See` help screencap` command, here are two significant parameters and their meanings:
 
-| Parameter | Meaning |
-|---------------|--------------------------------------------|
-| -p | Save the file in png format specified |
+| Parameter     | Meaning                                                                      |
+|---------------|------------------------------------------------------------------------------|
+| -p            | Save the file in png format specified                                        |
 | -d Display-id | screenshots display the specified number (multiple screen display case next) |
 
 Found If you specify a file name can be omitted when the -p parameter to `.png` ending; otherwise you need to use the -p parameter. If you do not specify a file name, file contents screenshot will be directly output to stdout.
@@ -1603,12 +1573,12 @@ adb pull /sdcard/filename.mp4
 
 You can use the `adb shell screenrecord --help` See` help screenrecord` command, the following are common parameters and their meanings:
 
-| Parameter | Meaning |
-|---------------------|-------------------------------------------------|
+| Parameter           | Meaning                                                                 |
+|---------------------|-------------------------------------------------------------------------|
 | --size WIDTHxHEIGHT | dimensions of the video, such as `1280x720`, default screen resolution. |
-| --bit-Rate RATE | bit-rate video, the default is 4Mbps. |
-| --time-Limit TIME | recording length, in seconds. |
-| --verbose | Print more information. |
+| --bit-Rate RATE     | bit-rate video, the default is 4Mbps.                                   |
+| --time-Limit TIME   | recording length, in seconds.                                           |
+| --verbose           | Print more information.                                                 |
 
 ### Remount system partition as writable
 
@@ -1868,12 +1838,12 @@ shell     8750  217   10640  740   00000000 b6f28340 R ps
 
 Meaning of each column:
 
-| Listing | Meaning |
-| ------ | ----------- |
-| USER | their user |
-| PID | Process ID |
-| PPID | parent process ID |
-| NAME | process name |
+| Listing | Meaning           |
+|---------|-------------------|
+| USER    | their user        |
+| PID     | Process ID        |
+| PPID    | parent process ID |
+| NAME    | process name      |
 
 ### View real-time resource consumption
 
@@ -1904,18 +1874,18 @@ User 3 + Nice 0 + Sys 21 + Idle 280 + IOW 0 + IRQ 0 + SIRQ 3 = 307
 
 Meaning of each column:
 
-| Listing | Meaning |
-|------|------------------------------------------------------------|
-| PID | Process ID |
-| PR | Priority |
-| CPU% | instantaneous current occupancy percentage of CPU |
-| S | process state (R = run, S = sleep, T = trace / stop, Z = zombie process) |
-| #THR | Threads |
-| VSS | Virtual Set Size of virtual memory consumption (including shared libraries occupy memory) |
-| RSS | Resident Set Size actual physical memory (including shared libraries occupy memory) |
-| PCY | scheduling policy priority, SP_BACKGROUND / SPFOREGROUND |
-| UID | process owner user ID |
-| NAME | process name |
+| Listing | Meaning                                                                                   |
+|---------|-------------------------------------------------------------------------------------------|
+| PID     | Process ID                                                                                |
+| PR      | Priority                                                                                  |
+| CPU%    | instantaneous current occupancy percentage of CPU                                         |
+| S       | process state (R = run, S = sleep, T = trace / stop, Z = zombie process)                  |
+| #THR    | Threads                                                                                   |
+| VSS     | Virtual Set Size of virtual memory consumption (including shared libraries occupy memory) |
+| RSS     | Resident Set Size actual physical memory (including shared libraries occupy memory)       |
+| PCY     | scheduling policy priority, SP_BACKGROUND / SPFOREGROUND                                  |
+| UID     | process owner user ID                                                                     |
+| NAME    | process name                                                                              |
 
 `Top` command also supports a number of command-line parameters, detailed usage is as follows:
 
@@ -1933,20 +1903,20 @@ Other ###
 
 The following is a brief description of other commonly used commands, has previously spoken commands no special additional explanation:
 
-| Command | function |
-| ------- | ----------------------------- |
-| cat | display file contents |
-| cd | change directory |
-| chmod | change file access mode / access |
-| df | view disk space usage |
-| grep | output filter |
-| kill | kill the specified process PID |
-| ls | list directory contents |
-| mount | Mount View and manage directory |
-| mv | move or rename a file |
-| ps | view running processes |
-| rm | delete files |
-| top | Check process resource consumption |
+| Command | function                           |
+|---------|------------------------------------|
+| cat     | display file contents              |
+| cd      | change directory                   |
+| chmod   | change file access mode / access   |
+| df      | view disk space usage              |
+| grep    | output filter                      |
+| kill    | kill the specified process PID     |
+| ls      | list directory contents            |
+| mount   | Mount View and manage directory    |
+| mv      | move or rename a file              |
+| ps      | view running processes             |
+| rm      | delete files                       |
+| top     | Check process resource consumption |
 
 ## common problem
 
@@ -1996,6 +1966,7 @@ Thanks for sharing with friends and selfless supplement.
 * [seasonyuu](https://github.com/seasonyuu)
 * [fan123199](https://github.com/fan123199)
 * [zhEdward](https://github.com/zhEdward)
+* [0x8BADFOOD](https://github.com/0x8BADFOOD)
 
 ## Reference Links
 
@@ -2009,4 +1980,4 @@ Thanks for sharing with friends and selfless supplement.
 * [Adb shell top](http://blog.csdn.net/kittyboy0001/article/details/38562515)
 * [Like master, like using ADB command line (2)](http://cabins.github.io/2016/03/25/UseAdbLikeAPro-2/)
 
-[1]: # ip- address
+[1]: #ip-address
