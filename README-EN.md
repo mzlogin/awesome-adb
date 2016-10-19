@@ -1545,7 +1545,7 @@ This will output a lot of information, including the previously mentioned severa
 
 In output also includes some other useful information, they can also be `adb shell getprop <attribute name>` command alone, part of the property include the following:
 
-| Attribute name | Meaning |
+| Attribute name  | Meaning |
 |---------------------------------|--------------------------|
 | ro.build.version.sdk | SDK version |
 | ro.build.version.release | Android system version |
