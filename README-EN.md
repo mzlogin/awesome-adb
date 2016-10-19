@@ -58,19 +58,19 @@ Continuously updated, please mention the PR and Issue supplementary correction, 
 		* [Clear Log](#empty the log)
 	* [Kernel log](#kernel log)
 * [View Device Information](#view device information)
-	* [Model] (Model #)
+	* [Model] (#Model )
 	* [Battery status](#battery status)
 	* [Screen resolution](#screen resolution)
 	* [Screen density](#screen density)
 	* [Screen parameter](#display parameters)
-	* [Android \ _id](#android_id)
+	* [Android\_id](#android_id)
 	* [IMEI](#imei)
 	* [Android system version](#android- system version)
-	* [IP address](#ip- address)
-	* [Mac Address](#mac- address)
-	* [CPU information](#cpu- information)
+	* [IP address](#ip-address)
+	* [Mac Address](#mac-address)
+	* [CPU information](#cpu-information)
 	* [Memory Information](#memory information)
-	* [More hardware and system attributes](#more hardware, and system attributes)
+	* [More hardware and system attributes](#More hardware, and system attributes)
 * [Useful features](#utility function)
 	* [Screenshot](#screenshot)
 	* [Recording Screen](#recording screen)
@@ -115,7 +115,7 @@ If only one device / emulator connection, you can omit the `[-d | -e | -s <seria
 If you have more than one device / emulator connection, you need to specify the target device for the command.
 
 | Parameter | Meaning |
-| --------------------- | --------------------------- ------------------------- |
+|---------------------|----------------------------------------------------|
 | -d | Specifies currently the only Android device USB connector as the command target |
 | -e | Specify currently the only goal for the command to run the simulator |
 | `-s <SerialNumber>` | Specifies the device number corresponding serialNumber / simulator command target |
@@ -183,9 +183,9 @@ adb root
 
 Normal output:
 
-`` `Sh
+```sh
 restarting adbd as root
-`` `
+```
 
 Now run `adb shell`, take a look at the command line prompt is not turned into a` `#?
 
@@ -384,7 +384,7 @@ adb shell pm list packages [-f] [-d] [-e] [-s] [-3] [-i] [-u] [--user USER_ID] [
 That is the basis of `adb shell pm list packages` can add some parameters on the filter to view different lists, supports filtering parameters are as follows:
 
 | Parameter | display list |
-| ------------ | ---------------------------- |
+|------------|----------------------------|
 | No | all applications |
 | -f | Display apk file application association |
 | -d | Show only applications disabled |
@@ -464,7 +464,7 @@ parameter:
 `Adb install` may be followed by some optional parameters to control the behavior of the installation APK, available parameters and their meanings are as follows:
 
 | Parameter | Meaning |
-| ------ | ------------------------------------------ ----------------------------------------- |
+|------|-----------------------------------------------------------------------------------|
 | -l | Will be applied to protect the installation directory / mnt / asec |
 | -r | Allowed to cover the installation |
 | -t | Allowed to install application specified in AndroidManifest.xml `android: testOnly =" true "` Application |
@@ -501,7 +501,7 @@ Failure [INSTALL_FAILED_ALREADY_EXISTS]
 Common Installation failed output code, the meaning and possible solutions are as follows:
 
 | Output | Meaning | solutions |
-| ------------------------------------------------- --- | ---------------------------------------------- ---------------------------- | --------------------- ---------------------------- |
+|----------------------------------------------------|--------------------------------------------------------------------------|-------------------------------------------------|
 | INSTALL\_FAILED\_ALREADY\_EXISTS | application already exists | use `-r` parameters |
 | INSTALL\_FAILED\_INVALID\_APK | invalid APK file | |
 | INSTALL\_FAILED\_INVALID\_URI | invalid filename APK | APK file names to ensure no Chinese |
@@ -721,29 +721,29 @@ Such usage is very practical in the test, such as a broadcast scenes difficult t
 Both predefined broadcast transmission system can also send a custom broadcast. The following is part of the normal pre-defined radio and Trigger timing:
 
 | Action | trigger timing |
-| ------------------------------------------------- | ----------------------------------------------- |
-| Android.net.conn.CONNECTIVITY_CHANGE | Fi changes |
-| Android.intent.action.SCREEN_ON | screen lit |
-| Android.intent.action.SCREEN_OFF | screen off |
-| Android.intent.action.BATTERY_LOW | low battery, low battery prompt box will pop up |
-| Android.intent.action.BATTERY_OKAY | electricity restored |
-| Android.intent.action.BOOT_COMPLETED | equipment Booted |
-| Android.intent.action.DEVICE_STORAGE_LOW | storage space is running low |
-| Android.intent.action.DEVICE_STORAGE_OK | storage space recovery |
-| Android.intent.action.PACKAGE_ADDED | install a new application |
-| Android.net.wifi.STATE_CHANGE | WiFi connection status change |
-| Android.net.wifi.WIFI_STATE_CHANGED | WiFi state to the On / Off / Starting up / shutting down / Unknown |
-| Android.intent.action.BATTERY_CHANGED | battery level changes |
-| Android.intent.action.INPUT_METHOD_CHANGED | system input method changes |
-| Android.intent.action.ACTION_POWER_CONNECTED | external power connector |
-| Android.intent.action.ACTION_POWER_DISCONNECTED | disconnected from external power |
-| Android.intent.action.DREAMING_STARTED | system began Sleep |
-| Android.intent.action.DREAMING_STOPPED | system stops Sleep |
-| Android.intent.action.WALLPAPER_CHANGED | wallpaper changes |
-| Android.intent.action.HEADSET_PLUG | insert earphone |
-| Android.intent.action.MEDIA_UNMOUNTED | unload external media |
-| Android.intent.action.MEDIA_MOUNTED | mount external media |
-| Android.os.action.POWER_SAVE_MODE_CHANGED | power-saving mode is turned on |
+|-------------------------------------------------|-----------------------------------------------|
+| android.net.conn.CONNECTIVITY_CHANGE | Fi changes |
+| android.intent.action.SCREEN_ON | screen lit |
+| android.intent.action.SCREEN_OFF | screen off |
+| android.intent.action.BATTERY_LOW | low battery, low battery prompt box will pop up |
+| android.intent.action.BATTERY_OKAY | electricity restored |
+| android.intent.action.BOOT_COMPLETED | equipment Booted |
+| android.intent.action.DEVICE_STORAGE_LOW | storage space is running low |
+| android.intent.action.DEVICE_STORAGE_OK | storage space recovery |
+| android.intent.action.PACKAGE_ADDED | install a new application |
+| android.net.wifi.STATE_CHANGE | WiFi connection status change |
+| android.net.wifi.WIFI_STATE_CHANGED | WiFi state to the On / Off / Starting up / shutting down / Unknown |
+| android.intent.action.BATTERY_CHANGED | battery level changes |
+| android.intent.action.INPUT_METHOD_CHANGED | system input method changes |
+| android.intent.action.ACTION_POWER_CONNECTED | external power connector |
+| android.intent.action.ACTION_POWER_DISCONNECTED | disconnected from external power |
+| android.intent.action.DREAMING_STARTED | system began Sleep |
+| android.intent.action.DREAMING_STOPPED | system stops Sleep |
+| android.intent.action.WALLPAPER_CHANGED | wallpaper changes |
+| android.intent.action.HEADSET_PLUG | insert earphone |
+| android.intent.action.MEDIA_UNMOUNTED | unload external media |
+| android.intent.action.MEDIA_MOUNTED | mount external media |
+| android.os.action.POWER_SAVE_MODE_CHANGED | power-saving mode is turned on |
 
 * (Above broadcast can be used to trigger adb) *
 
@@ -833,7 +833,7 @@ The commands and default sources are:
 Such as using `adb shell input keyevent <keycode>` command, different keycode to achieve different functions, keycode complete list see [KeyEvent] (https://developer.android.com/reference/android/view/KeyEvent. html), I think the interesting part of the quote is as follows:
 
 | Keycode | Meaning |
-| --------- | -------------------------------- |
+|---------|--------------------------------|
 | 3 | HOME button |
 | 4 | return key |
 | 5 | open dialing application |
@@ -1259,7 +1259,7 @@ Example output:
 
 ```sh
 Physical density: 420
-`` `
+```
 
 The device screen density of 420dpi.
 
@@ -1546,18 +1546,18 @@ This will output a lot of information, including the previously mentioned severa
 In output also includes some other useful information, they can also be `adb shell getprop <attribute name>` command alone, part of the property include the following:
 
 | Attribute name | Meaning |
-| --------------------------------- | --------------- ----------- |
-| Ro.build.version.sdk | SDK version |
-| Ro.build.version.release | Android system version |
-| Ro.build.version.security_patch | Android security patch level |
-| Ro.product.model | Type |
-| Ro.product.brand | Brands |
-| Ro.product.name | device name |
-| Ro.product.board | Processor Model |
-| Ro.product.cpu.abilist | CPU support list abi |
-| Persist.sys.isUsbOtgEnabled | supports OTG |
-| Dalvik.vm.heapsize | each application's memory cap |
-| Ro.sf.lcd_density | screen density |
+|---------------------------------|--------------------------|
+| ro.build.version.sdk | SDK version |
+| ro.build.version.release | Android system version |
+| ro.build.version.security_patch | Android security patch level |
+| ro.product.model | Type |
+| ro.product.brand | Brands |
+| ro.product.name | device name |
+| ro.product.board | Processor Model |
+| ro.product.cpu.abilist | CPU support list abi |
+| persist.sys.isUsbOtgEnabled | supports OTG |
+| dalvik.vm.heapsize | each application's memory cap |
+| ro.sf.lcd_density | screen density |
 
 ## Utility functions
 
@@ -1578,7 +1578,7 @@ adb pull /sdcard/sc.png
 You can use the `adb shell screencap -h` See` help screencap` command, here are two significant parameters and their meanings:
 
 | Parameter | Meaning |
-| --------------- | --------------------------------- ----------- |
+|---------------|--------------------------------------------|
 | -p | Save the file in png format specified |
 | -d Display-id | screenshots display the specified number (multiple screen display case next) |
 
@@ -1603,7 +1603,7 @@ adb pull /sdcard/filename.mp4
 You can use the `adb shell screenrecord --help` See` help screenrecord` command, the following are common parameters and their meanings:
 
 | Parameter | Meaning |
-| --------------------- | --------------------------- ---------------------- |
+|---------------------|-------------------------------------------------|
 | --size WIDTHxHEIGHT | dimensions of the video, such as `1280x720`, default screen resolution. |
 | --bit-Rate RATE | bit-rate video, the default is 4Mbps. |
 | --time-Limit TIME | recording length, in seconds. |
@@ -1611,9 +1611,9 @@ You can use the `adb shell screenrecord --help` See` help screenrecord` command,
 
 ### Remount system partition as writable
 
-** Note: You need root privileges. **
+**Note: You need root privileges.**
 
-/ System partitions are mounted read-only, but some operating systems such as Android to add commands to remove the need to bring their own application / system write operation, it is necessary to remount it read-write.
+/system partitions are mounted read-only, but some operating systems such as Android to add commands to remove the need to bring their own application / system write operation, it is necessary to remount it read-write.
 
 step:
 
@@ -1684,7 +1684,7 @@ If the output is not an error, then the operation is successful, you can file / 
 
 ### Check connection over WiFi password
 
-** Note: You need root privileges. **
+**Note: You need root privileges.**
 
 command:
 
@@ -1981,7 +1981,7 @@ taskkill /PID 1548
 
 Then start adb no problem.
 
-## Adb unofficial implementation
+## adb unofficial implementation
 
 * [fb-adb](https://github.com/facebook/fb-adb) - A better shell for Android devices (for Mac).
 
