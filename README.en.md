@@ -6,9 +6,7 @@ This repository renews continually, Pull Requests and Issues are welcomed. If yo
 
 **Note:** Some commands may depending on the version of Android system or ROM.
 
-Other languages:
-
-* [Chinese](./README.md)
+Other languages: [:cn: Chinese](./README.md)
 
 #![Table of Contents](./assets/toc.png)
 
