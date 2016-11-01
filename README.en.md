@@ -33,7 +33,8 @@ Other languages: [:cn: Chinese](./README.md)
 	* [Uninstalling](#uninstalling)
 	* [Clear app cache data](#clear-app-cache-data)
 	* [View Reception Activity](#view-reception-activity)
-* [Applications to interact with](#applications-to-interact-with)
+	* [View Running Services](#view-running-services)
+* [Interact with Applications](#interact-with-applications)
 	* [Transferred from Activity](#transferred-from-activity)
 	* [Transferred from the Service](#transferred-from-the-service)
 	* [Transmits broadcast](#transmits-broadcast)
@@ -621,7 +622,19 @@ mFocusedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.androi
 
 Where `com.cyanogenmod.trebuchet / com.android.launcher3.Launcher` is currently in the foreground Activity.
 
-## Applications to interact with
+### View Running Services
+
+command:
+
+```sh
+adb shell dumpsys activity services [<packagename>]
+```
+
+`<packagename>` parameter is optional, command with `<packagename>` will output services related with that packagename, and command without `<packagename>` will output all services.
+
+Complete packagename is unnecessary. For example, `adb shell dumpsys activity services org.mazhuang` will output services related with `org.mazhuang.demo1`, `org.mazhuang.demo2` and `org.mazhuang123`, etc.
+
+## Interact with Applications
 
 Primarily using `am <command>` command commonly used `<command>` as follows:
 

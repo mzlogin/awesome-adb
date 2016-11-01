@@ -33,6 +33,7 @@ Other languages: [:gb: English](./README.en.md)
 	* [卸载应用](#卸载应用)
 	* [清除应用数据与缓存](#清除应用数据与缓存)
 	* [查看前台 Activity](#查看前台-activity)
+	* [查看正在运行的 Services](#查看正在运行的-services)
 * [与应用交互](#与应用交互)
 	* [调起 Activity](#调起-activity)
 	* [调起 Service](#调起-service)
@@ -620,6 +621,18 @@ mFocusedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.androi
 ```
 
 其中的 `com.cyanogenmod.trebuchet/com.android.launcher3.Launcher` 就是当前处于前台的 Activity。
+
+### 查看正在运行的 Services
+
+命令：
+
+```sh
+adb shell dumpsys activity services [<packagename>]
+```
+
+`<packagename>` 参数不是必须的，指定 `<packagename>` 表示查看与某个包名相关的 Services，不指定表示查看所有 Services。
+
+`<packagename>` 不一定要给出完整的包名，比如运行 `adb shell dumpsys activity services org.mazhuang`，那么包名 `org.mazhuang.demo1`、`org.mazhuang.demo2` 和 `org.mazhuang123` 等相关的 Services 都会列出来。
 
 ## 与应用交互
 
