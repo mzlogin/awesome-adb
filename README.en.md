@@ -1598,6 +1598,14 @@ You can use the `adb shell screencap -h` See` help screencap` command, here are 
 
 Found If you specify a file name can be omitted when the -p parameter to `.png` ending; otherwise you need to use the -p parameter. If you do not specify a file name, file contents screenshot will be directly output to stdout.
 
+Save screenshot file to computer with a single line command:
+
+```sh
+adb shell screencap -p | sed "s/\r$//" > sc.png
+```
+
+This depends on `sed` command, it's avaliable in Linux and Mac OS X by default. In Windows, you may find it in bin directory in Git installation place. Otherwise, you may need to download [sed for Windows](http://gnuwin32.sourceforge.net/packages/sed.htm) and add the directory where sed.exe is to PATH environment variable.
+
 ### Recording Screen
 
 Record screen are saved in mp4 format to / sdcard:

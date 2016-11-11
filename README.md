@@ -1598,6 +1598,14 @@ adb pull /sdcard/sc.png
 
 实测如果指定文件名以 `.png` 结尾时可以省略 -p 参数；否则需要使用 -p 参数。如果不指定文件名，截图文件的内容将直接输出到 stdout。
 
+直接一行命令截图并保存到电脑的方法：
+
+```sh
+adb shell screencap -p | sed "s/\r$//" > sc.png
+```
+
+这个方法需要用到 sed 命令，在 Linux 和 Mac 下直接就有，在 Windows 下 Git 安装文件夹的 bin 目录下也有。如果确实找不到该命令，可以下载 [sed for Windows](http://gnuwin32.sourceforge.net/packages/sed.htm) 并将 sed.exe 所在目录添加到 PATH 环境变量里。
+
 ### 录制屏幕
 
 录制屏幕以 mp4 格式保存到 /sdcard：
