@@ -1604,7 +1604,7 @@ adb pull /sdcard/sc.png
 adb shell screencap -p | sed "s/\r$//" > sc.png
 ```
 
-这个方法需要用到 sed 命令，在 Linux 和 Mac 下直接就有，在 Windows 下 Git 安装文件夹的 bin 目录下也有。如果确实找不到该命令，可以下载 [sed for Windows](http://gnuwin32.sourceforge.net/packages/sed.htm) 并将 sed.exe 所在目录添加到 PATH 环境变量里。
+这个方法需要用到 sed 命令，在 Linux 和 Mac 下直接就有，在 Windows 下 Git 安装目录的 bin 文件夹下也有。如果确实找不到该命令，可以下载 [sed for Windows](http://gnuwin32.sourceforge.net/packages/sed.htm) 并将 sed.exe 所在文件夹添加到 PATH 环境变量里。
 
 ### 录制屏幕
 
