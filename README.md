@@ -73,6 +73,10 @@ Other languages: [:gb: English](./README.en.md)
     * [CPU 信息](#cpu-信息)
     * [内存信息](#内存信息)
     * [更多硬件与系统属性](#更多硬件与系统属性)
+* [修改设置](#修改设置)
+    * [分辨率](#分辨率)
+    * [屏幕密度](#屏幕密度-1)
+    * [显示区域](#显示区域)
 * [实用功能](#实用功能)
     * [屏幕截图](#屏幕截图)
     * [录制屏幕](#录制屏幕)
@@ -1261,6 +1265,15 @@ Physical size: 1080x1920
 
 该设备屏幕分辨率为 1080px * 1920px。
 
+如果使用命令修改过，那输出可能是：
+
+```sh
+Physical size: 1080x1920
+Override size: 480x1024
+```
+
+表明设备的屏幕分辨率原本是 1080px * 1920px，当前被修改为 480px * 1024px。
+
 ### 屏幕密度
 
 命令：
@@ -1276,6 +1289,15 @@ Physical density: 420
 ```
 
 该设备屏幕密度为 420dpi。
+
+如果使用命令修改过，那输出可能是：
+
+```sh
+Physical density: 480
+Override density: 160
+```
+
+表明设备的屏幕密度原来是 480dpi，当前被修改为 160dpi。
 
 ### 显示屏参数
 
@@ -1572,6 +1594,56 @@ adb shell cat /system/build.prop
 | persist.sys.isUsbOtgEnabled     | 是否支持 OTG             |
 | dalvik.vm.heapsize              | 每个应用程序的内存上限   |
 | ro.sf.lcd_density               | 屏幕密度                 |
+
+## 修改设置
+
+### 分辨率
+
+命令：
+
+```sh
+adb shell wm size 480x1024
+```
+
+表示将分辨率修改为 480px * 1024px。
+
+恢复原分辨率命令：
+
+```sh
+adb shell wm size reset
+```
+
+### 屏幕密度
+
+命令：
+
+```sh
+adb shell wm density 160
+```
+
+表示将屏幕密度修改为 160dpi。
+
+恢复原屏幕密度命令：
+
+```sh
+adb shell wm density reset
+```
+
+### 显示区域
+
+命令：
+
+```sh
+adb shell wm overscan 0,0,0,200
+```
+
+四个数字分别表示距离左、上、右、下边缘的留白像素，以上命令表示将屏幕底部 200px 留白。
+
+恢复原显示区域命令：
+
+```sh
+adb shell wm overscan reset
+```
 
 ## 实用功能
 

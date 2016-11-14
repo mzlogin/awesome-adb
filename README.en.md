@@ -73,6 +73,10 @@ Other languages: [:cn: Chinese](./README.md)
     * [CPU Information](#cpu-information)
     * [Memory Information](#memory-information)
     * [More hardware and system properties](#more-hardware-and-system-properties)
+* [Modify Settings](#modify-settings)
+    * [Resolution](#resolution)
+    * [Screen density](#screen-density-1)
+    * [Overscan](#overscan)
 * [Utility functions](#utility-functions)
     * [Screenshots](#screenshots)
     * [Recording Screen](#recording-screen)
@@ -1261,6 +1265,15 @@ Physical size: 1080x1920
 
 The device's screen resolution is 1080px * 1920px.
 
+If resolution has been changed by command, output may be:
+
+```sh
+Physical size: 1080x1920
+Override size: 480x1024
+```
+
+It says that screen's original resolution is 1080px * 1920px, currently is 480px * 1024px.
+
 ### Screen density
 
 command:
@@ -1276,6 +1289,15 @@ Physical density: 420
 ```
 
 The device screen density of 420dpi.
+
+If screen density has been changed by command, output may be:
+
+```sh
+Physical density: 480
+Override density: 160
+```
+
+It says that originla screen density is 480dpi, currently is 160dpi.
 
 ### Display Parameters
 
@@ -1572,6 +1594,56 @@ In output also includes some other useful information, they can also be `adb she
 | persist.sys.isUsbOtgEnabled     | supports OTG                  |
 | dalvik.vm.heapsize              | each application's memory cap |
 | ro.sf.lcd_density               | screen density                |
+
+## Modify Settings
+
+### Resolution
+
+command:
+
+```sh
+adb shell wm size 480x1024
+```
+
+It means change the resolution to 480px * 1024px.
+
+Reset to original resolution:
+
+```sh
+adb shell wm size reset
+```
+
+### Screen density
+
+command:
+
+```sh
+adb shell wm density 160
+```
+
+It means change the screen density to 160dpi.
+
+Reset to original screen density:
+
+```sh
+adb shell wm density reset
+```
+
+### Overscan
+
+command:
+
+```sh
+adb shell wm overscan 0,0,0,200
+```
+
+Four parameters are left, top, right and bottom margin pixels to the edge, command above means leave 200px in screen bottom clean.
+
+Reset to original overscan:
+
+```sh
+adb shell wm overscan reset
+```
 
 ## Utility functions
 
