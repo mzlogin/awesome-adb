@@ -1597,6 +1597,8 @@ In output also includes some other useful information, they can also be `adb she
 
 ## Modify Settings
 
+**Notice:** Display may not normal after reset settings, you can use command `adb reboot` to reboot device, or reboot it maually.
+
 ### Resolution
 
 command:
