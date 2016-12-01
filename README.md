@@ -77,6 +77,8 @@ Other languages: [:gb: English](./README.en.md)
     * [分辨率](#分辨率)
     * [屏幕密度](#屏幕密度-1)
     * [显示区域](#显示区域)
+    * [关闭 USB 调试模式](#关闭-usb-调试模式)
+    * [状态栏和导航栏的显示隐藏](#状态栏和导航栏的显示隐藏)
 * [实用功能](#实用功能)
     * [屏幕截图](#屏幕截图)
     * [录制屏幕](#录制屏幕)
@@ -1599,6 +1601,8 @@ adb shell cat /system/build.prop
 
 **注：**修改设置之后，运行恢复命令有可能显示仍然不太正常，可以运行 `adb reboot` 重启设备，或手动重启。
 
+修改设置的原理主要是通过 settings 命令修改 /data/data/com.android.providers.settings/databases/settings.db 里存放的设置值。
+
 ### 分辨率
 
 命令：
@@ -1646,6 +1650,62 @@ adb shell wm overscan 0,0,0,200
 ```sh
 adb shell wm overscan reset
 ```
+
+### 关闭 USB 调试模式
+
+命令：
+
+```sh
+adb shell settings put global adb_enabled 0
+```
+
+恢复：
+
+用命令恢复不了了，毕竟关闭了 USB 调试 adb 就连接不上 Android 设备了。
+
+去设备上手动恢复吧：「设置」-「开发者选项」-「Android 调试」。
+
+### 状态栏和导航栏的显示隐藏
+
+本节所说的相关设置对应 Cyanogenmod 里的「扩展桌面」。
+
+命令：
+
+```sh
+adb shell settings put global policy_control <key-values>
+```
+
+`<key-values>` 可由如下几种键及其对应的值组成，格式为 `<key1>=<value1>:<key2>=<value2>`。
+
+| key                   | 含义       |
+|-----------------------|------------|
+| immersive.full        | 同时隐藏   |
+| immersive.status      | 隐藏状态栏 |
+| immersive.navigation  | 隐藏导航栏 |
+| immersive.preconfirms | ?          |
+
+这些键对应的值可则如下值用逗号组合：
+
+| value          | 含义         |
+|----------------|--------------|
+| `apps`         | 所有应用     |
+| `*`            | 所有界面     |
+| `packagename`  | 指定应用     |
+| `-packagename` | 排除指定应用 |
+
+例如：
+
+```sh
+adb shell settings put global policy_control immersive.full=*
+```
+
+表示设置在所有界面下都同时隐藏状态栏和导航栏。
+
+```sh
+adb shell settings put global policy_control immersive.status=com.package1,com.package2:immersive.navigation=apps,-com.package3
+```
+
+表示设置在包名为 `com.package1` 和 `com.package2` 的应用里隐藏状态栏，在除了包名为 `com.package3` 的所有应用里隐藏导航栏。
 
 ## 实用功能
 

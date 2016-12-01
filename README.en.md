@@ -77,6 +77,8 @@ Other languages: [:cn: Chinese](./README.md)
     * [Resolution](#resolution)
     * [Screen density](#screen-density-1)
     * [Overscan](#overscan)
+    * [Turn off Android Debug](#turn-off-android-debug)
+    * [Show/hide status bar or navigation bar](#showhide-status-bar-or-navigation-bar)
 * [Utility functions](#utility-functions)
     * [Screenshots](#screenshots)
     * [Recording Screen](#recording-screen)
@@ -1646,6 +1648,64 @@ Reset to original overscan:
 ```sh
 adb shell wm overscan reset
 ```
+
+### Turn off Android Debug
+
+command:
+
+```sh
+adb shell settings put global adb_enabled 0
+```
+
+To reset:
+
+We can't do this via command now, because without "Android Debug" on, adb cannot communicate with Devices.
+
+So just do it on device manually:
+
+"Settings" - "Developer options" - "Android Debug".
+
+### Show/hide status bar or navigation bar
+
+Settings in this section correspond with "Expanded desktop" in Cyanogenmod.
+
+command:
+
+```sh
+adb shell settings put global policy_control <key-values>
+```
+
+`<key-values>` composite by keys and their values below, format is `<key1>=<value1>:<key2>=<value2>`.
+
+| key                   | meaning             |
+|-----------------------|---------------------|
+| immersive.full        | Hide both           |
+| immersive.status      | Hide status bar     |
+| immersive.navigation  | Hide navigation bar |
+| immersive.preconfirms | ?                   |
+
+Values for these keys are comma-delimited list of tokens, where tokens:
+
+| value          | 含义             |
+|----------------|------------------|
+| `apps`         | All applications |
+| `*`            | Everywhere       |
+| `packagename`  | Include package  |
+| `-packagename` | Exclude package  |
+
+For example:
+
+```sh
+adb shell settings put global policy_control immersive.full=*
+```
+
+Means set hide both status bar and navigation bar everywhere.
+
+```sh
+adb shell settings put global policy_control immersive.status=com.package1,com.package2:immersive.navigation=apps,-com.package3
+```
+
+Means set hide status bar in applications whoes package name is `com.package1` or `com.package2`, hide navigation bar in all applications, exclude whoes package name is `com.package3`.
 
 ## Utility functions
 
