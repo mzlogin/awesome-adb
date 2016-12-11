@@ -21,8 +21,8 @@ Other languages: [:cn: Chinese](./README.md)
 * [Device connection management](#device-connection-management)
     * [Query for devices](#query-for-devices)
     * [Connect to a device over USB](#connect-to-a-device-over-usb)
-    * [Wireless connection (need to use the USB cable)](#wireless-connection-need-to-use-the-usb-cable)
-    * [Wireless connection (without using the USB cable)](#wireless-connection-without-using-the-usb-cable)
+    * [Connect to a device over WiFi (with help of USB cable)](#connect-to-a-device-over-wifi-with-help-of-usb-cable)
+    * [Connect to a device over WiFi (without help of USB cable)](#connect-to-a-device-over-wifi-without-help-of-usb-cable)
 * [Application Management](#application-management)
     * [Check the list of](#check-the-list-of)
         * [All applications](#all-applications)
@@ -284,9 +284,9 @@ To use adb with connection over USB, need to satisfy serveral conditions:
 
    Your connection is successfully.
 
-### Wireless connection (need to use the USB cable)
+### Connect to a device over WiFi (with help of USB cable)
 
-In addition to the USB connection to the computer to use adb, can also be a wireless connection - although the connection process is also step using USB needs, but after a successful connection to your device can get rid of the limit of the USB cable within a certain range it !
+Adb is usually used over USB. However, it is also possible to use over WiFi, though steps describe here need help of USB cable. After connect to device over WiFi successfully, your device can be placed anywhere with WiFi signal, get rid of USB cable.
 
 Steps:
 
@@ -342,7 +342,7 @@ command:
 adb disconnect <device-ip-address>
 ```
 
-### Wireless connection (without using the USB cable)
+### Connect to a device over WiFi (without help of USB cable)
 
 **Note: You need root privileges.**
 
