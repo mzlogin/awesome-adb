@@ -1056,7 +1056,11 @@ adb logcat *:W
 
 Will Warning, Error, Fatal and Silent log output.
 
+(**Notice:** tag `*` must surrounded with double quotation, like `adb logcat "*:W"`, otherwise an error `no matches found *:W` would throws.)
+
 #### Filter by tag and log level
+
+filterspecs are a series of `<tag>[:priority]`.
 
 For example, the command:
 

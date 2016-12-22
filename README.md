@@ -1036,7 +1036,7 @@ Android 系统的日志分为两部分，底层的 Linux 内核日志输出到 /
 
 #### 按级别过滤日志
 
-Android 的日志分为如下几个级别：
+Android 的日志分为如下几个优先级（priority）：
 
 * V —— Verbose（最低，输出得最多）
 * D —— Debug
@@ -1056,7 +1056,11 @@ adb logcat *:W
 
 会将 Warning、Error、Fatal 和 Silent 日志输出。
 
+（**注：**在 macOS 下需要给 `*:W` 这样以 `*` 作为 tag 的参数加双引号，如 `adb logcat "*:W"`，不然会报错 `no matches found: *:W`。）
+
 #### 按 tag 和级别过滤日志
+
+`<filter-spec>` 可以由多个 `<tag>[:priority]` 组成。
 
 比如，命令：
 
