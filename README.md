@@ -1587,19 +1587,34 @@ adb shell cat /system/build.prop
 
 输出里还包括一些其它有用的信息，它们也可通过 `adb shell getprop <属性名>` 命令单独查看，列举一部分属性如下：
 
-| 属性名                          | 含义                     |
-|---------------------------------|--------------------------|
-| ro.build.version.sdk            | SDK 版本                 |
-| ro.build.version.release        | Android 系统版本         |
-| ro.build.version.security_patch | Android 安全补丁程序级别 |
-| ro.product.model                | 型号                     |
-| ro.product.brand                | 品牌                     |
-| ro.product.name                 | 设备名                   |
-| ro.product.board                | 处理器型号               |
-| ro.product.cpu.abilist          | CPU 支持的 abi 列表      |
-| persist.sys.isUsbOtgEnabled     | 是否支持 OTG             |
-| dalvik.vm.heapsize              | 每个应用程序的内存上限   |
-| ro.sf.lcd_density               | 屏幕密度                 |
+| 属性名                          | 含义                          |
+|---------------------------------|-------------------------------|
+| ro.build.version.sdk            | SDK 版本                      |
+| ro.build.version.release        | Android 系统版本              |
+| ro.build.version.security_patch | Android 安全补丁程序级别      |
+| ro.product.model                | 型号                          |
+| ro.product.brand                | 品牌                          |
+| ro.product.name                 | 设备名                        |
+| ro.product.board                | 处理器型号                    |
+| ro.product.cpu.abilist          | CPU 支持的 abi 列表[*节注一*] |
+| persist.sys.isUsbOtgEnabled     | 是否支持 OTG                  |
+| dalvik.vm.heapsize              | 每个应用程序的内存上限        |
+| ro.sf.lcd_density               | 屏幕密度                      |
+
+*节注一：*
+
+一些小厂定制的 ROM 可能修改过 CPU 支持的 abi 列表的属性名，如果用 `ro.product.cpu.abilist` 属性名查找不到，可以这样试试：
+
+```sh
+adb shell cat /system/build.prop | grep ro.product.cpu.abi
+```
+
+示例输出：
+
+```sh
+ro.product.cpu.abi=armeabi-v7a
+ro.product.cpu.abi2=armeabi
+```
 
 ## 修改设置
 
