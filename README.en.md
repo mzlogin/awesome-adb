@@ -1,102 +1,105 @@
 #![Awesome Adb](./assets/title.png)
 
-ADB ([Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)), it is not only irreplaceable powerful tool for Android developers/testers, but also a good toy to play with Android devices.
+The [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html) (ADB) is a toolkit included in the Android SDK package, it is not only a powerful tool for Android developers and testers, but also a good toy for Android fans.
 
-This repo is continuously updated, if you found mistake/issue please create issue or create pull request.
+This repository renews continually, Pull Requests and Issues are welcomed. If you found [this](https://github.com/mzlogin/awesome-adb) is useful, you can star it and conveniently back here to view when necessary.
 
-If you found [this GitHub repository](https://github.com/mzlogin/awesome-adb) is useful, please star this repo. Thanks.
+**Note:** Some commands may depending on the version of Android system or ROM.
 
-**Note:** Some commands may not supported well depends on the version of Android and ROM.
-
-Other languages:
-
-* [Chinese](./README.md)
+Other languages: [:cn: Chinese](./README.md)
 
 #![Table of Contents](./assets/toc.png)
 
 <!-- vim-markdown-toc GFM -->
 * [Basic Usage](#basic-usage)
-	* [Command syntax](#command-syntax)
-	* [Targeting equipment for command](#targeting-equipment-for-command)
-	* [Start/Stop](#startstop)
-	* [View adb version](#view-adb-version)
-	* [Run adbd as root](#run-adbd-as-root)
-	* [Designated adb server network port](#designated-adb-server-network-port)
+    * [Command syntax](#command-syntax)
+    * [Targeting equipment for command](#targeting-equipment-for-command)
+    * [Start/Stop](#startstop)
+    * [View adb version](#view-adb-version)
+    * [Run adbd as root](#run-adbd-as-root)
+    * [Designated adb server network port](#designated-adb-server-network-port)
 * [Device connection management](#device-connection-management)
-	* [Inquiries connected device / simulator](#inquiries-connected-device--simulator)
-	* [USB connection](#usb-connection)
-	* [Wireless connection (need to use the USB cable)](#wireless-connection-need-to-use-the-usb-cable)
-	* [Wireless connection (without using the USB cable)](#wireless-connection-without-using-the-usb-cable)
+    * [Inquiries connected device / simulator](#inquiries-connected-device--simulator)
+    * [USB connection](#usb-connection)
+    * [Wireless connection (need to use the USB cable)](#wireless-connection-need-to-use-the-usb-cable)
+    * [Wireless connection (without using the USB cable)](#wireless-connection-without-using-the-usb-cable)
 * [Application Management](#application-management)
-	* [Check the list of](#check-the-list-of)
-		* [All applications](#all-applications)
-		* [system applications](#system-applications)
-		* [third-party usage](#third-party-usage)
-		* [Application package name contains a string](#application-package-name-contains-a-string)
-	* [Install APK](#install-apk)
-	* [Uninstalling](#uninstalling)
-	* [Clear app cache data](#clear-app-cache-data)
-	* [View Reception Activity](#view-reception-activity)
-* [Applications to interact with](#applications-to-interact-with)
-	* [Transferred from Activity](#transferred-from-activity)
-	* [Transferred from the Service](#transferred-from-the-service)
-	* [Transmits broadcast](#transmits-broadcast)
-	* [Forcibly stop the application](#forcibly-stop-the-application)
+    * [Check the list of](#check-the-list-of)
+        * [All applications](#all-applications)
+        * [system applications](#system-applications)
+        * [third-party usage](#third-party-usage)
+        * [Application package name contains a string](#application-package-name-contains-a-string)
+    * [Install APK](#install-apk)
+    * [Uninstalling](#uninstalling)
+    * [Clear app cache data](#clear-app-cache-data)
+    * [View Reception Activity](#view-reception-activity)
+    * [View Running Services](#view-running-services)
+* [Interact with Applications](#interact-with-applications)
+    * [Transferred from Activity](#transferred-from-activity)
+    * [Transferred from the Service](#transferred-from-the-service)
+    * [Transmits broadcast](#transmits-broadcast)
+    * [Forcibly stop the application](#forcibly-stop-the-application)
 * [File Management](#file-management)
-	* [Copy files to the computer equipment in](#copy-files-to-the-computer-equipment-in)
-	* [Copy computer files to the device](#copy-computer-files-to-the-device)
+    * [Copy files to the computer equipment in](#copy-files-to-the-computer-equipment-in)
+    * [Copy computer files to the device](#copy-computer-files-to-the-device)
 * [Analog Keys / inputs](#analog-keys--inputs)
-	* [Power button](#power-button)
-	* [menu](#menu)
-	* [HOME key](#home-key)
-	* [return key](#return-key)
-	* [volume control](#volume-control)
-	* [Media Control](#media-control)
-	* [On / Off screen](#on--off-screen)
-	* [Slide to unlock](#slide-to-unlock)
-	* [Enter text](#enter-text)
+    * [Power button](#power-button)
+    * [menu](#menu)
+    * [HOME key](#home-key)
+    * [return key](#return-key)
+    * [volume control](#volume-control)
+    * [Media Control](#media-control)
+    * [On / Off screen](#on--off-screen)
+    * [Slide to unlock](#slide-to-unlock)
+    * [Enter text](#enter-text)
 * [View Log](#view-log)
-	* [Android log](#android-log)
-	* [Filter the log by level](#filter-the-log-by-level)
-		* [Filter by tag and log level](#filter-by-tag-and-log-level)
-		* [Log format](#log-format)
-		* [Clear log](#clear-log)
-	* [Kernel log](#kernel-log)
+    * [Android log](#android-log)
+    * [Filter the log by level](#filter-the-log-by-level)
+        * [Filter by tag and log level](#filter-by-tag-and-log-level)
+        * [Log format](#log-format)
+        * [Clear log](#clear-log)
+    * [Kernel log](#kernel-log)
 * [View device information](#view-device-information)
-	* [Model](#model)
-	* [Battery Status](#battery-status)
-	* [Screen Resolution](#screen-resolution)
-	* [Screen density](#screen-density)
-	* [Display Parameters](#display-parameters)
-	* [android\_id](#android_id)
-	* [IMEI](#imei)
-	* [Android system version](#android-system-version)
-	* [IP address](#ip-address)
-	* [Mac Address](#mac-address)
-	* [CPU Information](#cpu-information)
-	* [Memory Information](#memory-information)
-	* [More hardware and system properties](#more-hardware-and-system-properties)
+    * [Model](#model)
+    * [Battery Status](#battery-status)
+    * [Screen Resolution](#screen-resolution)
+    * [Screen density](#screen-density)
+    * [Display Parameters](#display-parameters)
+    * [android\_id](#android_id)
+    * [IMEI](#imei)
+    * [Android system version](#android-system-version)
+    * [IP address](#ip-address)
+    * [Mac Address](#mac-address)
+    * [CPU Information](#cpu-information)
+    * [Memory Information](#memory-information)
+    * [More hardware and system properties](#more-hardware-and-system-properties)
+* [Modify Settings](#modify-settings)
+    * [Resolution](#resolution)
+    * [Screen density](#screen-density-1)
+    * [Overscan](#overscan)
+    * [Turn off Android Debug](#turn-off-android-debug)
+    * [Show/hide status bar or navigation bar](#showhide-status-bar-or-navigation-bar)
 * [Utility functions](#utility-functions)
-	* [Screenshots](#screenshots)
-	* [Recording Screen](#recording-screen)
-	* [Remount system partition as writable](#remount-system-partition-as-writable)
-	* [Check connection over WiFi password](#check-connection-over-wifi-password)
-	* [To set the system date and time](#to-set-the-system-date-and-time)
-	* [restart cellphone](#restart-cellphone)
-	* [Detect whether the device is root](#detect-whether-the-device-is-root)
-	* [Monkey use stress testing](#monkey-use-stress-testing)
-	* [On / off WiFi](#on--off-wifi)
+    * [Screenshots](#screenshots)
+    * [Recording Screen](#recording-screen)
+    * [Remount system partition as writable](#remount-system-partition-as-writable)
+    * [Check connection over WiFi password](#check-connection-over-wifi-password)
+    * [To set the system date and time](#to-set-the-system-date-and-time)
+    * [restart cellphone](#restart-cellphone)
+    * [Detect whether the device is root](#detect-whether-the-device-is-root)
+    * [Monkey use stress testing](#monkey-use-stress-testing)
+    * [On / off WiFi](#on--off-wifi)
 * [Brush related commands](#brush-related-commands)
-	* [Restart to Recovery mode](#restart-to-recovery-mode)
-	* [To restart from the Recovery Android](#to-restart-from-the-recovery-android)
-	* [Restart to Fastboot mode](#restart-to-fastboot-mode)
-	* [Through sideload system update](#through-sideload-system-update)
+    * [Restart to Recovery mode](#restart-to-recovery-mode)
+    * [To restart from the Recovery Android](#to-restart-from-the-recovery-android)
+    * [Restart to Fastboot mode](#restart-to-fastboot-mode)
+    * [Through sideload system update](#through-sideload-system-update)
 * [More adb shell command](#more-adb-shell-command)
-	* [See process](#see-process)
-	* [View real-time resource consumption](#view-real-time-resource-consumption)
-	* [Other](#other)
+    * [See process](#see-process)
+    * [View real-time resource consumption](#view-real-time-resource-consumption)
+    * [Other](#other)
 * [common problem](#common-problem)
-	* [Start adb server failure](#start-adb-server-failure)
+    * [Start adb server failure](#start-adb-server-failure)
 * [adb unofficial implementation](#adb-unofficial-implementation)
 * [Acknowledgements](#acknowledgements)
 * [Reference Links](#reference-links)
@@ -625,7 +628,19 @@ mFocusedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.androi
 
 Where `com.cyanogenmod.trebuchet / com.android.launcher3.Launcher` is currently in the foreground Activity.
 
-## Applications to interact with
+### View Running Services
+
+command:
+
+```sh
+adb shell dumpsys activity services [<packagename>]
+```
+
+`<packagename>` parameter is optional, command with `<packagename>` will output services related with that packagename, and command without `<packagename>` will output all services.
+
+Complete packagename is unnecessary. For example, `adb shell dumpsys activity services org.mazhuang` will output services related with `org.mazhuang.demo1`, `org.mazhuang.demo2` and `org.mazhuang123`, etc.
+
+## Interact with Applications
 
 Primarily using `am <command>` command commonly used `<command>` as follows:
 
@@ -1041,7 +1056,11 @@ adb logcat *:W
 
 Will Warning, Error, Fatal and Silent log output.
 
+(**Notice:** tag `*` must surrounded with double quotation, like `adb logcat "*:W"`, otherwise an error `no matches found *:W` would throws.)
+
 #### Filter by tag and log level
+
+filterspecs are a series of `<tag>[:priority]`.
 
 For example, the command:
 
@@ -1252,6 +1271,15 @@ Physical size: 1080x1920
 
 The device's screen resolution is 1080px * 1920px.
 
+If resolution has been changed by command, output may be:
+
+```sh
+Physical size: 1080x1920
+Override size: 480x1024
+```
+
+It says that screen's original resolution is 1080px * 1920px, currently is 480px * 1024px.
+
 ### Screen density
 
 command:
@@ -1267,6 +1295,15 @@ Physical density: 420
 ```
 
 The device screen density of 420dpi.
+
+If screen density has been changed by command, output may be:
+
+```sh
+Physical density: 480
+Override density: 160
+```
+
+It says that originla screen density is 480dpi, currently is 160dpi.
 
 ### Display Parameters
 
@@ -1564,6 +1601,116 @@ In output also includes some other useful information, they can also be `adb she
 | dalvik.vm.heapsize              | each application's memory cap |
 | ro.sf.lcd_density               | screen density                |
 
+## Modify Settings
+
+**Notice:** Display may not normal after reset settings, you can use command `adb reboot` to reboot device, or reboot it maually.
+
+### Resolution
+
+command:
+
+```sh
+adb shell wm size 480x1024
+```
+
+It means change the resolution to 480px * 1024px.
+
+Reset to original resolution:
+
+```sh
+adb shell wm size reset
+```
+
+### Screen density
+
+command:
+
+```sh
+adb shell wm density 160
+```
+
+It means change the screen density to 160dpi.
+
+Reset to original screen density:
+
+```sh
+adb shell wm density reset
+```
+
+### Overscan
+
+command:
+
+```sh
+adb shell wm overscan 0,0,0,200
+```
+
+Four parameters are left, top, right and bottom margin pixels to the edge, command above means leave 200px in screen bottom clean.
+
+Reset to original overscan:
+
+```sh
+adb shell wm overscan reset
+```
+
+### Turn off Android Debug
+
+command:
+
+```sh
+adb shell settings put global adb_enabled 0
+```
+
+To reset:
+
+We can't do this via command now, because without "Android Debug" on, adb cannot communicate with Devices.
+
+So just do it on device manually:
+
+"Settings" - "Developer options" - "Android Debug".
+
+### Show/hide status bar or navigation bar
+
+Settings in this section correspond with "Expanded desktop" in Cyanogenmod.
+
+command:
+
+```sh
+adb shell settings put global policy_control <key-values>
+```
+
+`<key-values>` composite by keys and their values below, format is `<key1>=<value1>:<key2>=<value2>`.
+
+| key                   | meaning             |
+|-----------------------|---------------------|
+| immersive.full        | Hide both           |
+| immersive.status      | Hide status bar     |
+| immersive.navigation  | Hide navigation bar |
+| immersive.preconfirms | ?                   |
+
+Values for these keys are comma-delimited list of tokens, where tokens:
+
+| value          | 含义             |
+|----------------|------------------|
+| `apps`         | All applications |
+| `*`            | Everywhere       |
+| `packagename`  | Include package  |
+| `-packagename` | Exclude package  |
+
+For example:
+
+```sh
+adb shell settings put global policy_control immersive.full=*
+```
+
+Means set hide both status bar and navigation bar everywhere.
+
+```sh
+adb shell settings put global policy_control immersive.status=com.package1,com.package2:immersive.navigation=apps,-com.package3
+```
+
+Means set hide status bar in applications whoes package name is `com.package1` or `com.package2`, hide navigation bar in all applications, exclude whoes package name is `com.package3`.
+
 ## Utility functions
 
 ### Screenshots
@@ -1588,6 +1735,14 @@ You can use the `adb shell screencap -h` See` help screencap` command, here are 
 | -d Display-id | screenshots display the specified number (multiple screen display case next) |
 
 Found If you specify a file name can be omitted when the -p parameter to `.png` ending; otherwise you need to use the -p parameter. If you do not specify a file name, file contents screenshot will be directly output to stdout.
+
+Save screenshot file to computer with a single line command:
+
+```sh
+adb shell screencap -p | sed "s/\r$//" > sc.png
+```
+
+This depends on `sed` command, it's avaliable in Linux and Mac OS X by default. In Windows, you may find it in bin directory in Git installation place. Otherwise, you may need to download [sed for Windows](http://gnuwin32.sourceforge.net/packages/sed.htm) and add the directory where sed.exe is to PATH environment variable.
 
 ### Recording Screen
 
