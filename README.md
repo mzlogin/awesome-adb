@@ -1753,11 +1753,31 @@ adb pull /sdcard/sc.png
 
 直接一行命令截图并保存到电脑的方法：
 
+*Linux 和 Windows*
+
 ```sh
 adb shell screencap -p | sed "s/\r$//" > sc.png
 ```
 
-这个方法需要用到 sed 命令，在 Linux 和 Mac 下直接就有，在 Windows 下 Git 安装目录的 bin 文件夹下也有。如果确实找不到该命令，可以下载 [sed for Windows](http://gnuwin32.sourceforge.net/packages/sed.htm) 并将 sed.exe 所在文件夹添加到 PATH 环境变量里。
+*Mac OS X*
+
+```sh
+adb shell screencap -p | gsed "s/\r$//" > sc.png
+```
+
+这个方法需要用到 gnu sed 命令，在 Linux 下直接就有，在 Windows 下 Git 安装目录的 bin 文件夹下也有。如果确实找不到该命令，可以下载 [sed for Windows](http://gnuwin32.sourceforge.net/packages/sed.htm) 并将 sed.exe 所在文件夹添加到 PATH 环境变量里。
+
+而在 Mac 下使用系统自带的 sed 命令会报错：
+
+```sh
+sed: RE error: illegal byte sequence
+```
+
+需要安装 gnu-sed，然后使用 gsed 命令：
+
+```sh
+brew install gnu-sed
+```
 
 ### 录制屏幕
 
