@@ -527,8 +527,8 @@ Failure [INSTALL_FAILED_ALREADY_EXISTS]
 | INSTALL\_FAILED\_TEST\_ONLY                        | 应用是 test-only 的，但安装时没有指定 `-t` 参数                          |                                                                             |
 | INSTALL\_FAILED\_CPU\_ABI\_INCOMPATIBLE            | 包含不兼容设备 CPU 应用程序二进制接口的 native code                      |                                                                             |
 | INSTALL\_FAILED\_MISSING\_FEATURE                  | 应用使用了设备不可用的功能                                               |                                                                             |
-| INSTALL\_FAILED\_CONTAINER\_ERROR                  | sdcard 访问失败                                                          | 确认 sdcard 可用，或者安装到内置存储                                        |
-| INSTALL\_FAILED\_INVALID\_INSTALL\_LOCATION        | 不能安装到指定位置                                                       | 切换安装位置，添加或删除 `-s` 参数                                          |
+| INSTALL\_FAILED\_CONTAINER\_ERROR                  | 1. sdcard 访问失败; 2. 应用签名与 ROM 签名一致，被当作内置应用           | 1. 确认 sdcard 可用，或者安装到内置存储; 2. 打包时不与 ROM 使用相同签名     |
+| INSTALL\_FAILED\_INVALID\_INSTALL\_LOCATION        | 1. 不能安装到指定位置; 2. 应用签名与 ROM 签名一致，被当作内置应用        | 1. 切换安装位置，添加或删除 `-s` 参数; 2. 打包时不与 ROM 使用相同签名       |
 | INSTALL\_FAILED\_MEDIA\_UNAVAILABLE                | 安装位置不可用                                                           | 一般为 sdcard，确认 sdcard 可用或安装到内置存储                             |
 | INSTALL\_FAILED\_VERIFICATION\_TIMEOUT             | 验证安装包超时                                                           |                                                                             |
 | INSTALL\_FAILED\_VERIFICATION\_FAILURE             | 验证安装包失败                                                           |                                                                             |
