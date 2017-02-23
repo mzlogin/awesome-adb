@@ -379,6 +379,14 @@ adb disconnect <device-ip-address>
 
    如果能看到 `connected to <device-ip-address>:5555` 这样的输出则表示连接成功。
 
+*节注一：*
+
+有的设备，比如小米 5S + MIUI 8.0 + Android 6.0.1 MXB48T，可能在第 5 步之前需要重启 adbd 服务，在设备的终端模拟器上运行：
+
+```sh
+restart adbd
+```
+
 ## 应用管理
 
 ### 查看应用列表
