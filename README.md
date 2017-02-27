@@ -136,15 +136,24 @@ $ adb devices
 List of devices attached
 cf264b8f	device
 emulator-5554	device
+10.129.164.6:5555	device
 ```
 
-输出里的 `cf264b8f` 和 `emulator-5554` 即为 serialNumber。比如这时想指定 `cf264b8f` 这个设备来运行 adb 命令获取屏幕分辨率：
+输出里的 `cf264b8f`、`emulator-5554` 和 `10.129.164.6:5555` 即为 serialNumber。
+
+比如这时想指定 `cf264b8f` 这个设备来运行 adb 命令获取屏幕分辨率：
 
 ```sh
 adb -s cf264b8f shell wm size
 ```
 
-遇到多设备/模拟器的情况均使用这几个参数为命令指定目标设备，下文中为简化描述，不再重复。
+又如想给 `10.129.164.6:5555` 这个设备安装应用（*这种形式的 serialNumber 格式为 `<IP>:<Port>`，一般为无线连接的设备*）：
+
+```sh
+adb -s 10.129.164.6:5555 install test.apk
+```
+
+**遇到多设备/模拟器的情况均使用这几个参数为命令指定目标设备，下文中为简化描述，不再重复。**
 
 ### 启动/停止
 
@@ -227,6 +236,7 @@ adb devices
 List of devices attached
 cf264b8f	device
 emulator-5554	device
+10.129.164.6:5555	device
 ```
 
 输出格式为 `[serialNumber] [state]`，serialNumber 即我们常说的 SN，state 有如下几种：
@@ -237,7 +247,7 @@ emulator-5554	device
 
 * `no device` —— 没有设备/模拟器连接。
 
-以上输出显示当前已经连接了两台设备/模拟器，`cf264b8f` 与 `emulator-5554` 分别是它们的 SN。从 `emulator-5554` 这个名字可以看出它是一个 Android 模拟器。
+以上输出显示当前已经连接了三台设备/模拟器，`cf264b8f`、`emulator-5554` 和 `10.129.164.6:5555` 分别是它们的 SN。从 `emulator-5554` 这个名字可以看出它是一个 Android 模拟器，而 `10.129.164.6:5555` 这种形为 `<IP>:<Port>` 的 serialNumber 一般是通过 adb 无线连接的设备。
 
 常见异常输出：
 
