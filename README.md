@@ -147,7 +147,7 @@ emulator-5554	device
 adb -s cf264b8f shell wm size
 ```
 
-又如想给 `10.129.164.6:5555` 这个设备安装应用（*这种形式的 serialNumber 格式为 `<IP>:<Port>`，一般为无线连接的设备*）：
+又如想给 `10.129.164.6:5555` 这个设备安装应用（*这种形式的 serialNumber 格式为 `<IP>:<Port>`，一般为无线连接的设备或 Genymotion 等第三方 Android 模拟器*）：
 
 ```sh
 adb -s 10.129.164.6:5555 install test.apk
@@ -247,7 +247,7 @@ emulator-5554	device
 
 * `no device` —— 没有设备/模拟器连接。
 
-以上输出显示当前已经连接了三台设备/模拟器，`cf264b8f`、`emulator-5554` 和 `10.129.164.6:5555` 分别是它们的 SN。从 `emulator-5554` 这个名字可以看出它是一个 Android 模拟器，而 `10.129.164.6:5555` 这种形为 `<IP>:<Port>` 的 serialNumber 一般是通过 adb 无线连接的设备。
+以上输出显示当前已经连接了三台设备/模拟器，`cf264b8f`、`emulator-5554` 和 `10.129.164.6:5555` 分别是它们的 SN。从 `emulator-5554` 这个名字可以看出它是一个 Android 模拟器，而 `10.129.164.6:5555` 这种形为 `<IP>:<Port>` 的 serialNumber 一般是无线连接的设备或 Genymotion 等第三方 Android 模拟器。
 
 常见异常输出：
 
