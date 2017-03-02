@@ -40,8 +40,8 @@ Other languages: [:cn: Chinese](./README.md)
     * [Transmits broadcast](#transmits-broadcast)
     * [Forcibly stop the application](#forcibly-stop-the-application)
 * [File Management](#file-management)
-    * [Copy files to the computer equipment in](#copy-files-to-the-computer-equipment-in)
-    * [Copy computer files to the device](#copy-computer-files-to-the-device)
+    * [Copy files from a device to a computer](#copy-files-from-a-device-to-a-computer)
+    * [Copy files from a computer to a device](#copy-files-from-a-computer-to-a-device)
 * [Analog Keys / inputs](#analog-keys--inputs)
     * [Power button](#power-button)
     * [menu](#menu)
@@ -785,39 +785,43 @@ Stop all processes and services represents 360 security guards.
 
 ## File Management
 
-### Copy files to the computer equipment in
+### Copy files from a device to a computer
 
 command:
 
 ```sh
-adb pull <file path on device> [directory on the computer]
+adb pull <remote> [local]
 ```
+> - `remote`: file path on device
+> - `local`: directory on computer
 
-The parameters on which the directory `` computer can be omitted, it defaults to the current directory.
+The `local` parameter is optional, the default value is current directory.
 
-example:
+For example:
 
 ```sh
 adb pull /sdcard/sr.mp4 ~/tmp/
 ```
 
-* Tips: * file path on the device may need root privileges to access, if your equipment has been root, you can use the `adb shell` and` su` command to obtain root privileges adb shell Lane after the first `cp / path / on / device / sdcard / filename` copy files to sdcard, then `adb pull / sdcard / filename / path / on / pc`.
+- *Tips*: The file from device may be not readable without root permission, you need to make sure your device is rooted and then use `adb shell` and `su` commands to gain the root permission in the `adb shell` environment, after that you can use `cp /path/on/device /sdcard/filename` to copy the target file from those directories which require root permission to a public directory, and finaly you can use `adb pull /sdcard/filename /path/on/pc` normally as mentioned above after exiting the `adb shell` environment.
 
-### Copy computer files to the device
+### Copy files from a computer to a device
 
 command:
 
 ```sh
-adb push <file path on your computer> <equipment in the catalog>
+adb push <local> <remote>
 ```
+> - `local`: file path on computer
+> - `remote`: directory on device
 
-example:
+For example:
 
 ```sh
 adb push ~/sr.mp4 /sdcard/
 ```
 
-* Tips: * file on the path of ordinary privileges may not be directly written to the device if you have root too, can be `adb push / path / on / pc / sdcard / filename`, and then` `adb shell` after su` obtain root privileges adb shell inside, `cp / sdcard / filename / path / on / device`.
+- *Tips*: The directory on device may be not writable without root permission, you need to make sure your device is rooted and then use `adb push /path/on/pc /sdcard/filename` firstly, and use `adb shell` and `su` to gain the root permission in the `adb shell` environment, and finaly use `cp /sdcard/filename /path/on/device` to copy the file to the target directory.
 
 ## Analog Keys / inputs
 
