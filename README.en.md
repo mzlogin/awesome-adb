@@ -821,7 +821,7 @@ For example:
 adb push ~/sr.mp4 /sdcard/
 ```
 
-- *Tips*: The directory on device may be not writable without root permission, you need to make sure your device is rooted and then use `adb push /path/on/pc /sdcard/filename` firstly, and use `adb shell` and `su` to gain the room permission in the `adb shell` environment, and finaly use `cp /sdcard/filename /path/on/device` to copy the file to the target directory.
+- *Tips*: The directory on device may be not writable without root permission, you need to make sure your device is rooted and then use `adb push /path/on/pc /sdcard/filename` firstly, and use `adb shell` and `su` to gain the root permission in the `adb shell` environment, and finaly use `cp /sdcard/filename /path/on/device` to copy the file to the target directory.
 
 ## Analog Keys / inputs
 
