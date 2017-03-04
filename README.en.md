@@ -379,6 +379,20 @@ Since we want to achieve a wireless connection, it can all step down are wireles
 
    If you can see `connected to <device-ip-address>: 5555` such output indicates a successful connection.
 
+* Notice: *
+   Some device may not working unless you restart adbd service, so you need to run command on the device's terminal as below
+
+   ```sh
+   restart adbd
+   ```
+
+   if `restart` is not working, try following command:
+
+   ```sh
+   start adbd
+   stop adbd
+   ```
+
 ## Application Management
 
 ### Check the list of
@@ -2115,7 +2129,7 @@ The following is a brief description of other commonly used commands, has previo
 
 ### Start adb server failure
 
-**Error message** 
+**Error message**
 
 ```sh
 error: protocol fault (couldn't read status): No error
