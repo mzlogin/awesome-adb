@@ -397,6 +397,13 @@ adb disconnect <device-ip-address>
 restart adbd
 ```
 
+如果restart无效,尝试以下命令
+
+```sh
+start adbd
+stop adbd
+```
+
 ## 应用管理
 
 ### 查看应用列表
