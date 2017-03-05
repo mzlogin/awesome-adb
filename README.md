@@ -397,7 +397,7 @@ adb disconnect <device-ip-address>
 restart adbd
 ```
 
-如果restart无效,尝试以下命令
+如果 restart 无效，尝试以下命令：
 
 ```sh
 start adbd
@@ -2207,15 +2207,9 @@ taskkill /PID 1548
 
 ## 致谢
 
-感谢朋友们无私的分享与补充。
+感谢朋友们无私的分享与补充（排名不分先后）。
 
-* [zxning](https://github.com/zxning)
-* [linhua55](https://github.com/linhua55)
-* [codeskyblue](https://github.com/codeskyblue)
-* [seasonyuu](https://github.com/seasonyuu)
-* [fan123199](https://github.com/fan123199)
-* [zhEdward](https://github.com/zhEdward)
-* [0x8BADFOOD](https://github.com/0x8BADFOOD)
+[zxning](https://github.com/zxning)，[linhua55](https://github.com/linhua55)，[codeskyblue](https://github.com/codeskyblue)，[seasonyuu](https://github.com/seasonyuu)，[fan123199](https://github.com/fan123199)，[zhEdward](https://github.com/zhEdward)，[0x8BADFOOD](https://github.com/0x8BADFOOD)，[keith666666](https://github.com/keith666666)。
 
 ## 参考链接
 

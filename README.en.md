@@ -2165,15 +2165,9 @@ Then start adb no problem.
 
 ## Acknowledgements
 
-Thanks for sharing with friends and selfless supplement.
+Thanks friends for theirs selfless sharing and supplement. Names listed in no particular order.
 
-* [zxning](https://github.com/zxning)
-* [linhua55](https://github.com/linhua55)
-* [codeskyblue](https://github.com/codeskyblue)
-* [seasonyuu](https://github.com/seasonyuu)
-* [fan123199](https://github.com/fan123199)
-* [zhEdward](https://github.com/zhEdward)
-* [0x8BADFOOD](https://github.com/0x8BADFOOD)
+[zxning](https://github.com/zxning), [linhua55](https://github.com/linhua55), [codeskyblue](https://github.com/codeskyblue), [seasonyuu](https://github.com/seasonyuu), [fan123199](https://github.com/fan123199), [zhEdward](https://github.com/zhEdward), [0x8BADFOOD](https://github.com/0x8BADFOOD), [keith666666](https://github.com/keith666666).
 
 ## Reference Links
 
