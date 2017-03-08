@@ -136,15 +136,24 @@ $ adb devices
 List of devices attached
 cf264b8f	device
 emulator-5554	device
+10.129.164.6:5555	device
 ```
 
-输出里的 `cf264b8f` 和 `emulator-5554` 即为 serialNumber。比如这时想指定 `cf264b8f` 这个设备来运行 adb 命令获取屏幕分辨率：
+输出里的 `cf264b8f`、`emulator-5554` 和 `10.129.164.6:5555` 即为 serialNumber。
+
+比如这时想指定 `cf264b8f` 这个设备来运行 adb 命令获取屏幕分辨率：
 
 ```sh
 adb -s cf264b8f shell wm size
 ```
 
-遇到多设备/模拟器的情况均使用这几个参数为命令指定目标设备，下文中为简化描述，不再重复。
+又如想给 `10.129.164.6:5555` 这个设备安装应用（*这种形式的 serialNumber 格式为 `<IP>:<Port>`，一般为无线连接的设备或 Genymotion 等第三方 Android 模拟器*）：
+
+```sh
+adb -s 10.129.164.6:5555 install test.apk
+```
+
+**遇到多设备/模拟器的情况均使用这几个参数为命令指定目标设备，下文中为简化描述，不再重复。**
 
 ### 启动/停止
 
@@ -227,6 +236,7 @@ adb devices
 List of devices attached
 cf264b8f	device
 emulator-5554	device
+10.129.164.6:5555	device
 ```
 
 输出格式为 `[serialNumber] [state]`，serialNumber 即我们常说的 SN，state 有如下几种：
@@ -237,7 +247,7 @@ emulator-5554	device
 
 * `no device` —— 没有设备/模拟器连接。
 
-以上输出显示当前已经连接了两台设备/模拟器，`cf264b8f` 与 `emulator-5554` 分别是它们的 SN。从 `emulator-5554` 这个名字可以看出它是一个 Android 模拟器。
+以上输出显示当前已经连接了三台设备/模拟器，`cf264b8f`、`emulator-5554` 和 `10.129.164.6:5555` 分别是它们的 SN。从 `emulator-5554` 这个名字可以看出它是一个 Android 模拟器，而 `10.129.164.6:5555` 这种形为 `<IP>:<Port>` 的 serialNumber 一般是无线连接的设备或 Genymotion 等第三方 Android 模拟器。
 
 常见异常输出：
 
@@ -378,6 +388,21 @@ adb disconnect <device-ip-address>
    这里的 `<device-ip-address>` 就是上一步中找到的设备 IP 地址。
 
    如果能看到 `connected to <device-ip-address>:5555` 这样的输出则表示连接成功。
+
+*节注一：*
+
+有的设备，比如小米 5S + MIUI 8.0 + Android 6.0.1 MXB48T，可能在第 5 步之前需要重启 adbd 服务，在设备的终端模拟器上运行：
+
+```sh
+restart adbd
+```
+
+如果 restart 无效，尝试以下命令：
+
+```sh
+start adbd
+stop adbd
+```
 
 ## 应用管理
 
@@ -527,8 +552,8 @@ Failure [INSTALL_FAILED_ALREADY_EXISTS]
 | INSTALL\_FAILED\_TEST\_ONLY                        | 应用是 test-only 的，但安装时没有指定 `-t` 参数                          |                                                                             |
 | INSTALL\_FAILED\_CPU\_ABI\_INCOMPATIBLE            | 包含不兼容设备 CPU 应用程序二进制接口的 native code                      |                                                                             |
 | INSTALL\_FAILED\_MISSING\_FEATURE                  | 应用使用了设备不可用的功能                                               |                                                                             |
-| INSTALL\_FAILED\_CONTAINER\_ERROR                  | sdcard 访问失败                                                          | 确认 sdcard 可用，或者安装到内置存储                                        |
-| INSTALL\_FAILED\_INVALID\_INSTALL\_LOCATION        | 不能安装到指定位置                                                       | 切换安装位置，添加或删除 `-s` 参数                                          |
+| INSTALL\_FAILED\_CONTAINER\_ERROR                  | 1. sdcard 访问失败; 2. 应用签名与 ROM 签名一致，被当作内置应用           | 1. 确认 sdcard 可用，或者安装到内置存储; 2. 打包时不与 ROM 使用相同签名     |
+| INSTALL\_FAILED\_INVALID\_INSTALL\_LOCATION        | 1. 不能安装到指定位置; 2. 应用签名与 ROM 签名一致，被当作内置应用        | 1. 切换安装位置，添加或删除 `-s` 参数; 2. 打包时不与 ROM 使用相同签名       |
 | INSTALL\_FAILED\_MEDIA\_UNAVAILABLE                | 安装位置不可用                                                           | 一般为 sdcard，确认 sdcard 可用或安装到内置存储                             |
 | INSTALL\_FAILED\_VERIFICATION\_TIMEOUT             | 验证安装包超时                                                           |                                                                             |
 | INSTALL\_FAILED\_VERIFICATION\_FAILURE             | 验证安装包失败                                                           |                                                                             |
@@ -1753,11 +1778,31 @@ adb pull /sdcard/sc.png
 
 直接一行命令截图并保存到电脑的方法：
 
+*Linux 和 Windows*
+
 ```sh
 adb shell screencap -p | sed "s/\r$//" > sc.png
 ```
 
-这个方法需要用到 sed 命令，在 Linux 和 Mac 下直接就有，在 Windows 下 Git 安装目录的 bin 文件夹下也有。如果确实找不到该命令，可以下载 [sed for Windows](http://gnuwin32.sourceforge.net/packages/sed.htm) 并将 sed.exe 所在文件夹添加到 PATH 环境变量里。
+*Mac OS X*
+
+```sh
+adb shell screencap -p | gsed "s/\r$//" > sc.png
+```
+
+这个方法需要用到 gnu sed 命令，在 Linux 下直接就有，在 Windows 下 Git 安装目录的 bin 文件夹下也有。如果确实找不到该命令，可以下载 [sed for Windows](http://gnuwin32.sourceforge.net/packages/sed.htm) 并将 sed.exe 所在文件夹添加到 PATH 环境变量里。
+
+而在 Mac 下使用系统自带的 sed 命令会报错：
+
+```sh
+sed: RE error: illegal byte sequence
+```
+
+需要安装 gnu-sed，然后使用 gsed 命令：
+
+```sh
+brew install gnu-sed
+```
 
 ### 录制屏幕
 
@@ -2162,15 +2207,9 @@ taskkill /PID 1548
 
 ## 致谢
 
-感谢朋友们无私的分享与补充。
+感谢朋友们无私的分享与补充（排名不分先后）。
 
-* [zxning](https://github.com/zxning)
-* [linhua55](https://github.com/linhua55)
-* [codeskyblue](https://github.com/codeskyblue)
-* [seasonyuu](https://github.com/seasonyuu)
-* [fan123199](https://github.com/fan123199)
-* [zhEdward](https://github.com/zhEdward)
-* [0x8BADFOOD](https://github.com/0x8BADFOOD)
+[zxning](https://github.com/zxning)，[linhua55](https://github.com/linhua55)，[codeskyblue](https://github.com/codeskyblue)，[seasonyuu](https://github.com/seasonyuu)，[fan123199](https://github.com/fan123199)，[zhEdward](https://github.com/zhEdward)，[0x8BADFOOD](https://github.com/0x8BADFOOD)，[keith666666](https://github.com/keith666666)。
 
 ## 参考链接
 
