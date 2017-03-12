@@ -35,10 +35,10 @@ Other languages: [:cn: Chinese](./README.md)
     * [View Reception Activity](#view-reception-activity)
     * [View Running Services](#view-running-services)
 * [Interact with Applications](#interact-with-applications)
-    * [Transferred from Activity](#transferred-from-activity)
-    * [Transferred from the Service](#transferred-from-the-service)
-    * [Transmits broadcast](#transmits-broadcast)
-    * [Forcibly stop the application](#forcibly-stop-the-application)
+    * [Start an Activity](#start-an-activity)
+    * [Start a Service](#start-a-service)
+    * [Issue a broadcast](#issue-a-broadcast)
+    * [Force stop a application](#force-stop-a-application)
 * [File Management](#file-management)
     * [Copy files from a device to a computer](#copy-files-from-a-device-to-a-computer)
     * [Copy files from a computer to a device](#copy-files-from-a-computer-to-a-device)
@@ -656,26 +656,30 @@ Complete packagename is unnecessary. For example, `adb shell dumpsys activity se
 
 ## Interact with Applications
 
-Primarily using `am <command>` command commonly used `<command>` as follows:
+The most used syntax for interacting with applications is : 
+```sh
+am <command>
+```
+The common commands for `<command>` are as follow:
 
 | Command                           | use                                    |
 |-----------------------------------|----------------------------------------|
-| `Start [options] <INTENT>`        | Start `<INTENT>` specified Activity    |
-| `Startservice [options] <INTENT>` | Start `<INTENT>` designated Service    |
-| `Broadcast [options] <INTENT>`    | Send `<INTENT>` designated broadcast   |
-| `Force-stop <packagename>`        | stop `<packagename>` related processes |
+| `start [options] <INTENT>`        | Start an Activity specified by <INTENT>    |
+| `startservice [options] <INTENT>` | Start the Service specified by <INTENT>    |
+| `broadcast [options] <INTENT>`    | Issue a broadcast <INTENT>   |
+| `force-stop <packagename>`        | Force stop everything associated with <packagename> |
 
-`<INTENT>` very flexible parameters, and write Android program code corresponding to the Intent.
+The `<INTENT>` is a flexible parameter which is corresponding to the Intent writing in the application.
 
-Options for determining intent objects as follows:
+The options for `<INTENT>` are as follows:
 
 | Parameter        | Meaning                                                                                                                               |
 |------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| `-a <ACTION>`    | specified action, such as `android.intent.action.VIEW`                                                                                |
-| `-c <CATEGORY>`  | specify a category, such as `android.intent.category.APP_CONTACTS`                                                                    |
-| `-n <COMPONENT>` | specify the full component name, which is used to explicitly specify the start Activity, such as `com.example.app / .ExampleActivity` |
+| `-a <ACTION>`    | Specify the intent action, such as `android.intent.action.VIEW`. You can declare this only once.                                                                                |
+| `-c <CATEGORY>`  | Specify an intent category, such as `android.intent.category.APP_CONTACTS`                                                                    |
+| `-n <COMPONENT>` | Specify the component name with package name prefix to create an explicit intent, such as `com.example.app/.ExampleActivity` |
 
-`<INTENT>` can bring in data, like Bundle write code like:
+There are some options addting data for `<INTENT>`, similar to `extra` for Bundle:
 
 | Parameter                                                        | Meaning                                |
 |------------------------------------------------------------------|----------------------------------------|
@@ -690,112 +694,112 @@ Options for determining intent objects as follows:
 | `--eia <EXTRA_KEY> <EXTRA_INT_VALUE> [, <EXTRA_INT_VALUE ...]`   | integer array                          |
 | `--ela <EXTRA_KEY> <EXTRA_LONG_VALUE> [, <EXTRA_LONG_VALUE ...]` | long array                             |
 
-### Transferred from Activity
+### Start an Activity
 
-Format:
+The syntax is:
 
 ```sh
 adb shell am start [options] <INTENT>
 ```
 
-E.g:
+For example:
 
 ```sh
 adb shell am start -n com.tencent.mm/.ui.LauncherUI
 ```
 
-It represents transfer from the micro-channel main interface.
+The command above means starting the launch activity of WeChat.
 
 ```sh
 adb shell am start -n org.mazhuang.boottimemeasure/.MainActivity --es "toast" "hello, world"
 ```
 
-Expressed from the transfer `org.mazhuang.boottimemeasure / .MainActivity` key data string and pass it to` toast - hello, world`.
+The command above means starting MainActivity of the application with the package name `org.mazhuang.boottimemeasure` with a extra string infomation (key is 'toast' and value is 'hello, world').
 
-### Transferred from the Service
+### Start a Service
 
-Format:
+The syntax is:
 
 ```sh
 adb shell am startservice [options] <INTENT>
 ```
 
-E.g:
+For example:
 
 ```sh
 adb shell am startservice -n com.tencent.mm/.plugin.accountsync.model.AccountAuthenticatorService
 ```
 
-Service represents a transfer from micro-letter.
+The command above means starting a service from WeChat.
 
-### Transmits broadcast
+### Issue a broadcast
 
-Format:
+The syntax is:
 
 ```sh
 adb shell am broadcast [options] <INTENT>
 ```
 
-All components can be broadcast to be broadcast only to the specified component.
+Broadcast intent can be sent to all components or a specified component.
 
-For example, all of the components to broadcast `BOOT_COMPLETED`:
+For example, the command of issuing a broadcast intent with `BOOT_COMPLETED` to all of the components is as following:
 
 ```sh
 adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
 ```
 
-As another example, only to `org.mazhuang.boottimemeasure / .BootCompletedReceiver` broadcast` BOOT_COMPLETED`:
+As another example of issuing a broadcast intent with `BOOT_COMPLETED` only to `org.mazhuang.boottimemeasure / .BootCompletedReceiver` is as following:
 
 ```sh
 adb shell am broadcast -a android.intent.action.BOOT_COMPLETED -n org.mazhuang.boottimemeasure/.BootCompletedReceiver
 ```
 
-Such usage is very practical in the test, such as a broadcast scenes difficult to manufacture, can be considered to transmit broadcast in this way.
+The command of issuing a broadcast intent is very useful in the test, especially when a broatcast intent is hard to generate normally, it would be of great use to issue the broadcast intent by the command.
 
-Both predefined broadcast transmission system can also send a custom broadcast. The following is part of the normal pre-defined radio and Trigger timing:
+Both system predefined and custom broadcast intent are able to be issued. The following is part of the system predefined broadcast intents and the triggers:
 
-| Action                                          | trigger timing                                                     |
+| Action                                          | Trigger                                                     |
 |-------------------------------------------------|--------------------------------------------------------------------|
-| android.net.conn.CONNECTIVITY_CHANGE            | Fi changes                                                         |
-| android.intent.action.SCREEN_ON                 | screen lit                                                         |
+| android.net.conn.CONNECTIVITY_CHANGE            | network connectivity changes                                                         |
+| android.intent.action.SCREEN_ON                 | screen on                                                         |
 | android.intent.action.SCREEN_OFF                | screen off                                                         |
-| android.intent.action.BATTERY_LOW               | low battery, low battery prompt box will pop up                    |
-| android.intent.action.BATTERY_OKAY              | electricity restored                                               |
-| android.intent.action.BOOT_COMPLETED            | equipment Booted                                                   |
-| android.intent.action.DEVICE_STORAGE_LOW        | storage space is running low                                       |
-| android.intent.action.DEVICE_STORAGE_OK         | storage space recovery                                             |
-| android.intent.action.PACKAGE_ADDED             | install a new application                                          |
-| android.net.wifi.STATE_CHANGE                   | WiFi connection status change                                      |
-| android.net.wifi.WIFI_STATE_CHANGED             | WiFi state to the On / Off / Starting up / shutting down / Unknown |
-| android.intent.action.BATTERY_CHANGED           | battery level changes                                              |
-| android.intent.action.INPUT_METHOD_CHANGED      | system input method changes                                        |
-| android.intent.action.ACTION_POWER_CONNECTED    | external power connector                                           |
-| android.intent.action.ACTION_POWER_DISCONNECTED | disconnected from external power                                   |
-| android.intent.action.DREAMING_STARTED          | system began Sleep                                                 |
-| android.intent.action.DREAMING_STOPPED          | system stops Sleep                                                 |
-| android.intent.action.WALLPAPER_CHANGED         | wallpaper changes                                                  |
-| android.intent.action.HEADSET_PLUG              | insert earphone                                                    |
-| android.intent.action.MEDIA_UNMOUNTED           | unload external media                                              |
-| android.intent.action.MEDIA_MOUNTED             | mount external media                                               |
-| android.os.action.POWER_SAVE_MODE_CHANGED       | power-saving mode is turned on                                     |
+| android.intent.action.BATTERY_LOW               | low battery, corresponding to the "Low battery warning" system dialog                    |
+| android.intent.action.BATTERY_OKAY              | the battery is now okay after being low                                               |
+| android.intent.action.BOOT_COMPLETED            | device boot finished                                                   |
+| android.intent.action.DEVICE_STORAGE_LOW        | low memory condition on the device                                       |
+| android.intent.action.DEVICE_STORAGE_OK         | low memory condition on the device no longer exists                                           |
+| android.intent.action.PACKAGE_ADDED             | a new application has been installed                                       |
+| android.net.wifi.STATE_CHANGE                   | WiFi connection status changed                                      |
+| android.net.wifi.WIFI_STATE_CHANGED             | Wi-Fi has been enabled, disabled, enabling, disabling, or unknown |
+| android.intent.action.BATTERY_CHANGED           | battery level changed                                              |
+| android.intent.action.INPUT_METHOD_CHANGED      | system input method changed                                        |
+| android.intent.action.ACTION_POWER_CONNECTED    | external power connected to the device                                           |
+| android.intent.action.ACTION_POWER_DISCONNECTED | external power removed from the device                                   |
+| android.intent.action.DREAMING_STARTED          | system starts dreaming                                                 |
+| android.intent.action.DREAMING_STOPPED          | system stops dreaming                                                 |
+| android.intent.action.WALLPAPER_CHANGED         | wallpaper changeed                                                  |
+| android.intent.action.HEADSET_PLUG              | wired headset plugged in or unplugged                                                    |
+| android.intent.action.MEDIA_UNMOUNTED           | external media is present, but not mounted at its mount point                                              |
+| android.intent.action.MEDIA_MOUNTED             | external media is present and mounted at its mount point                                               |
+| android.os.action.POWER_SAVE_MODE_CHANGED       | power-saving mode changed                                   |
 
-* (Above broadcast can be used to trigger adb) *
+* (Above broadcast intents can be issued by adb commands) *
 
-### Forcibly stop the application
+### Force stop a application
 
-command:
+The syntax is:
 
 ```sh
 adb shell am force-stop <packagename>
 ```
 
-Command Example:
+For example:
 
 ```sh
 adb shell am force-stop com.qihoo360.mobilesafe
 ```
 
-Stop all processes and services represents 360 security guards.
+The command above means stopping all processes and services related to the package name `com.qihoo360.mobilesafe`.
 
 ## File Management
 
