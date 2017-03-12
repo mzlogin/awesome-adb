@@ -662,12 +662,12 @@ am <command>
 ```
 The common commands for `<command>` are as follow:
 
-| Command                           | use                                    |
-|-----------------------------------|----------------------------------------|
-| `start [options] <INTENT>`        | Start an Activity specified by <INTENT>    |
-| `startservice [options] <INTENT>` | Start the Service specified by <INTENT>    |
-| `broadcast [options] <INTENT>`    | Issue a broadcast <INTENT>   |
-| `force-stop <packagename>`        | Force stop everything associated with <packagename> |
+| Command                           | Use                                                  |
+|-----------------------------------|------------------------------------------------------|
+| `start [options] <INTENT>`        | Start an Activity specified by `<INTENT>`            |
+| `startservice [options] <INTENT>` | Start the Service specified by `<INTENT>`            |
+| `broadcast [options] <INTENT>`    | Issue a broadcast `<INTENT>`                         |
+| `force-stop <packagename>`        | Force stop everything associated with `<packagename>`|
 
 The `<INTENT>` is a flexible parameter which is corresponding to the Intent writing in the application.
 
@@ -783,7 +783,7 @@ Both system predefined and custom broadcast intent are able to be issued. The fo
 | android.intent.action.MEDIA_MOUNTED             | external media is present and mounted at its mount point                                               |
 | android.os.action.POWER_SAVE_MODE_CHANGED       | power-saving mode changed                                   |
 
-* (Above broadcast intents can be issued by adb commands) *
+*(Above broadcast intents can be issued by adb commands)*
 
 ### Force stop a application
 
