@@ -379,6 +379,20 @@ Since we want to achieve a wireless connection, it can all step down are wireles
 
    If you can see `connected to <device-ip-address>: 5555` such output indicates a successful connection.
 
+* Notice: *
+   Some device may not working unless you restart adbd service, so you need to run command on the device's terminal as below
+
+   ```sh
+   restart adbd
+   ```
+
+   if `restart` is not working, try following command:
+
+   ```sh
+   start adbd
+   stop adbd
+   ```
+
 ## Application Management
 
 ### Check the list of
@@ -2115,7 +2129,7 @@ The following is a brief description of other commonly used commands, has previo
 
 ### Start adb server failure
 
-**Error message** 
+**Error message**
 
 ```sh
 error: protocol fault (couldn't read status): No error
@@ -2151,15 +2165,9 @@ Then start adb no problem.
 
 ## Acknowledgements
 
-Thanks for sharing with friends and selfless supplement.
+Thanks friends for theirs selfless sharing and supplement. Names listed in no particular order.
 
-* [zxning](https://github.com/zxning)
-* [linhua55](https://github.com/linhua55)
-* [codeskyblue](https://github.com/codeskyblue)
-* [seasonyuu](https://github.com/seasonyuu)
-* [fan123199](https://github.com/fan123199)
-* [zhEdward](https://github.com/zhEdward)
-* [0x8BADFOOD](https://github.com/0x8BADFOOD)
+[zxning](https://github.com/zxning), [linhua55](https://github.com/linhua55), [codeskyblue](https://github.com/codeskyblue), [seasonyuu](https://github.com/seasonyuu), [fan123199](https://github.com/fan123199), [zhEdward](https://github.com/zhEdward), [0x8BADFOOD](https://github.com/0x8BADFOOD), [keith666666](https://github.com/keith666666).
 
 ## Reference Links
 
