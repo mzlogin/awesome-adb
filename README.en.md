@@ -37,8 +37,8 @@ Other languages: [:cn: Chinese](./README.md)
 * [Interact with Applications](#interact-with-applications)
     * [Start an Activity](#start-an-activity)
     * [Start a Service](#start-a-service)
-    * [Issue a broadcast](#issue-a-broadcast)
-    * [Force stop a application](#force-stop-a-application)
+    * [Send a broadcast](#send-a-broadcast)
+    * [Force stop an application](#force-stop-an-application)
 * [File Management](#file-management)
     * [Copy files from a device to a computer](#copy-files-from-a-device-to-a-computer)
     * [Copy files from a computer to a device](#copy-files-from-a-computer-to-a-device)
@@ -666,7 +666,7 @@ The common commands for `<command>` are as follow:
 |-----------------------------------|------------------------------------------------------|
 | `start [options] <INTENT>`        | Start an Activity specified by `<INTENT>`            |
 | `startservice [options] <INTENT>` | Start the Service specified by `<INTENT>`            |
-| `broadcast [options] <INTENT>`    | Issue a broadcast `<INTENT>`                         |
+| `broadcast [options] <INTENT>`    | Send a broadcast `<INTENT>`                         |
 | `force-stop <packagename>`        | Force stop everything associated with `<packagename>`|
 
 The `<INTENT>` is a flexible parameter which is corresponding to the Intent writing in the application.
@@ -714,7 +714,7 @@ The command above means starting the launch activity of WeChat.
 adb shell am start -n org.mazhuang.boottimemeasure/.MainActivity --es "toast" "hello, world"
 ```
 
-The command above means starting MainActivity of the application with the package name `org.mazhuang.boottimemeasure` with a extra string infomation (key is 'toast' and value is 'hello, world').
+The command above means starting MainActivity of the application with the package name `org.mazhuang.boottimemeasure` with an extra string information (key is 'toast' and value is 'hello, world').
 
 ### Start a Service
 
@@ -732,7 +732,7 @@ adb shell am startservice -n com.tencent.mm/.plugin.accountsync.model.AccountAut
 
 The command above means starting a service from WeChat.
 
-### Issue a broadcast
+### Send a broadcast
 
 The syntax is:
 
@@ -754,9 +754,9 @@ As another example of issuing a broadcast intent with `BOOT_COMPLETED` only to `
 adb shell am broadcast -a android.intent.action.BOOT_COMPLETED -n org.mazhuang.boottimemeasure/.BootCompletedReceiver
 ```
 
-The command of issuing a broadcast intent is very useful in the test, especially when a broatcast intent is hard to generate normally, it would be of great use to issue the broadcast intent by the command.
+The command of issuing a broadcast intent is very useful in the test, especially when a broatcast intent is hard to generate normally, it would be of great use to send the broadcast intent by the command.
 
-Both system predefined and custom broadcast intent are able to be issued. The following is part of the system predefined broadcast intents and the triggers:
+Both system predefined and custom broadcast intent are able to be sent. The following is part of the system predefined broadcast intents and the triggers:
 
 | Action                                          | Trigger                                                     |
 |-------------------------------------------------|--------------------------------------------------------------------|
@@ -783,9 +783,9 @@ Both system predefined and custom broadcast intent are able to be issued. The fo
 | android.intent.action.MEDIA_MOUNTED             | external media is present and mounted at its mount point                                               |
 | android.os.action.POWER_SAVE_MODE_CHANGED       | power-saving mode changed                                   |
 
-*(Above broadcast intents can be issued by adb commands)*
+*(Above broadcast intents are all available to be sent via adb commands)*
 
-### Force stop a application
+### Force stop an application
 
 The syntax is:
 
