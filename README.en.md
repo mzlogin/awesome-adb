@@ -1316,7 +1316,7 @@ Sample output:
 Physical density: 420
 ```
 
-the output shows the density of the device is 420dpi.
+The output shows the density of the device is 420dpi.
 
 If screen density has been changed by command, the output would be like this:
 
