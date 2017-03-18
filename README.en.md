@@ -1238,13 +1238,13 @@ By kernel log, we can do some things, such as a measure of the kernel boot time,
 
 ### Model
 
-command:
+Command:
 
 ```sh
 adb shell getprop ro.product.model
 ```
 
-Example output:
+Sample output:
 
 ```sh
 Nexus 5
@@ -1252,13 +1252,13 @@ Nexus 5
 
 ### Battery Status
 
-command:
+Command:
 
 ```sh
 adb shell dumpsys battery
 ```
 
-Input Example:
+Sample output:
 
 ```sh
 Current Battery Service state:
@@ -1275,67 +1275,67 @@ Current Battery Service state:
   technology: Li-poly
 ```
 
-`Scale` which represents the maximum power,` level` represents the current power. The above output represents 44% of remaining power.
+`Scale` means the maximum value of `level`, and `level` means the current battery level. The output above means there is 44% of battery left of the device.
 
 ### Screen Resolution
 
-command:
+Command:
 
 ```sh
 adb shell wm size
 ```
 
-Example output:
+Sample output:
 
 ```sh
 Physical size: 1080x1920
 ```
 
-The device's screen resolution is 1080px * 1920px.
+The above output means the device's screen resolution is 1080px * 1920px.
 
-If resolution has been changed by command, output may be:
+If resolution has been changed by command, the output would be like this:
 
 ```sh
 Physical size: 1080x1920
 Override size: 480x1024
 ```
 
-It says that screen's original resolution is 1080px * 1920px, currently is 480px * 1024px.
+It means the original resolution of the screen is 1080px * 1920px, and currently it is 480px * 1024px.
 
 ### Screen density
 
-command:
+Command:
 
 ```sh
 adb shell wm density
 ```
 
-Example output:
+Sample output:
 
 ```sh
 Physical density: 420
 ```
 
-The device screen density of 420dpi.
+the output shows the density of the device is 420dpi.
 
-If screen density has been changed by command, output may be:
+If screen density has been changed by command, the output would be like this:
 
 ```sh
 Physical density: 480
 Override density: 160
 ```
 
-It says that originla screen density is 480dpi, currently is 160dpi.
+It means the original density of the screen is 480dpi, and currently it is 160dpi.
 
 ### Display Parameters
 
-command:
+Command:
 
 ```sh
 adb shell dumpsys window displays
 ```
 
-Example output:
+Sample output:
 
 ```sh
 WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
@@ -1344,17 +1344,17 @@ WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
     deferred=false layoutNeeded=false
 ```
 
-Where `mDisplayId` to display numbers,` init` initial resolution and screen density, `app` height than` init` in the smaller, bottom of the screen indicates the virtual keys and a height of 1920 - 1794 = 126px co 42dp .
+The `mDisplayId` stands for the number of the display screen, `init` shows the initial resolution and density of the screen, the height in `app` is smaller than that in `init`, which means the device has a virtual navigation bar with a height: `1920 - 1794 = 126px (42dp)`.
 
 ### android\_id
 
-command:
+Command:
 
 ```sh
 adb shell settings get secure android_id
 ```
 
-Example output:
+Sample output:
 
 ```sh
 51b6be48bac8c569
@@ -1362,13 +1362,13 @@ Example output:
 
 ### IMEI
 
-In Android 4.4 and below versions are available through the following command IMEI:
+For devices with a os version of Android 4.4 and the belows, the IMEI viewing command is like this:
 
 ```sh
 adb shell dumpsys iphonesubinfo
 ```
 
-Example output:
+Sample output:
 
 ```sh
 Phone Subscriber Info:
@@ -1376,9 +1376,9 @@ Phone Subscriber Info:
   Device ID = 860955027785041
 ```
 
-`Device ID` which is IMEI.
+`Device ID` stands for IMEI.
 
-In Android 5.0 and above in the command output is empty, was acquired by other means (requires root privileges):
+For devices with a os of Android 5.0 and the aboves, the command used to view IMEI above is not working which always comes out nothing, the alternative is like this(requires root privileges):
 
 ```sh
 adb shell
@@ -1386,7 +1386,7 @@ su
 service call iphonesubinfo 1
 ```
 
-Example output:
+Sample output:
 
 ```sh
 Result: Parcel(
@@ -1395,19 +1395,19 @@ Result: Parcel(
   0x00000020: 00340030 00000031                   '0.4.1...        ')
 ```
 
-The effective content is extracted from the inside of the IMEI, such as here is `860955027785041`.
+After extracting the data the normal IMEI will show, such as the IMEI above is `860955027785041`.
 
 Reference: [adb shell dumpsys iphonesubinfo not working since Android 5.0 Lollipop](http://stackoverflow.com/questions/27002663/adb-shell-dumpsys-iphonesubinfo-not-working-since-android-5-0-lollipop)
 
 ### Android system version
 
-command:
+Command:
 
 ```sh
 adb shell getprop ro.build.version.release
 ```
 
-Example output:
+Sample output:
 
 ```sh
 5.0.2
@@ -1415,30 +1415,30 @@ Example output:
 
 ### IP address
 
-Every time you want to know the IP address of the device had the "Setting" - "About phone" - "state information" - "IP address" annoying, right? You can easily see via adb.
+Are you getting bored for pressing "Setting" - "About phone" - "state information" - "IP address" to get the IP address of the device? You can make it easily via adb command:
 
-command:
+Command:
 
 ```sh
 adb shell ifconfig | grep Mask
 ```
 
-Example output:
+Sample output:
 
 ```sh
 inet addr:10.130.245.230  Mask:255.255.255.252
 inet addr:127.0.0.1  Mask:255.0.0.0
 ```
 
-So it is `10.130.245.230` device IP address.
+The IP address of the device is `10.130.245.230`.
 
-On some devices this command no output, if the device is attached to WiFi, you can use the following command to view the LAN IP:
+The above command may result in an empty result on some devices if they are connected via WIFI, then you can use the following command to view the LAN IP:
 
 ```sh
 adb shell ifconfig wlan0
 ```
 
-Example output:
+Sample output:
 
 ```sh
 wlan0: ip 10.129.160.99 mask 255.255.240.0 flags [up broadcast running multicast]
@@ -1457,13 +1457,13 @@ wlan0     Link encap:UNSPEC
           RX bytes:116266821 TX bytes:8311736
 ```
 
-If the above command still can not get the desired information, then you can try the following command (part of the system version is available):
+If the above two commands still don't get the desired information, then you can try the following command (available in some system):
 
 ```sh
 adb shell netcfg
 ```
 
-Example output:
+Sample output:
 
 ```sh
 wlan0    UP                               10.129.160.99/20  0x00001043 f8:a9:d0:17:42:4d
@@ -1489,33 +1489,33 @@ rev_rmnet0 DOWN                                   0.0.0.0/0   0x00001002 fe:65:d
 rev_rmnet1 DOWN                                   0.0.0.0/0   0x00001002 da:d8:e8:4f:2e:fe
 ```
 
-You can see the network connection name, enabled, IP address and Mac address and other information.
+It shows the network connection name, connection enable status, IP address, Mac address and etc.
 
 ### Mac Address
 
-command:
+Command:
 
 ```sh
 adb shell cat /sys/class/net/wlan0/address
 ```
 
-Example output:
+Sample output:
 
 ```sh
 f8:a9:d0:17:42:4d
 ```
 
-This view is LAN Mac address, or other information connected to the mobile network can `adb shell netcfg` command" IP address "mentioned in the previous section to see through.
+The output above is the Mac address of LAN, if you want other infomation of connection, the command `adb shell netcfg` mentioned in the section **IP address** would be helpful.
 
 ### CPU Information
 
-command:
+Command:
 
 ```sh
 adb shell cat /proc/cpuinfo
 ```
 
-Example output:
+Sample output:
 
 ```sh
 Processor       : ARMv7 Processor rev 0 (v7l)
@@ -1543,17 +1543,17 @@ Revision        : 000b
 Serial          : 0000000000000000
 ```
 
-This is the CPU information Nexus 5, we can see from the output hardware used is `Qualcomm MSM 8974`, processor number is 0-3, so it is a quad-core, the use of architecture is` ARMv7 Processor rev 0 ( v71) `.
+This is the CPU information of Nexus 5, we can find from the output that the hardware is `Qualcomm MSM 8974`, and the processor number is from 0 to 3, which means the cpu is a quad-core, then from the `Processor` we can find the architecture of the cpu is` ARMv7 Processor rev 0 ( v71) `.
 
 ### Memory Information
 
-command:
+Command:
 
 ```sh
 adb shell cat /proc/meminfo
 ```
 
-Example output:
+Sample output:
 
 ```sh
 MemTotal:        1027424 kB
@@ -1595,7 +1595,7 @@ VmallocUsed:       61004 kB
 VmallocChunk:     209668 kB
 ```
 
-Wherein, `MemTotal` is the total memory device,` MemFree` is currently free memory.
+`MemTotal` means the total memory of the device, and `MemFree` means the current free memory.
 
 ### More hardware and system properties
 
@@ -1605,9 +1605,9 @@ More hardware devices and system properties can be obtained by the following com
 adb shell cat /system/build.prop
 ```
 
-This will output a lot of information, including the previously mentioned several sections of "model" and "version of Android," and so on.
+This will output a lot of information, including "model" and "Android system version" and other infomation which are mentioned in previous several sections.
 
-In output also includes some other useful information, they can also be `adb shell getprop <attribute name>` command alone, part of the property include the following:
+In output also includes some other useful information, which can also be obtained individually via the command `adb shell getprop <attribute name>`:
 
 | Attribute name                  | Meaning                       |
 |---------------------------------|-------------------------------|
@@ -1618,11 +1618,22 @@ In output also includes some other useful information, they can also be `adb she
 | ro.product.brand                | Brands                        |
 | ro.product.name                 | device name                   |
 | ro.product.board                | Processor Model               |
-| ro.product.cpu.abilist          | CPU support list abi          |
-| persist.sys.isUsbOtgEnabled     | supports OTG                  |
-| dalvik.vm.heapsize              | each application's memory cap |
+| ro.product.cpu.abilist          | CPU supported abi list[Ref 1]   |
+| persist.sys.isUsbOtgEnabled     | OTG supports                  |
+| dalvik.vm.heapsize              | limit on heap size for each app |
 | ro.sf.lcd_density               | screen density                |
 
+*Ref 1*:
+The property of abi list may be changed in some custom ROMs, if it can't be obtained via `ro.product.cpu.abilist`, you can try this command:
+```
+adb shell cat /system/build.prop | grep ro.product.cpu.abi
+```
+
+Sample output:
+```
+ro.product.cpu.abi=armeabi-v7a
+ro.product.cpu.abi2=armeabi
+```
 ## Modify Settings
 
 **Notice:** Display may not normal after reset settings, you can use command `adb reboot` to reboot device, or reboot it maually.
