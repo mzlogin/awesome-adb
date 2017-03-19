@@ -1362,7 +1362,7 @@ Sample output:
 
 ### IMEI
 
-For devices with a os version of Android 4.4 and the belows, the IMEI viewing command is like this:
+For Android 4.4 and the belows, the IMEI viewing command is like this:
 
 ```sh
 adb shell dumpsys iphonesubinfo
@@ -1457,7 +1457,7 @@ wlan0     Link encap:UNSPEC
           RX bytes:116266821 TX bytes:8311736
 ```
 
-If the above two commands still don't get the desired information, then you can try the following command (available in some system):
+If the two commands above still don't get the desired information, then you can try the following command (available in some system):
 
 ```sh
 adb shell netcfg
