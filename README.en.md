@@ -1,4 +1,4 @@
-#![Awesome Adb](./assets/title.png)
+# ![Awesome Adb](./assets/title.png)
 
 The [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html) (ADB) is a toolkit included in the Android SDK package, it is not only a powerful tool for Android developers and testers, but also a good toy for Android fans.
 
@@ -8,7 +8,7 @@ This repository renews continually, Pull Requests and Issues are welcomed. If yo
 
 Other languages: [:cn: Chinese](./README.md)
 
-#![Table of Contents](./assets/toc.png)
+# ![Table of Contents](./assets/toc.png)
 
 <!-- vim-markdown-toc GFM -->
 * [Basic Usage](#basic-usage)
