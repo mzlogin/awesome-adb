@@ -1378,7 +1378,7 @@ Phone Subscriber Info:
 
 `Device ID` stands for IMEI.
 
-For devices with a os of Android 5.0 and the aboves, the command used to view IMEI above is not working which always comes out nothing, the alternative is like this(requires root privileges):
+For Android 5.0 and the aboves, the command used to view IMEI above is not working which always comes out nothing, the alternative is like this(requires root privileges):
 
 ```sh
 adb shell
