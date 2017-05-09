@@ -1748,7 +1748,15 @@ Means set hide status bar in applications whoes package name is `com.package1` o
 
 ### Screenshots
 
-command:
+Take screenshot and save to computer:
+
+```sh
+adb exec-out screencap -p > sc.png
+```
+
+If your adb is old version, doesn't have `exec-out` command, then your can take screenshot like below:
+
+First, take screenshot and save to device:
 
 ```sh
 adb shell screencap -p /sdcard/sc.png
@@ -1769,7 +1777,7 @@ You can use the `adb shell screencap -h` See` help screencap` command, here are 
 
 Found If you specify a file name can be omitted when the -p parameter to `.png` ending; otherwise you need to use the -p parameter. If you do not specify a file name, file contents screenshot will be directly output to stdout.
 
-Save screenshot file to computer with a single line command:
+Another method to save screenshot file to computer with a single line command:
 
 ```sh
 adb shell screencap -p | sed "s/\r$//" > sc.png

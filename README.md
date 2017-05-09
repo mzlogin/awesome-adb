@@ -1755,7 +1755,15 @@ adb shell settings put global policy_control immersive.status=com.package1,com.p
 
 ### 屏幕截图
 
-命令：
+截图保存到电脑：
+
+```sh
+adb exec-out screencap -p > sc.png
+```
+
+如果 adb 版本较老，无法使用 `exec-out` 命令，这时候建议更新 adb 版本。无法更新的话可以使用以下麻烦点的办法：
+
+先截图保存到设备里：
 
 ```sh
 adb shell screencap -p /sdcard/sc.png
@@ -1776,7 +1784,7 @@ adb pull /sdcard/sc.png
 
 实测如果指定文件名以 `.png` 结尾时可以省略 -p 参数；否则需要使用 -p 参数。如果不指定文件名，截图文件的内容将直接输出到 stdout。
 
-直接一行命令截图并保存到电脑的方法：
+另外一种一行命令截图并保存到电脑的方法：
 
 *Linux 和 Windows*
 
