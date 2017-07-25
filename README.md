@@ -400,8 +400,8 @@ restart adbd
 如果 restart 无效，尝试以下命令：
 
 ```sh
-start adbd
 stop adbd
+start adbd
 ```
 
 ## 应用管理

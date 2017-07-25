@@ -389,8 +389,8 @@ Since we want to achieve a wireless connection, it can all step down are wireles
    if `restart` is not working, try following command:
 
    ```sh
-   start adbd
    stop adbd
+   start adbd
    ```
 
 ## Application Management
@@ -759,30 +759,30 @@ The command of issuing a broadcast intent is very useful in the test, especially
 
 Both system predefined and custom broadcast intent are able to be sent. The following is part of the system predefined broadcast intents and the triggers:
 
-| Action                                          | Trigger                                                     |
-|-------------------------------------------------|--------------------------------------------------------------------|
-| android.net.conn.CONNECTIVITY_CHANGE            | network connectivity changes                                                         |
-| android.intent.action.SCREEN_ON                 | screen on                                                         |
-| android.intent.action.SCREEN_OFF                | screen off                                                         |
-| android.intent.action.BATTERY_LOW               | low battery, corresponding to the "Low battery warning" system dialog                    |
-| android.intent.action.BATTERY_OKAY              | the battery is now okay after being low                                               |
-| android.intent.action.BOOT_COMPLETED            | device boot finished                                                   |
-| android.intent.action.DEVICE_STORAGE_LOW        | low memory condition on the device                                       |
-| android.intent.action.DEVICE_STORAGE_OK         | low memory condition on the device no longer exists                                           |
-| android.intent.action.PACKAGE_ADDED             | a new application has been installed                                       |
-| android.net.wifi.STATE_CHANGE                   | WiFi connection status changed                                      |
-| android.net.wifi.WIFI_STATE_CHANGED             | Wi-Fi has been enabled, disabled, enabling, disabling, or unknown |
-| android.intent.action.BATTERY_CHANGED           | battery level changed                                              |
-| android.intent.action.INPUT_METHOD_CHANGED      | system input method changed                                        |
-| android.intent.action.ACTION_POWER_CONNECTED    | external power connected to the device                                           |
-| android.intent.action.ACTION_POWER_DISCONNECTED | external power removed from the device                                   |
-| android.intent.action.DREAMING_STARTED          | system starts dreaming                                                 |
+| Action                                          | Trigger                                                               |
+|-------------------------------------------------|-----------------------------------------------------------------------|
+| android.net.conn.CONNECTIVITY_CHANGE            | network connectivity changes                                          |
+| android.intent.action.SCREEN_ON                 | screen on                                                             |
+| android.intent.action.SCREEN_OFF                | screen off                                                            |
+| android.intent.action.BATTERY_LOW               | low battery, corresponding to the "Low battery warning" system dialog |
+| android.intent.action.BATTERY_OKAY              | the battery is now okay after being low                               |
+| android.intent.action.BOOT_COMPLETED            | device boot finished                                                  |
+| android.intent.action.DEVICE_STORAGE_LOW        | low memory condition on the device                                    |
+| android.intent.action.DEVICE_STORAGE_OK         | low memory condition on the device no longer exists                   |
+| android.intent.action.PACKAGE_ADDED             | a new application has been installed                                  |
+| android.net.wifi.STATE_CHANGE                   | WiFi connection status changed                                        |
+| android.net.wifi.WIFI_STATE_CHANGED             | Wi-Fi has been enabled, disabled, enabling, disabling, or unknown     |
+| android.intent.action.BATTERY_CHANGED           | battery level changed                                                 |
+| android.intent.action.INPUT_METHOD_CHANGED      | system input method changed                                           |
+| android.intent.action.ACTION_POWER_CONNECTED    | external power connected to the device                                |
+| android.intent.action.ACTION_POWER_DISCONNECTED | external power removed from the device                                |
+| android.intent.action.DREAMING_STARTED          | system starts dreaming                                                |
 | android.intent.action.DREAMING_STOPPED          | system stops dreaming                                                 |
-| android.intent.action.WALLPAPER_CHANGED         | wallpaper changeed                                                  |
-| android.intent.action.HEADSET_PLUG              | wired headset plugged in or unplugged                                                    |
-| android.intent.action.MEDIA_UNMOUNTED           | external media is present, but not mounted at its mount point                                              |
-| android.intent.action.MEDIA_MOUNTED             | external media is present and mounted at its mount point                                               |
-| android.os.action.POWER_SAVE_MODE_CHANGED       | power-saving mode changed                                   |
+| android.intent.action.WALLPAPER_CHANGED         | wallpaper changeed                                                    |
+| android.intent.action.HEADSET_PLUG              | wired headset plugged in or unplugged                                 |
+| android.intent.action.MEDIA_UNMOUNTED           | external media is present, but not mounted at its mount point         |
+| android.intent.action.MEDIA_MOUNTED             | external media is present and mounted at its mount point              |
+| android.os.action.POWER_SAVE_MODE_CHANGED       | power-saving mode changed                                             |
 
 *(Above broadcast intents are all available to be sent via adb commands)*
 
