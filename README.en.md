@@ -11,6 +11,7 @@ Other languages: [:cn: Chinese](./README.md)
 # ![Table of Contents](./assets/toc.png)
 
 <!-- vim-markdown-toc GFM -->
+
 * [Basic Usage](#basic-usage)
     * [Command syntax](#command-syntax)
     * [Targeting equipment for command](#targeting-equipment-for-command)
@@ -97,6 +98,7 @@ Other languages: [:cn: Chinese](./README.md)
 * [More adb shell command](#more-adb-shell-command)
     * [See process](#see-process)
     * [View real-time resource consumption](#view-real-time-resource-consumption)
+    * [query process uid](#query-process-uid)
     * [Other](#other)
 * [common problem](#common-problem)
     * [Start adb server failure](#start-adb-server-failure)
@@ -2129,6 +2131,32 @@ Usage: top [ -m max_procs ] [ -n iterations ] [ -d delay ] [ -s sort_column ] [ 
     -t display thread information
     -h displays help documentation
 ```
+
+### query process uid
+
+There are two methods:
+
+1. `adb shell dumpsys package <packagename> | grep userId=`
+
+   For example:
+
+   ```sh
+   $ adb shell dumpsys package org.mazhuang.guanggoo | grep userId=
+      userId=10394
+   ```
+
+2. Get pid by `ps` first, then `adb shell cat /proc/<pid>/status | grep Uid`
+
+   For example:
+
+   ```sh
+   $ adb shell
+   gemini:/ $ ps | grep org.mazhuang.guanggoo
+   u0_a394   28635 770   1795812 78736 SyS_epoll_ 0000000000 S org.mazhuang.guanggoo
+   gemini:/ $ cat /proc/28635/status | grep Uid
+   Uid:    10394   10394   10394   10394
+   gemini:/ $
+   ```
 
 ### Other
 

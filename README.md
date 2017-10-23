@@ -11,6 +11,7 @@ Other languages: [:gb: English](./README.en.md)
 # ![Table of Contents](./assets/toc.png)
 
 <!-- vim-markdown-toc GFM -->
+
 * [基本用法](#基本用法)
     * [命令语法](#命令语法)
     * [为命令指定目标设备](#为命令指定目标设备)
@@ -97,6 +98,7 @@ Other languages: [:gb: English](./README.en.md)
 * [更多 adb shell 命令](#更多-adb-shell-命令)
     * [查看进程](#查看进程)
     * [查看实时资源占用情况](#查看实时资源占用情况)
+    * [查看进程 UID](#查看进程-uid)
     * [其它](#其它)
 * [常见问题](#常见问题)
     * [启动 adb server 失败](#启动-adb-server-失败)
@@ -2156,6 +2158,32 @@ Usage: top [ -m max_procs ] [ -n iterations ] [ -d delay ] [ -s sort_column ] [ 
     -t      显示线程信息
     -h      显示帮助文档
 ```
+
+### 查看进程 UID
+
+有两种方案：
+
+1. `adb shell dumpsys package <packagename> | grep userId=`
+
+   如：
+
+   ```sh
+   $ adb shell dumpsys package org.mazhuang.guanggoo | grep userId=
+      userId=10394
+   ```
+
+2. 通过 ps 命令找到对应进程的 pid 之后 `adb shell cat /proc/<pid>/status | grep Uid`
+
+   如：
+
+   ```sh
+   $ adb shell
+   gemini:/ $ ps | grep org.mazhuang.guanggoo
+   u0_a394   28635 770   1795812 78736 SyS_epoll_ 0000000000 S org.mazhuang.guanggoo
+   gemini:/ $ cat /proc/28635/status | grep Uid
+   Uid:    10394   10394   10394   10394
+   gemini:/ $
+   ```
 
 ### 其它
 
