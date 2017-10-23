@@ -35,6 +35,7 @@ Other languages: [:gb: English](./README.en.md)
     * [清除应用数据与缓存](#清除应用数据与缓存)
     * [查看前台 Activity](#查看前台-activity)
     * [查看正在运行的 Services](#查看正在运行的-services)
+    * [查看应用详细信息](#查看应用详细信息)
 * [与应用交互](#与应用交互)
     * [调起 Activity](#调起-activity)
     * [调起 Service](#调起-service)
@@ -667,6 +668,98 @@ adb shell dumpsys activity services [<packagename>]
 `<packagename>` 参数不是必须的，指定 `<packagename>` 表示查看与某个包名相关的 Services，不指定表示查看所有 Services。
 
 `<packagename>` 不一定要给出完整的包名，比如运行 `adb shell dumpsys activity services org.mazhuang`，那么包名 `org.mazhuang.demo1`、`org.mazhuang.demo2` 和 `org.mazhuang123` 等相关的 Services 都会列出来。
+
+### 查看应用详细信息
+
+命令：
+
+```sh
+adb shell dumpsys package <packagename>
+```
+
+输出中包含很多信息，包括 Activity Resolver Table、Registered ContentProviders、包名、userId、安装后的文件资源代码等路径、版本信息、权限信息和授予状态、签名版本信息等。
+
+`<packagename>` 表示应用包名。
+
+输出示例：
+
+```sh
+Activity Resolver Table:
+  Non-Data Actions:
+      android.intent.action.MAIN:
+        5b4cba8 org.mazhuang.guanggoo/.SplashActivity filter 5ec9dcc
+          Action: "android.intent.action.MAIN"
+          Category: "android.intent.category.LAUNCHER"
+          AutoVerify=false
+
+Registered ContentProviders:
+  org.mazhuang.guanggoo/com.tencent.bugly.beta.utils.BuglyFileProvider:
+    Provider{7a3c394 org.mazhuang.guanggoo/com.tencent.bugly.beta.utils.BuglyFileProvider}
+
+ContentProvider Authorities:
+  [org.mazhuang.guanggoo.fileProvider]:
+    Provider{7a3c394 org.mazhuang.guanggoo/com.tencent.bugly.beta.utils.BuglyFileProvider}
+      applicationInfo=ApplicationInfo{7754242 org.mazhuang.guanggoo}
+
+Key Set Manager:
+  [org.mazhuang.guanggoo]
+      Signing KeySets: 501
+
+Packages:
+  Package [org.mazhuang.guanggoo] (c1d7f):
+    userId=10394
+    pkg=Package{55f714c org.mazhuang.guanggoo}
+    codePath=/data/app/org.mazhuang.guanggoo-2
+    resourcePath=/data/app/org.mazhuang.guanggoo-2
+    legacyNativeLibraryDir=/data/app/org.mazhuang.guanggoo-2/lib
+    primaryCpuAbi=null
+    secondaryCpuAbi=null
+    versionCode=74 minSdk=15 targetSdk=25
+    versionName=1.1.74
+    splits=[base]
+    apkSigningVersion=2
+    applicationInfo=ApplicationInfo{7754242 org.mazhuang.guanggoo}
+    flags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    privateFlags=[ RESIZEABLE_ACTIVITIES ]
+    dataDir=/data/user/0/org.mazhuang.guanggoo
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    timeStamp=2017-10-22 23:50:53
+    firstInstallTime=2017-10-22 23:50:25
+    lastUpdateTime=2017-10-22 23:50:55
+    installerPackageName=com.miui.packageinstaller
+    signatures=PackageSignatures{af09595 [53c7caa2]}
+    installPermissionsFixed=true installStatus=1
+    pkgFlags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    requested permissions:
+      android.permission.READ_PHONE_STATE
+      android.permission.INTERNET
+      android.permission.ACCESS_NETWORK_STATE
+      android.permission.ACCESS_WIFI_STATE
+      android.permission.READ_LOGS
+      android.permission.WRITE_EXTERNAL_STORAGE
+      android.permission.READ_EXTERNAL_STORAGE
+    install permissions:
+      android.permission.INTERNET: granted=true
+      android.permission.ACCESS_NETWORK_STATE: granted=true
+      android.permission.ACCESS_WIFI_STATE: granted=true
+    User 0: ceDataInode=1155675 installed=true hidden=false suspended=false stopped=true notLaunched=false enabled=0
+      gids=[3003]
+      runtime permissions:
+        android.permission.READ_EXTERNAL_STORAGE: granted=true
+        android.permission.READ_PHONE_STATE: granted=true
+        android.permission.WRITE_EXTERNAL_STORAGE: granted=true
+    User 999: ceDataInode=0 installed=false hidden=false suspended=false stopped=true notLaunched=true enabled=0
+      gids=[3003]
+      runtime permissions:
+
+
+Dexopt state:
+  [org.mazhuang.guanggoo]
+    Instruction Set: arm64
+      path: /data/app/org.mazhuang.guanggoo-2/base.apk
+      status: /data/app/org.mazhuang.guanggoo-2/oat/arm64/base.odex [compilation_filter=speed-profile, status=kOatUpToDa
+      te]
+```
 
 ## 与应用交互
 

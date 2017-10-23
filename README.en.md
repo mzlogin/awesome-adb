@@ -35,6 +35,7 @@ Other languages: [:cn: Chinese](./README.md)
     * [Clear app cache data](#clear-app-cache-data)
     * [View Reception Activity](#view-reception-activity)
     * [View Running Services](#view-running-services)
+    * [Query package detail information](#query-package-detail-information)
 * [Interact with Applications](#interact-with-applications)
     * [Start an Activity](#start-an-activity)
     * [Start a Service](#start-a-service)
@@ -656,6 +657,98 @@ adb shell dumpsys activity services [<packagename>]
 `<packagename>` parameter is optional, command with `<packagename>` will output services related with that packagename, and command without `<packagename>` will output all services.
 
 Complete packagename is unnecessary. For example, `adb shell dumpsys activity services org.mazhuang` will output services related with `org.mazhuang.demo1`, `org.mazhuang.demo2` and `org.mazhuang123`, etc.
+
+### Query package detail information
+
+command:
+
+```sh
+adb shell dumpsys package <packagename>
+```
+
+There are many infos in output, include Activity Resolver Table, Registered ContentProviders, package name, userId, files/resources/codes path after install, version name and code, permissions info and their granted status, signing version, etc.
+
+`<packagename>` is package name of an application.
+
+Example output:
+
+```sh
+Activity Resolver Table:
+  Non-Data Actions:
+      android.intent.action.MAIN:
+        5b4cba8 org.mazhuang.guanggoo/.SplashActivity filter 5ec9dcc
+          Action: "android.intent.action.MAIN"
+          Category: "android.intent.category.LAUNCHER"
+          AutoVerify=false
+
+Registered ContentProviders:
+  org.mazhuang.guanggoo/com.tencent.bugly.beta.utils.BuglyFileProvider:
+    Provider{7a3c394 org.mazhuang.guanggoo/com.tencent.bugly.beta.utils.BuglyFileProvider}
+
+ContentProvider Authorities:
+  [org.mazhuang.guanggoo.fileProvider]:
+    Provider{7a3c394 org.mazhuang.guanggoo/com.tencent.bugly.beta.utils.BuglyFileProvider}
+      applicationInfo=ApplicationInfo{7754242 org.mazhuang.guanggoo}
+
+Key Set Manager:
+  [org.mazhuang.guanggoo]
+      Signing KeySets: 501
+
+Packages:
+  Package [org.mazhuang.guanggoo] (c1d7f):
+    userId=10394
+    pkg=Package{55f714c org.mazhuang.guanggoo}
+    codePath=/data/app/org.mazhuang.guanggoo-2
+    resourcePath=/data/app/org.mazhuang.guanggoo-2
+    legacyNativeLibraryDir=/data/app/org.mazhuang.guanggoo-2/lib
+    primaryCpuAbi=null
+    secondaryCpuAbi=null
+    versionCode=74 minSdk=15 targetSdk=25
+    versionName=1.1.74
+    splits=[base]
+    apkSigningVersion=2
+    applicationInfo=ApplicationInfo{7754242 org.mazhuang.guanggoo}
+    flags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    privateFlags=[ RESIZEABLE_ACTIVITIES ]
+    dataDir=/data/user/0/org.mazhuang.guanggoo
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    timeStamp=2017-10-22 23:50:53
+    firstInstallTime=2017-10-22 23:50:25
+    lastUpdateTime=2017-10-22 23:50:55
+    installerPackageName=com.miui.packageinstaller
+    signatures=PackageSignatures{af09595 [53c7caa2]}
+    installPermissionsFixed=true installStatus=1
+    pkgFlags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    requested permissions:
+      android.permission.READ_PHONE_STATE
+      android.permission.INTERNET
+      android.permission.ACCESS_NETWORK_STATE
+      android.permission.ACCESS_WIFI_STATE
+      android.permission.READ_LOGS
+      android.permission.WRITE_EXTERNAL_STORAGE
+      android.permission.READ_EXTERNAL_STORAGE
+    install permissions:
+      android.permission.INTERNET: granted=true
+      android.permission.ACCESS_NETWORK_STATE: granted=true
+      android.permission.ACCESS_WIFI_STATE: granted=true
+    User 0: ceDataInode=1155675 installed=true hidden=false suspended=false stopped=true notLaunched=false enabled=0
+      gids=[3003]
+      runtime permissions:
+        android.permission.READ_EXTERNAL_STORAGE: granted=true
+        android.permission.READ_PHONE_STATE: granted=true
+        android.permission.WRITE_EXTERNAL_STORAGE: granted=true
+    User 999: ceDataInode=0 installed=false hidden=false suspended=false stopped=true notLaunched=true enabled=0
+      gids=[3003]
+      runtime permissions:
+
+
+Dexopt state:
+  [org.mazhuang.guanggoo]
+    Instruction Set: arm64
+      path: /data/app/org.mazhuang.guanggoo-2/base.apk
+      status: /data/app/org.mazhuang.guanggoo-2/oat/arm64/base.odex [compilation_filter=speed-profile, status=kOatUpToDa
+      te]
+```
 
 ## Interact with Applications
 
