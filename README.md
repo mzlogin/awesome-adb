@@ -103,6 +103,7 @@ Other languages: [:gb: English](./README.en.md)
     * [其它](#其它)
 * [常见问题](#常见问题)
     * [启动 adb server 失败](#启动-adb-server-失败)
+    * [com.android.ddmlib.AdbCommandRejectedException](#comandroidddmlibadbcommandrejectedexception)
 * [adb 的非官方实现](#adb-的非官方实现)
 * [致谢](#致谢)
 * [参考链接](#参考链接)
@@ -2330,6 +2331,21 @@ taskkill /PID 1548
 ```
 
 然后再启动 adb 就没问题了。
+
+### com.android.ddmlib.AdbCommandRejectedException
+
+在 Android Studio 里新建一个模拟器，但是用 adb 一直连接不上，提示：
+
+```
+com.android.ddmlib.AdbCommandRejectedException: device unauthorized.
+This adb server's $ADB_VENDOR_KEYS is not set
+Try 'adb kill-server' if that seems wrong.
+Otherwise check for a confirmation dialog on your device.
+```
+
+在手机上安装一个终端然后执行 su 提示没有该命令，这不正常。
+
+于是删除该模拟器后重新下载安装一次，这次就正常了。
 
 ## adb 的非官方实现
 

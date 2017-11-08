@@ -103,6 +103,7 @@ Other languages: [:cn: Chinese](./README.md)
     * [Other](#other)
 * [common problem](#common-problem)
     * [Start adb server failure](#start-adb-server-failure)
+    * [com.android.ddmlib.AdbCommandRejectedException](#comandroidddmlibadbcommandrejectedexception)
 * [adb unofficial implementation](#adb-unofficial-implementation)
 * [Acknowledgements](#acknowledgements)
 * [Reference Links](#reference-links)
@@ -2303,6 +2304,21 @@ taskkill /PID 1548
 ```
 
 Then start adb no problem.
+
+### com.android.ddmlib.AdbCommandRejectedException
+
+Create a new emulator in Android Studio, but cannot connect with adb, output is:
+
+```
+com.android.ddmlib.AdbCommandRejectedException: device unauthorized.
+This adb server's $ADB_VENDOR_KEYS is not set
+Try 'adb kill-server' if that seems wrong.
+Otherwise check for a confirmation dialog on your device.
+```
+
+After install a terminal app in emulator and run `su` command, it shows no su program, that is not normal.
+
+So just delete the emulator and re-download, reinstall, all is well now.
 
 ## adb unofficial implementation
 
