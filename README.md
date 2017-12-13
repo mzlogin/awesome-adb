@@ -96,6 +96,9 @@ Other languages: [:gb: English](./README.en.md)
     * [从 Recovery 重启到 Android](#从-recovery-重启到-android)
     * [重启到 Fastboot 模式](#重启到-fastboot-模式)
     * [通过 sideload 更新系统](#通过-sideload-更新系统)
+* [安全相关命令](#安全相关命令)
+    * [启用/禁用 SELinux](#启用禁用-selinux)
+    * [启用/禁用 dm_verity](#启用禁用-dmverity)
 * [更多 adb shell 命令](#更多-adb-shell-命令)
     * [查看进程](#查看进程)
     * [查看实时资源占用情况](#查看实时资源占用情况)
@@ -2164,6 +2167,40 @@ adb reboot bootloader
    ```sh
    adb sideload <path-to-update.zip>
    ```
+
+## 安全相关命令
+
+### 启用/禁用 SELinux
+
+启用 SELinux
+
+```sh
+adb root
+adb setenforce 1
+```
+
+禁用 SELinux
+
+```sh
+adb root
+adb setenforce 0
+```
+
+### 启用/禁用 dm_verity
+
+启用 dm_verity
+
+```sh
+adb root
+adb enable-verity
+```
+
+禁用 dm_verity
+
+```sh
+adb root
+adb disable-verity
+```
 
 ## 更多 adb shell 命令
 
