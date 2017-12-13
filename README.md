@@ -2176,14 +2176,14 @@ adb reboot bootloader
 
 ```sh
 adb root
-adb setenforce 1
+adb shell setenforce 1
 ```
 
 禁用 SELinux
 
 ```sh
 adb root
-adb setenforce 0
+adb shell setenforce 0
 ```
 
 ### 启用/禁用 dm_verity

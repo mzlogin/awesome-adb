@@ -2149,14 +2149,14 @@ Enable SELinux
 
 ```sh
 adb root
-adb setenforce 1
+adb shell setenforce 1
 ```
 
 Disable SELinux
 
 ```sh
 adb root
-adb setenforce 0
+adb shell setenforce 0
 ```
 
 ### Enable / Disable dm_verity
