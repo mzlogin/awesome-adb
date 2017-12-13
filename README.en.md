@@ -91,11 +91,14 @@ Other languages: [:cn: Chinese](./README.md)
     * [Detect whether the device is root](#detect-whether-the-device-is-root)
     * [Monkey use stress testing](#monkey-use-stress-testing)
     * [On / off WiFi](#on--off-wifi)
-* [Brush related commands](#brush-related-commands)
+* [Flashing-Phone related commands](#brush-related-commands)
     * [Restart to Recovery mode](#restart-to-recovery-mode)
     * [To restart from the Recovery Android](#to-restart-from-the-recovery-android)
     * [Restart to Fastboot mode](#restart-to-fastboot-mode)
     * [Through sideload system update](#through-sideload-system-update)
+* [Security related commands](#security-related-commands)
+    * [Enabled / Disable SELinux](#enabledisable-selinux)
+    * [Enabled / Disable dm_verity](#enabledisable-dmverity)
 * [More adb shell command](#more-adb-shell-command)
     * [See process](#see-process)
     * [View real-time resource consumption](#view-real-time-resource-consumption)
@@ -753,7 +756,7 @@ Dexopt state:
 
 ## Interact with Applications
 
-The most used syntax for interacting with applications is : 
+The most used syntax for interacting with applications is :
 ```sh
 am <command>
 ```
@@ -2086,7 +2089,7 @@ adb shell svc wifi disable
 
 If successfully implemented, the output is empty; if not get root privileges to execute this command will fail, output `Killed`.
 
-## Brush related commands
+## Flashing-Phone related commands
 
 ### Restart to Recovery mode
 
@@ -2137,6 +2140,40 @@ Case in Recovery Mode Update:
    ```sh
    adb sideload <path-to-update.zip>
    ```
+
+## Security-related commands
+
+### Enable / Disable SELinux
+
+Enable SELinux
+
+```sh
+adb root
+adb setenforce 1
+```
+
+Disable SELinux
+
+```sh
+adb root
+adb setenforce 0
+```
+
+### Enable / Disable dm_verity
+
+Enable dm_verity
+
+```sh
+adb root
+adb enable-verity
+```
+
+Disable dm_verity
+
+```sh
+adb root
+adb disable-verity
+```
 
 ## More adb shell command
 
