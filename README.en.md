@@ -97,8 +97,8 @@ Other languages: [:cn: Chinese](./README.md)
     * [Restart to Fastboot mode](#restart-to-fastboot-mode)
     * [Through sideload system update](#through-sideload-system-update)
 * [Security related commands](#security-related-commands)
-    * [Enabled/Disable SELinux](#enabledisable-selinux)
-    * [Enabled/Disable dm_verity](#enabledisable-dmverity)
+    * [Enabled / Disable SELinux](#enabledisable-selinux)
+    * [Enabled / Disable dm_verity](#enabledisable-dmverity)
 * [More adb shell command](#more-adb-shell-command)
     * [See process](#see-process)
     * [View real-time resource consumption](#view-real-time-resource-consumption)
@@ -756,7 +756,7 @@ Dexopt state:
 
 ## Interact with Applications
 
-The most used syntax for interacting with applications is : 
+The most used syntax for interacting with applications is :
 ```sh
 am <command>
 ```
@@ -2143,7 +2143,7 @@ Case in Recovery Mode Update:
 
 ## Security-related commands
 
-### Enable/Disable SELinux
+### Enable / Disable SELinux
 
 Enable SELinux
 
@@ -2159,7 +2159,7 @@ adb root
 adb setenforce 0
 ```
 
-### Enable/Disable dm_verity
+### Enable / Disable dm_verity
 
 Enable dm_verity
 
