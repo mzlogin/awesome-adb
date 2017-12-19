@@ -98,7 +98,7 @@ Other languages: [:gb: English](./README.en.md)
     * [通过 sideload 更新系统](#通过-sideload-更新系统)
 * [安全相关命令](#安全相关命令)
     * [启用/禁用 SELinux](#启用禁用-selinux)
-    * [启用/禁用 dm_verity](#启用禁用-dmverity)
+    * [启用/禁用 dm_verity](#启用禁用-dm_verity)
 * [更多 adb shell 命令](#更多-adb-shell-命令)
     * [查看进程](#查看进程)
     * [查看实时资源占用情况](#查看实时资源占用情况)
@@ -2392,7 +2392,7 @@ Otherwise check for a confirmation dialog on your device.
 
 感谢朋友们无私的分享与补充（排名不分先后）。
 
-[zxning](https://github.com/zxning)，[linhua55](https://github.com/linhua55)，[codeskyblue](https://github.com/codeskyblue)，[seasonyuu](https://github.com/seasonyuu)，[fan123199](https://github.com/fan123199)，[zhEdward](https://github.com/zhEdward)，[0x8BADFOOD](https://github.com/0x8BADFOOD)，[keith666666](https://github.com/keith666666)。
+[zxning](https://github.com/zxning)，[linhua55](https://github.com/linhua55)，[codeskyblue](https://github.com/codeskyblue)，[seasonyuu](https://github.com/seasonyuu)，[fan123199](https://github.com/fan123199)，[zhEdward](https://github.com/zhEdward)，[0x8BADFOOD](https://github.com/0x8BADFOOD)，[keith666666](https://github.com/keith666666)，[shawnlinboy](https://github.com/shawnlinboy)。
 
 ## 参考链接
 

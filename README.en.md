@@ -91,14 +91,14 @@ Other languages: [:cn: Chinese](./README.md)
     * [Detect whether the device is root](#detect-whether-the-device-is-root)
     * [Monkey use stress testing](#monkey-use-stress-testing)
     * [On / off WiFi](#on--off-wifi)
-* [Flashing-Phone related commands](#brush-related-commands)
+* [Flashing-Phone related commands](#flashing-phone-related-commands)
     * [Restart to Recovery mode](#restart-to-recovery-mode)
     * [To restart from the Recovery Android](#to-restart-from-the-recovery-android)
     * [Restart to Fastboot mode](#restart-to-fastboot-mode)
     * [Through sideload system update](#through-sideload-system-update)
-* [Security related commands](#security-related-commands)
-    * [Enabled / Disable SELinux](#enabledisable-selinux)
-    * [Enabled / Disable dm_verity](#enabledisable-dmverity)
+* [Security-related commands](#security-related-commands)
+    * [Enable / Disable SELinux](#enable--disable-selinux)
+    * [Enable / Disable dm_verity](#enable--disable-dm_verity)
 * [More adb shell command](#more-adb-shell-command)
     * [See process](#see-process)
     * [View real-time resource consumption](#view-real-time-resource-consumption)
@@ -2365,7 +2365,7 @@ So just delete the emulator and re-download, reinstall, all is well now.
 
 Thanks friends for theirs selfless sharing and supplement. Names listed in no particular order.
 
-[zxning](https://github.com/zxning), [linhua55](https://github.com/linhua55), [codeskyblue](https://github.com/codeskyblue), [seasonyuu](https://github.com/seasonyuu), [fan123199](https://github.com/fan123199), [zhEdward](https://github.com/zhEdward), [0x8BADFOOD](https://github.com/0x8BADFOOD), [keith666666](https://github.com/keith666666).
+[zxning](https://github.com/zxning), [linhua55](https://github.com/linhua55), [codeskyblue](https://github.com/codeskyblue), [seasonyuu](https://github.com/seasonyuu), [fan123199](https://github.com/fan123199), [zhEdward](https://github.com/zhEdward), [0x8BADFOOD](https://github.com/0x8BADFOOD), [keith666666](https://github.com/keith666666), [shawnlinboy](https://github.com/shawnlinboy).
 
 ## Reference Links
 
