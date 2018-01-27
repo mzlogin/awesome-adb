@@ -1,8 +1,8 @@
 # dumpsys 相关命令
 
 <!-- vim-markdown-toc GFM -->
-* [获取当前Activity](获取当前activity)
-* [获取当前Window](获取当前window)
+* [获取当前Activity](#获取当前activity)
+* [获取当前Window](#获取当前window)
 <!-- vim-markdown-toc -->
 
 
