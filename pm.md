@@ -1,10 +1,10 @@
 # pm 相关命令
 
 
-* [pm --help](pm---help)
+* [help](help)
 * [查看手机中APK的存放位置](查看手机中apk的存放位置)
 
-### pm --help
+### help
 ```sh
 usage: pm list packages [-f] [-d] [-e] [-s] [-3] [-i] [-u] [--user USER_ID] [FILTER]
        pm list permission-groups
