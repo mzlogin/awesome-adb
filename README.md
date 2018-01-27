@@ -39,6 +39,7 @@ Other languages: [:gb: English](./README.en.md)
 * [与应用交互](#与应用交互)
     * [调起 Activity](#调起-activity)
     * [调起 Service](#调起-service)
+    * [停止 Service](#停止-service)
     * [发送广播](#发送广播)
     * [强制停止应用](#强制停止应用)
 * [文件管理](#文件管理)
@@ -838,6 +839,14 @@ adb shell am startservice -n com.tencent.mm/.plugin.accountsync.model.AccountAut
 ```
 
 表示调起微信的某 Service。
+
+### 停止 Service
+
+命令格式：
+
+```sh
+adb shell am stopservice [options] <INTENT>
+```
 
 ### 发送广播
 
