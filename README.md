@@ -42,6 +42,8 @@ Other languages: [:gb: English](./README.en.md)
     * [停止 Service](#停止-service)
     * [发送广播](#发送广播)
     * [强制停止应用](#强制停止应用)
+    * [启动应用](#启动应用)
+    * [收紧内存](#收紧内存)
 * [文件管理](#文件管理)
     * [复制设备里的文件到电脑](#复制设备里的文件到电脑)
     * [复制电脑里的文件到设备](#复制电脑里的文件到设备)
@@ -916,6 +918,39 @@ adb shell am force-stop com.qihoo360.mobilesafe
 ```
 
 表示停止 360 安全卫士的一切进程与服务。
+
+### 启动应用
+
+命令：
+```sh
+adb shell am start -n <launchable-activity>
+```
+
+命令示例：
+```sh
+adb shell am start -n com.baidu.searchbox/com.baidu.searchbox.SplashActivity
+```
+
+表示启动手机百度
+
+### 收紧内存
+
+命令：
+```sh
+adb shell am send-trim-memory  <pid> <level>
+
+pid:进程ID
+level:
+	HIDDEN、RUNNING_MODERATE、BACKGROUND、
+	RUNNING_LOW、MODERATE、RUNNING_CRITICAL、COMPLETE
+```
+
+命令示例：
+```sh
+adb shell am send-trim-memory 12345 RUNNING_LOW
+```
+表示向pid=12345的进程，发出level=RUNNING_LOW的收紧内存命令
+
 
 ## 文件管理
 
