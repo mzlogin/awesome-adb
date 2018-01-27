@@ -2,11 +2,13 @@
 
 
 <!-- vim-markdown-toc GFM -->
+
 * [pm --help](pm---help)
 * [查看手机中APK的存放位置](查看手机中apk的存放位置)
+
 <!-- vim-markdown-toc -->
 
-### pm --help
+## pm --help
 ```sh
 usage: pm list packages [-f] [-d] [-e] [-s] [-3] [-i] [-u] [--user USER_ID] [FILTER]
        pm list permission-groups
@@ -140,7 +142,7 @@ pm remove-user: remove the user with the given USER_IDENTIFIER,
   deleting all data associated with that user
 ```
 
-### 查看手机中APK的存放位置
+## 查看手机中APK的存放位置
 ```sh
 adb shell pm list packages -f
 ```
