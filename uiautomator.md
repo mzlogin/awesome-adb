@@ -1,7 +1,7 @@
 # uiautomator 相关命令
 
 <!-- vim-markdown-toc GFM -->
-* [获取当前页面布局](获取当前页面布局)
+* [获取当前页面布局](#获取当前页面布局)
 <!-- vim-markdown-toc -->
 
 
