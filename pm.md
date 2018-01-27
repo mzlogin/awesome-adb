@@ -3,8 +3,8 @@
 
 <!-- vim-markdown-toc GFM -->
 
-* [pm --help](pm---help)
-* [查看手机中APK的存放位置](查看手机中apk的存放位置)
+* [pm --help](#pm---help)
+* [查看手机中APK的存放位置](#查看手机中apk的存放位置)
 
 <!-- vim-markdown-toc -->
 
