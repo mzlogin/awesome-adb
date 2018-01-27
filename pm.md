@@ -1,10 +1,12 @@
 # pm 相关命令
 
 
-* [help](help)
+<!-- vim-markdown-toc GFM -->
+* [pm --help](pm---help)
 * [查看手机中APK的存放位置](查看手机中apk的存放位置)
+<!-- vim-markdown-toc -->
 
-### help
+### pm --help
 ```sh
 usage: pm list packages [-f] [-d] [-e] [-s] [-3] [-i] [-u] [--user USER_ID] [FILTER]
        pm list permission-groups
