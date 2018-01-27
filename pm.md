@@ -1,5 +1,10 @@
 # pm 相关命令
 
+
+* [pm --help](pm---help)
+* [查看手机中APK的存放位置](查看手机中apk的存放位置)
+
+### pm --help
 ```sh
 usage: pm list packages [-f] [-d] [-e] [-s] [-3] [-i] [-u] [--user USER_ID] [FILTER]
        pm list permission-groups
@@ -131,4 +136,21 @@ pm create-user: create a new user with the given USER_NAME,
 
 pm remove-user: remove the user with the given USER_IDENTIFIER,
   deleting all data associated with that user
+```
+
+### 查看手机中APK的存放位置
+```sh
+adb shell pm list packages -f
+```
+
+示例：
+```sh
+adb shell pm list packages -f | grep vivo 
+
+output:
+package:/system/app/BBKWeatherProvider/BBKWeatherProvider.apk=com.vivo.weather.provider
+package:/system/app/VivoSmartMultiWindow/VivoSmartMultiWindow.apk=com.vivo.smartmultiwindow
+package:/system/app/CoffeeTime/CoffeeTime.apk=com.vivo.livewallpaper.coffeetime
+package:/system/app/SetupWizard/SetupWizard.apk=com.vivo.setupwizard
+...
 ```
