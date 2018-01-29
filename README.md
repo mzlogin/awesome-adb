@@ -36,6 +36,7 @@ Other languages: [:gb: English](./README.en.md)
     * [查看前台 Activity](#查看前台-activity)
     * [查看正在运行的 Services](#查看正在运行的-services)
     * [查看应用详细信息](#查看应用详细信息)
+    * [查看应用安装路径](#查看应用安装路径)
 * [与应用交互](#与应用交互)
     * [调起 Activity](#调起-activity)
     * [调起 Service](#调起-service)
@@ -763,6 +764,24 @@ Dexopt state:
       path: /data/app/org.mazhuang.guanggoo-2/base.apk
       status: /data/app/org.mazhuang.guanggoo-2/oat/arm64/base.odex [compilation_filter=speed-profile, status=kOatUpToDa
       te]
+```
+
+### 查看应用安装路径
+
+命令:
+
+```
+adb shell pm path <PACKAGE>
+```
+
+输出应用安装路径
+
+输出示例:
+
+```
+adb shell pm path ecarx.weather
+
+package:/data/app/ecarx.weather-1.apk
 ```
 
 ## 与应用交互
