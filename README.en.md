@@ -36,6 +36,7 @@ Other languages: [:cn: Chinese](./README.md)
     * [View Reception Activity](#view-reception-activity)
     * [View Running Services](#view-running-services)
     * [Query package detail information](#query-package-detail-information)
+    * [Query application installation path](#query-application-installation-path)
 * [Interact with Applications](#interact-with-applications)
     * [Start an Activity](#start-an-activity)
     * [Start a Service](#start-a-service)
@@ -752,6 +753,26 @@ Dexopt state:
       path: /data/app/org.mazhuang.guanggoo-2/base.apk
       status: /data/app/org.mazhuang.guanggoo-2/oat/arm64/base.odex [compilation_filter=speed-profile, status=kOatUpToDa
       te]
+```
+
+### Query application installation path
+
+command:
+
+```
+adb shell pm path <PACKAGE>
+```
+
+Output shows application installation path.
+
+
+
+Example output:
+
+```
+adb shell pm path ecarx.weather
+
+package:/data/app/ecarx.weather-1.apk
 ```
 
 ## Interact with Applications
