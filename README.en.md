@@ -38,10 +38,12 @@ Other languages: [:cn: Chinese](./README.md)
     * [Query package detail information](#query-package-detail-information)
     * [Query application installation path](#query-application-installation-path)
 * [Interact with Applications](#interact-with-applications)
-    * [Start an Activity](#start-an-activity)
+    * [Launch app / Start an Activity](#launch-app--start-an-activity)
     * [Start a Service](#start-a-service)
+    * [Stop service](#stop-service)
     * [Send a broadcast](#send-a-broadcast)
     * [Force stop an application](#force-stop-an-application)
+    * [Trim memory](#trim-memory)
 * [File Management](#file-management)
     * [Copy files from a device to a computer](#copy-files-from-a-device-to-a-computer)
     * [Copy files from a computer to a device](#copy-files-from-a-computer-to-a-device)
@@ -109,6 +111,7 @@ Other languages: [:cn: Chinese](./README.md)
     * [Start adb server failure](#start-adb-server-failure)
     * [com.android.ddmlib.AdbCommandRejectedException](#comandroidddmlibadbcommandrejectedexception)
 * [adb unofficial implementation](#adb-unofficial-implementation)
+* [related commands](#related-commands)
 * [Acknowledgements](#acknowledgements)
 * [Reference Links](#reference-links)
 
@@ -815,7 +818,7 @@ There are some options addting data for `<INTENT>`, similar to `extra` for Bundl
 | `--eia <EXTRA_KEY> <EXTRA_INT_VALUE> [, <EXTRA_INT_VALUE ...]`   | integer array                          |
 | `--ela <EXTRA_KEY> <EXTRA_LONG_VALUE> [, <EXTRA_LONG_VALUE ...]` | long array                             |
 
-### Start an Activity
+### Launch app / Start an Activity
 
 The syntax is:
 
@@ -852,6 +855,14 @@ adb shell am startservice -n com.tencent.mm/.plugin.accountsync.model.AccountAut
 ```
 
 The command above means starting a service from WeChat.
+
+### Stop service
+
+The syntax is:
+
+```sh
+adb shell am stopservice [options] <INTENT>
+```
 
 ### Send a broadcast
 
@@ -921,6 +932,25 @@ adb shell am force-stop com.qihoo360.mobilesafe
 ```
 
 The command above means stopping all processes and services related to the package name `com.qihoo360.mobilesafe`.
+
+### Trim memory
+
+command:
+
+```sh
+adb shell am send-trim-memory  <pid> <level>
+```
+
+pid: process id
+level: HIDDEN、RUNNING_MODERATE、BACKGROUND、RUNNING_LOW、MODERATE、RUNNING_CRITICAL、COMPLETE
+
+For example:
+
+```sh
+adb shell am send-trim-memory 12345 RUNNING_LOW
+```
+
+means send command to process 12345, notify it to set level to RUNNING.
 
 ## File Management
 
@@ -2382,11 +2412,20 @@ So just delete the emulator and re-download, reinstall, all is well now.
 
 * [fb-adb](https://github.com/facebook/fb-adb) - A better shell for Android devices (for Mac).
 
+## related commands
+
+* [aapt](./related/aapt.md)
+* [am](./related/am.md)
+* [dumsys](./related/dumpsys.md)
+* [pm](./related/pm.md)
+* [uiautomator](./related/uiautomator.md)
+
 ## Acknowledgements
 
 Thanks friends for theirs selfless sharing and supplement. Names listed in no particular order.
 
-[zxning](https://github.com/zxning), [linhua55](https://github.com/linhua55), [codeskyblue](https://github.com/codeskyblue), [seasonyuu](https://github.com/seasonyuu), [fan123199](https://github.com/fan123199), [zhEdward](https://github.com/zhEdward), [0x8BADFOOD](https://github.com/0x8BADFOOD), [keith666666](https://github.com/keith666666), [shawnlinboy](https://github.com/shawnlinboy).
+[zxning](https://github.com/zxning), [linhua55](https://github.com/linhua55), [codeskyblue](https://github.com/codeskyblue), [seasonyuu](https://github.com/seasonyuu), [fan123199](https://github.com/fan123199), [zhEdward](https://github.com/zhEdward), [0x8BADFOOD](https://github.com/0x8BADFOOD), [keith666666](https://github.com/keith666666), [shawnlinboy](https://github.com/shawnlinboy), [s-xq](https://github.com/s-xq),
+[lucky9322](https://github.com/lucky9322).
 
 ## Reference Links
 

@@ -38,12 +38,11 @@ Other languages: [:gb: English](./README.en.md)
     * [查看应用详细信息](#查看应用详细信息)
     * [查看应用安装路径](#查看应用安装路径)
 * [与应用交互](#与应用交互)
-    * [调起 Activity](#调起-activity)
+    * [启动应用/ 调起 Activity](#启动应用-调起-activity)
     * [调起 Service](#调起-service)
     * [停止 Service](#停止-service)
     * [发送广播](#发送广播)
     * [强制停止应用](#强制停止应用)
-    * [启动应用](#启动应用)
     * [收紧内存](#收紧内存)
 * [文件管理](#文件管理)
     * [复制设备里的文件到电脑](#复制设备里的文件到电脑)
@@ -112,6 +111,7 @@ Other languages: [:gb: English](./README.en.md)
     * [启动 adb server 失败](#启动-adb-server-失败)
     * [com.android.ddmlib.AdbCommandRejectedException](#comandroidddmlibadbcommandrejectedexception)
 * [adb 的非官方实现](#adb-的非官方实现)
+* [相关命令](#相关命令)
 * [致谢](#致谢)
 * [参考链接](#参考链接)
 
@@ -823,7 +823,7 @@ package:/data/app/ecarx.weather-1.apk
 | `--eia <EXTRA_KEY> <EXTRA_INT_VALUE>[,<EXTRA_INT_VALUE...]`   | integer 数组                           |
 | `--ela <EXTRA_KEY> <EXTRA_LONG_VALUE>[,<EXTRA_LONG_VALUE...]` | long 数组                              |
 
-### 调起 Activity
+### 启动应用/ 调起 Activity
 
 命令格式：
 
@@ -938,38 +938,25 @@ adb shell am force-stop com.qihoo360.mobilesafe
 
 表示停止 360 安全卫士的一切进程与服务。
 
-### 启动应用
-
-命令：
-```sh
-adb shell am start -n <launchable-activity>
-```
-
-命令示例：
-```sh
-adb shell am start -n com.baidu.searchbox/com.baidu.searchbox.SplashActivity
-```
-
-表示启动手机百度
-
 ### 收紧内存
 
 命令：
 ```sh
 adb shell am send-trim-memory  <pid> <level>
+```
 
-pid:进程ID
+pid: 进程 ID
 level:
 	HIDDEN、RUNNING_MODERATE、BACKGROUND、
 	RUNNING_LOW、MODERATE、RUNNING_CRITICAL、COMPLETE
-```
 
 命令示例：
+
 ```sh
 adb shell am send-trim-memory 12345 RUNNING_LOW
 ```
-表示向pid=12345的进程，发出level=RUNNING_LOW的收紧内存命令
 
+表示向 pid=12345 的进程，发出 level=RUNNING_LOW 的收紧内存命令。
 
 ## 文件管理
 
@@ -2451,11 +2438,20 @@ Otherwise check for a confirmation dialog on your device.
 
 * [fb-adb](https://github.com/facebook/fb-adb) - A better shell for Android devices (for Mac).
 
+## 相关命令
+
+* [aapt](./related/aapt.md)
+* [am](./related/am.md)
+* [dumsys](./related/dumpsys.md)
+* [pm](./related/pm.md)
+* [uiautomator](./related/uiautomator.md)
+
 ## 致谢
 
 感谢朋友们无私的分享与补充（排名不分先后）。
 
-[zxning](https://github.com/zxning)，[linhua55](https://github.com/linhua55)，[codeskyblue](https://github.com/codeskyblue)，[seasonyuu](https://github.com/seasonyuu)，[fan123199](https://github.com/fan123199)，[zhEdward](https://github.com/zhEdward)，[0x8BADFOOD](https://github.com/0x8BADFOOD)，[keith666666](https://github.com/keith666666)，[shawnlinboy](https://github.com/shawnlinboy)。
+[zxning](https://github.com/zxning)，[linhua55](https://github.com/linhua55)，[codeskyblue](https://github.com/codeskyblue)，[seasonyuu](https://github.com/seasonyuu)，[fan123199](https://github.com/fan123199)，[zhEdward](https://github.com/zhEdward)，[0x8BADFOOD](https://github.com/0x8BADFOOD)，[keith666666](https://github.com/keith666666)，[shawnlinboy](https://github.com/shawnlinboy)，[s-xq](https://github.com/s-xq)，
+[lucky9322](https://github.com/lucky9322)。
 
 ## 参考链接
 
