@@ -862,6 +862,12 @@ adb shell am startservice -n com.tencent.mm/.plugin.accountsync.model.AccountAut
 
 表示调起微信的某 Service。
 
+另外一个典型的用例是如果设备上原本应该显示虚拟按键但是没有显示，可以试试这个：
+
+```sh
+adb shell am startservice -n com.android.systemui/.SystemUIService
+```
+
 ### 停止 Service
 
 命令格式：

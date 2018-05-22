@@ -857,6 +857,12 @@ adb shell am startservice -n com.tencent.mm/.plugin.accountsync.model.AccountAut
 
 The command above means starting a service from WeChat.
 
+Another typical useage is that if devices has bottom virtual keys but not show, you can try this:
+
+```sh
+adb shell am startservice -n com.android.systemui/.SystemUIService
+```
+
 ### Stop service
 
 The syntax is:
