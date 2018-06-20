@@ -83,6 +83,7 @@ Other languages: [:cn: Chinese](./README.md)
     * [Screen density](#screen-density-1)
     * [Overscan](#overscan)
     * [Turn off Android Debug](#turn-off-android-debug)
+    * [allow/forbidden access non SDK API](#allowforbidden-access-non-sdk-api)
     * [Show/hide status bar or navigation bar](#showhide-status-bar-or-navigation-bar)
 * [Utility functions](#utility-functions)
     * [Screenshots](#screenshots)
@@ -1859,6 +1860,33 @@ We can't do this via command now, because without "Android Debug" on, adb cannot
 So just do it on device manually:
 
 "Settings" - "Developer options" - "Android Debug".
+
+### allow/forbidden access non SDK API
+
+allow access non SDK API:
+
+```sh
+adb shell settings put global hidden_api_policy_pre_p_apps 1
+adb shell settings put global hidden_api_policy_p_apps 1
+```
+
+forbidden access non SDK API:
+
+```sh
+adb shell settings delete global hidden_api_policy_pre_p_apps
+adb shell settings delete global hidden_api_policy_p_apps
+```
+
+*Note: Commands above don't need root privileges.*
+
+meaning for number in command tail:
+
+| value | meaning                                                                                                                                                            |
+|-------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 0     | disable detect for non SDK API call. In this situation, there is no call log in logcat, and make strict mode API, detectNonSdkApiUsage() invalid. Not recommended. |
+| 1     | Just warning -- allow access all non SDK API, but retain warning in logcat. You can continue to use strick mode API.                                               |
+| 2     | It is forbidden to invoke interfaces in dark grey lists and black lists.                                                                                           |
+| 3     | It is forbidden to invoke the interface in the black list, but it is allowed to call the interface in the dark grey list.                                          |
 
 ### Show/hide status bar or navigation bar
 

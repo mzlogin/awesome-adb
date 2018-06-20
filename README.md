@@ -83,6 +83,7 @@ Other languages: [:gb: English](./README.en.md)
     * [屏幕密度](#屏幕密度-1)
     * [显示区域](#显示区域)
     * [关闭 USB 调试模式](#关闭-usb-调试模式)
+    * [允许/禁止访问非 SDK API](#允许禁止访问非-sdk-api)
     * [状态栏和导航栏的显示隐藏](#状态栏和导航栏的显示隐藏)
 * [实用功能](#实用功能)
     * [屏幕截图](#屏幕截图)
@@ -1865,6 +1866,33 @@ adb shell settings put global adb_enabled 0
 用命令恢复不了了，毕竟关闭了 USB 调试 adb 就连接不上 Android 设备了。
 
 去设备上手动恢复吧：「设置」-「开发者选项」-「Android 调试」。
+
+### 允许/禁止访问非 SDK API
+
+允许访问非 SDK API：
+
+```sh
+adb shell settings put global hidden_api_policy_pre_p_apps 1
+adb shell settings put global hidden_api_policy_p_apps 1
+```
+
+禁止访问非 SDK API：
+
+```sh
+adb shell settings delete global hidden_api_policy_pre_p_apps
+adb shell settings delete global hidden_api_policy_p_apps
+```
+
+不需要设备获得 Root 权限。
+
+命令最后的数字的含义：
+
+| 值 | 含义                                                                                                                      |
+|----|---------------------------------------------------------------------------------------------------------------------------|
+| 0  | 禁止检测非 SDK 接口的调用。该情况下，日志记录功能被禁用，并且令 strict mode API，即 detectNonSdkApiUsage() 无效。不推荐。 |
+| 1  | 仅警告——允许访问所有非 SDK 接口，但保留日志中的警告信息，可继续使用 strick mode API。                                     |
+| 2  | 禁止调用深灰名单和黑名单中的接口。                                                                                        |
+| 3  | 禁止调用黑名单中的接口，但允许调用深灰名单中的接口。                                                                      |
 
 ### 状态栏和导航栏的显示隐藏
 
