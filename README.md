@@ -653,7 +653,7 @@ adb shell pm clear com.qihoo360.mobilesafe
 
 ### 查看前台 Activity
 
-命令：
+命令1：
 
 ```sh
 adb shell dumpsys activity activities | grep mFocusedActivity
@@ -666,6 +666,21 @@ mFocusedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.androi
 ```
 
 其中的 `com.cyanogenmod.trebuchet/com.android.launcher3.Launcher` 就是当前处于前台的 Activity。
+
+命令2：
+
+```sh
+adb shell dumpsys activity top | grep ACTIVITY
+```
+
+输出示例：
+
+```sh
+ACTIVITY com.android.launcher3/.Launcher c69a02c pid=1884
+```
+
+其中的 `com.cyanogenmod.trebuchet/com.android.launcher3.Launcher` 就是当前处于前台的 Activity。
+
 
 ### 查看正在运行的 Services
 
@@ -1505,7 +1520,7 @@ WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
     deferred=false layoutNeeded=false
 ```
 
-其中 `mDisplayId` 为 显示屏编号，`init` 是初始分辨率和屏幕密度，`app` 的高度比 `init` 里的要小，表示屏幕底部有虚拟按键，高度为 1920 - 1794 = 126px 合 42dp。
+其中 `mDisplayId` 为 显示屏编号，`init` 是初始分辨率和屏幕密度，`app` 的高度比 `init` 里的要小，表示屏幕底部有虚拟按键，高度为 1920 - 1794 = 126px 合 48dp。
 
 ### android\_id
 
@@ -1667,6 +1682,7 @@ f8:a9:d0:17:42:4d
 ```
 
 这查看的是局域网 Mac 地址，移动网络或其它连接的信息可以通过前面的小节「IP 地址」里提到的 `adb shell netcfg` 命令来查看。
+在Android6.0及以上版本移除了netcfg命令，可以使用`adb shell ifconfig` 命令来查看。
 
 ### CPU 信息
 
