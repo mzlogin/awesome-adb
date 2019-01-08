@@ -1203,6 +1203,16 @@ adb shell input text hello
 
 现在 `hello` 出现在文本框了。
 
+如果输入的是中文的话,需要在手机中安装[ADBKeyboard.apk](https://github.com/senzhk/ADBKeyBoard),详细文档见[这里](https://github.com/senzhk/ADBKeyBoard)
+
+然后执行命令:
+```
+1. 设置当前输入法为:ADBKeyBoard
+adb shell ime set com.android.adbkeyboard/.AdbIME   
+2. 输入中文
+adb shell am broadcast -a ADB_INPUT_TEXT --es msg '你好'
+```
+
 ## 查看日志
 
 Android 系统的日志分为两部分，底层的 Linux 内核日志输出到 /proc/kmsg，Android 的日志输出到 /dev/log。
