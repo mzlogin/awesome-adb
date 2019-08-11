@@ -645,13 +645,13 @@ adb shell pm clear com.qihoo360.mobilesafe
 command:
 
 ```sh
-adb shell dumpsys activity activities | grep mFocusedActivity
+adb shell dumpsys activity activities | grep mResumedActivity
 ```
 
 Example output:
 
 ```sh
-mFocusedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.android.launcher3.Launcher t42}
+mResumedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.android.launcher3.Launcher t42}
 ```
 
 Where `com.cyanogenmod.trebuchet / com.android.launcher3.Launcher` is currently in the foreground Activity.
