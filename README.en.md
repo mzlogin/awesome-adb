@@ -656,6 +656,8 @@ mResumedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.androi
 
 Where `com.cyanogenmod.trebuchet / com.android.launcher3.Launcher` is currently in the foreground Activity.
 
+*The command above may not valid in Windows, you can try `adb shell dumpsys activity activities | findstr mResumedActivity` or `adb shell "dumpsys activity activities | grep mResumedActivity"`.
+
 ### View Running Services
 
 command:
