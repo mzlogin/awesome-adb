@@ -821,6 +821,7 @@ There are some options addting data for `<INTENT>`, similar to `extra` for Bundl
 | `--ela <EXTRA_KEY> <EXTRA_LONG_VALUE> [, <EXTRA_LONG_VALUE ...]` | long array                             |
 
 ### Launch app / Start an Activity
+> start with Activity's name
 
 The syntax is:
 
@@ -841,6 +842,21 @@ adb shell am start -n org.mazhuang.boottimemeasure/.MainActivity --es "toast" "h
 ```
 
 The command above means starting MainActivity of the application with the package name `org.mazhuang.boottimemeasure` with an extra string information (key is 'toast' and value is 'hello, world').
+
+> start without Activity's name
+
+The syntax is:
+
+```sh
+adb shell monkey -p <packagename> -c android.intent.category.LAUNCHER 1
+```
+For example:
+
+```sh
+adb shell monkey -p com.tencent.mm -c android.intent.category.LAUNCHER 1
+```
+
+The command above means starting the launch activity of WeChat.
 
 ### Start a Service
 
