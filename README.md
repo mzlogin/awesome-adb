@@ -667,6 +667,8 @@ mResumedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.androi
 
 其中的 `com.cyanogenmod.trebuchet/com.android.launcher3.Launcher` 就是当前处于前台的 Activity。
 
+*在 Windows 下以上命令可能不可用，可以尝试 `adb shell dumpsys activity activities | findstr mResumedActivity` 或 `adb shell "dumpsys activity activities | grep mResumedActivity"`。*
+
 ### 查看正在运行的 Services
 
 命令：
