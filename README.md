@@ -107,6 +107,9 @@ Other languages: [:gb: English](./README.en.md)
     * [查看进程](#查看进程)
     * [查看实时资源占用情况](#查看实时资源占用情况)
     * [查看进程 UID](#查看进程-uid)
+    * [测试闲置模式](#测试闲置模式)
+    * [测试待机模式](#测试待机模式)
+    * [后台限制模式](#后台限制模式)
     * [其它](#其它)
 * [常见问题](#常见问题)
     * [启动 adb server 失败](#启动-adb-server-失败)
@@ -2418,6 +2421,52 @@ Usage: top [ -m max_procs ] [ -n iterations ] [ -d delay ] [ -s sort_column ] [ 
    Uid:    10394   10394   10394   10394
    gemini:/ $
    ```
+### 测试闲置模式
+
+>从 Android 6.0（API 级别 23）开始，Android 引入了两项省电功能，通过管理应用在设备未连接至电源时的行为方式，帮助用户延长电池寿命。当用户长时间未使用设备时，低电耗模式会延迟应用的后台 CPU 和网络活动，从而降低耗电量。应用待机模式会延迟用户近期未与之交互的应用的后台网络活动。
+
+强制系统进入闲置模式
+```sh
+adb shell dumpsys deviceidle force-idle
+```
+
+系统退出闲置模式
+```sh
+adb shell dumpsys deviceidle unforce
+```
+
+重新激活设备 (确保应用在设备退出低电耗模式时正常恢复)
+```sh
+adb shell dumpsys battery reset
+```
+
+### 测试待机模式
+
+强制应用进入应用待机模式
+```sh
+adb shell dumpsys battery unplug
+adb shell am set-inactive <packageName> true
+```
+
+命令模拟唤醒您的应用 (确保应用从待机模式正常恢复)
+```sh
+adb shell am set-inactive <packageName> false
+adb shell am get-inactive <packageName>
+```
+
+### 后台限制模式
+
+后台限制模式 (仅适用于Android 7.0及以上)
+
+```sh
+adb shell cmd appops set <package_name> RUN_IN_BACKGROUND ignore
+```
+
+还原后台限制状态 (仅适用于Android 7.0及以上)
+
+```sh
+adb shell cmd appops set <package_name> RUN_IN_BACKGROUND allow
+```
 
 ### 其它
 
