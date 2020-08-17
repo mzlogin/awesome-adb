@@ -2124,6 +2124,25 @@ network={
 
 `Ssid` we shall see in the WLAN settings in the name,` psk` the password, `key_mgmt` security encryption.
 
+
+If android version is above O, the path of config file should be in `WifiConfigStore.xml`.
+
+```sh
+adb shell
+su
+cat /data/misc/wifi/WifiConfigStore.xml
+```
+
+Example output:
+
+> because of too many items in the file, it can be focused on `ConfigKey`-- WiFi name and `PreSharedKey` -- WiFi password.
+
+```xml
+<string name="ConfigKey">&quot;Wi-Fi&quot;WPA_PSK</string>
+<string name="PreSharedKey">&quot;931907334&quot;</string>
+```
+
+
 ### To set the system date and time
 
 ** Note: You need root privileges. **

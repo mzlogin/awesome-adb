@@ -2154,6 +2154,23 @@ network={
 
 `ssid` 即为我们在 WLAN 设置里看到的名称，`psk` 为密码，`key_mgmt` 为安全加密方式。
 
+如果Android O 或以后，WiFi密码保存的地址有变化，是在`WifiConfigStore.xml`里面
+
+```sh
+adb shell
+su
+cat /data/misc/wifi/WifiConfigStore.xml
+```
+
+输出格式：
+
+数据项较多，只需关注`ConfigKey`（WiFi名字）和`PreSharedKey`（WiFi密码）即可
+
+```xml
+<string name="ConfigKey">&quot;Wi-Fi&quot;WPA_PSK</string>
+<string name="PreSharedKey">&quot;931907334&quot;</string>
+```
+
 ### 设置系统日期和时间
 
 **注：需要 root 权限。**
