@@ -20,10 +20,10 @@ Other languages: [:cn: Chinese](./README.md)
     * [Run adbd as root](#run-adbd-as-root)
     * [Designated adb server network port](#designated-adb-server-network-port)
 * [Device connection management](#device-connection-management)
-    * [Inquiries connected device / simulator](#inquiries-connected-device--simulator)
-    * [USB connection](#usb-connection)
-    * [Wireless connection (need to use the USB cable)](#wireless-connection-need-to-use-the-usb-cable)
-    * [Wireless connection (without using the USB cable)](#wireless-connection-without-using-the-usb-cable)
+    * [Query for devices](#query-for-devices)
+    * [Connect to a device over USB](#connect-to-a-device-over-usb)
+    * [Connect to a device over WiFi (with help of USB cable)](#connect-to-a-device-over-wifi-with-help-of-usb-cable)
+    * [Connect to a device over WiFi (without help of USB cable)](#connect-to-a-device-over-wifi-without-help-of-usb-cable)
 * [Application Management](#application-management)
     * [Check the list of](#check-the-list-of)
         * [All applications](#all-applications)
@@ -225,7 +225,7 @@ The default port is 5037.
 
 ## Device connection management
 
-### Inquiries connected device / simulator
+### Query for devices
 
 command:
 
@@ -241,66 +241,66 @@ cf264b8f	device
 emulator-5554	device
 ```
 
-Output format is `[serialNumber] [state]`, serialNumber that is, we often say that the SN, state the following categories:
+The output is formatted like `[serialNumber] [state]`. `serialNumber` is a string to uniquely identify an emulator/device instance. `state` is the connection state of the instance may be one of the following:
 
-* `Offline` - indicates that the device is not connected to the success or unresponsive.
+* `offline` - this instance is not connected to adb or is not responding.
 
-* `Device` - device is connected. Note that this state does not identify the Android system has been fully activated and operational in the device during startup device instance can be connected to the adb, but after boot the system before it becomes operational.
+* `device` - this instance is now connected to the adb server. Note that this state does not imply that the Android system is fully booted and operational, since the instance connects to adb while the system is still booting. However, after boot-up, this is the normal operational state of an emulator/device instance.
 
-* `No device` - no device / emulator connection.
+* `no device` - there is no emulator/device connected.
 
-The output shows the current connected the two devices / simulators, `cf264b8f` and` emulator-5554` are they SN. As can be seen from the `emulator-5554` name it is an Android emulator.
+Output above shows there are two emulators/devices connected currently, their SNs are `cf264b8f` and `emulator-5554`. We can see that `emulator-5554` is an emulator from its SN.
 
-Common alarm output:
+Some outputs of exceptions:
 
-1. No device / emulator connection is successful.
+1. No emulator/device connection is successful:
 
    ```sh
    List of devices attached
    ```
 
-2. The device / emulator is not connected to adb or unresponsive.
+2. The emulator/device instance is not connected to adb or is not responding:
 
    ```sh
    List of devices attached
    cf264b8f	offline
    ```
 
-### USB connection
+### Connect to a device over USB
 
-USB connection normal use adb by the need to ensure that:
+To use adb with connection over USB, need to satisfy serveral conditions:
 
 1. Hardware status is normal.
 
-   Including Android devices in the normal power state, USB cable and interface intact.
+   Including: Android system successfully started, USB cable and interfaces are normal.
 
-Developer Options 2. Android devices and USB debugging mode is on.
+2. Enable Developer options and USB debugging on your device.
 
-   You can go to the "Settings" - "Developer options" - "Android Debug" view.
+   You can find the options in **Settings** > **Developer options** > **USB debugging**.
 
-   If you can not find the developer options in the settings, it needs to make it through an egg is displayed: In the "Settings" - "About phone" continuous click "version number" 7 times.
+   On Android 4.2 and higher, the Developer options screen is hidden by default. To make it visible, go to **Settings** > **About phone** and tap **Build number** seven times. Return to the previous screen to find **Developer options** at the bottom.
 
-3. The device driver is normal.
+3. Device driver is normal.
 
-   It seems to worry about the Linux and Mac OS X, the Windows likely to be encountered in the case of the need to install drivers, this can be confirmed right "Computer" - "Properties", the "Device Manager" in view on related equipment Is there a yellow exclamation point or question mark, if not explain the driving state has been good. Otherwise, you can download a mobile assistant class program to install the driver first.
+   Looks like no need to pay attention to this in Linux and Mac OS X. But in Windows you may met situations should install device driver. To confirm the status, you can right click **My Computer** and select **Properties** > **Device Manager**, if there is no yellow `!` or `?`, your device driver status is normal, otherwise you may need to download a Phone Assistant like software to help you to install device driver first.
 
-4. Status after confirmation via USB cable connected computers and devices.
+4. Confirm status after connect PC and andoid device over USB.
 
    ```sh
    adb devices
    ```
 
-   If you can see
+   If the output contains
 
    ```sh
    xxxxxx device
    ```
 
-   Description Connection successful.
+   Your connection is successfully.
 
-### Wireless connection (need to use the USB cable)
+### Connect to a device over WiFi (with help of USB cable)
 
-In addition to the USB connection to the computer to use adb, can also be a wireless connection - although the connection process is also step using USB needs, but after a successful connection to your device can get rid of the limit of the USB cable within a certain range it !
+Adb is usually used over USB. However, it is also possible to use over WiFi, though steps describe here need help of USB cable. After connect to device over WiFi successfully, your device can be placed anywhere with WiFi signal, get rid of USB cable.
 
 Steps:
 
@@ -356,7 +356,7 @@ command:
 adb disconnect <device-ip-address>
 ```
 
-### Wireless connection (without using the USB cable)
+### Connect to a device over WiFi (without help of USB cable)
 
 **Note: You need root privileges.**
 
