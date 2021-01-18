@@ -321,25 +321,27 @@ emulator-5554	device
 
 1. 更新到最新版本的 [SDK 平台工具](https://developer.android.com/studio/releases/platform-tools?hl=zh_cn)(至少30.0.0)。
 
-2. 在开发者选项中启用**无线调试**。
+2. 将 Android 设备与要运行 adb 的电脑连接到同一个局域网，比如连到同一个 WiFi。
 
-3. 在询问要允许在此网络上进行无线调试吗？的对话框中，点击允许。
+3. 在开发者选项中启用**无线调试**。
 
-4. 选择使用配对码配对设备，使用弹窗中的 IP 地址和端口号。
+4. 在询问要允许在此网络上进行无线调试吗？的对话框中，点击允许。
 
-   ```sh
+5. 选择使用配对码配对设备，使用弹窗中的 IP 地址和端口号。
+
+  ```sh
   adb pair ipaddr:port
-   ```
+  ```
 
-5. 提示`Enter pairing code: `时输入弹窗中的配对码，成功后会显示`Successfully paired to ...`。
+6. 提示`Enter pairing code: `时输入弹窗中的配对码，成功后会显示`Successfully paired to ...`。
 
-6. 使用无线调试下的 **IP 地址和端口**。
+7. 使用无线调试下的 **IP 地址和端口**。
 
   ```sh
   adb connect ipaddr:port
   ```
 
-7. 确认连接状态。
+8. 确认连接状态。
 
    ```sh
    adb devices
