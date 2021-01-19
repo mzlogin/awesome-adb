@@ -315,7 +315,9 @@ emulator-5554	device
 
 ### 无线连接（Android11 及以上）
 
-[Android 11 及更高版本新增了官方的无线连接方式，无需再通过 USB 实际连接设备。](https://developer.android.com/studio/command-line/adb?hl=zh_cn#connect-to-a-device-over-wi-fi-android-11+)
+Android 11 及更高版本支持使用 Android 调试桥 (adb) 从工作站以无线方式部署和调试应用。例如，您可以将可调试应用部署到多台远程设备，而无需通过 USB 实际连接设备。这样就可以避免常见的 USB 连接问题，例如驱动程序安装方面的问题。
+
+[官方文档](https://developer.android.com/studio/command-line/adb?hl=zh_cn#connect-to-a-device-over-wi-fi-android-11+)
 
 操作步骤：
 
