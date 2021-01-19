@@ -22,6 +22,7 @@ Other languages: [:cn: Chinese](./README.md)
 * [Device connection management](#device-connection-management)
     * [Inquiries connected device / simulator](#inquiries-connected-device--simulator)
     * [USB connection](#usb-connection)
+    * [Wireless connection (Android11+)](#wireless-connection-Android11)
     * [Wireless connection (need to use the USB cable)](#wireless-connection-need-to-use-the-usb-cable)
     * [Wireless connection (without using the USB cable)](#wireless-connection-without-using-the-usb-cable)
 * [Application Management](#application-management)
@@ -297,6 +298,38 @@ Developer Options 2. Android devices and USB debugging mode is on.
    ```
 
    Description Connection successful.
+
+### Wireless connection (Android11+)
+
+[Doc in Android developers](https://developer.android.com/studio/command-line/adb#connect-to-a-device-over-wi-fi-android-11+)
+
+Android 11 and higher support deploying and debugging your app wirelessly from your workstation using Android Debug Bridge (adb). For example, you can deploy your debuggable app to multiple remote devices without physically connecting your device via USB. This eliminates the need to deal with common USB connection issues, such as driver installation.
+
+To use wireless debugging, you need to pair your device to your workstation using a pairing code. Your workstation and device must be connected to the same wireless network. To connect to your device, follow these steps:
+
+1. Update to the latest version of the [SDK Platform-Tools](https://developer.android.com/studio/releases/platform-tools).
+
+2. Connect Android device to run adb computer connected to the same local area network, such as connected to the same WiFi.
+
+3. Enable the **Wireless debugging** option.
+
+4. On the dialog that asks **Allow wireless debugging on this network?**, click **Allow**.
+
+5. Select **Pair device with pairing code**. Take note of the pairing code, IP address, and port number displayed on the device.
+
+6. On your workstation, open a terminal and navigate to `android_sdk/platform-tools`.
+
+7. Run `adb pair ipaddr:port`. Use the IP address and port number from step 5.
+
+8. When prompted, enter the pairing code that you received in step 5. A message indicates that your device has been successfully paired.
+
+  ```sh
+  none
+  Enter pairing code: xxxxxx
+  Successfully paired to ...
+  ```
+
+9. (For Linux or Microsoft Windows only) Run `adb connect ipaddr:port`. Use the IP address and port under **Wireless debugging**.
 
 ### Wireless connection (need to use the USB cable)
 

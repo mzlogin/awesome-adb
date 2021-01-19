@@ -26,6 +26,7 @@ Other languages: [:gb: English](./README.en.md)
 * [设备连接管理](#设备连接管理)
     * [查询已连接设备/模拟器](#查询已连接设备模拟器)
     * [USB 连接](#usb-连接)
+    * [无线连接（Android11 及以上）](#无线连接Android11-及以上)
     * [无线连接（需要借助 USB 线）](#无线连接需要借助-usb-线)
     * [无线连接（无需借助 USB 线）](#无线连接无需借助-usb-线)
 * [应用管理](#应用管理)
@@ -311,6 +312,50 @@ emulator-5554	device
    ```
 
    说明连接成功。
+
+### 无线连接（Android11 及以上）
+
+Android 11 及更高版本支持使用 Android 调试桥 (adb) 从工作站以无线方式部署和调试应用。例如，您可以将可调试应用部署到多台远程设备，而无需通过 USB 实际连接设备。这样就可以避免常见的 USB 连接问题，例如驱动程序安装方面的问题。
+
+[官方文档](https://developer.android.com/studio/command-line/adb?hl=zh_cn#connect-to-a-device-over-wi-fi-android-11+)
+
+操作步骤：
+
+1. 更新到最新版本的 [SDK 平台工具](https://developer.android.com/studio/releases/platform-tools?hl=zh_cn)(至少30.0.0)。
+
+2. 将 Android 设备与要运行 adb 的电脑连接到同一个局域网，比如连到同一个 WiFi。
+
+3. 在开发者选项中启用**无线调试**。
+
+4. 在询问要允许在此网络上进行无线调试吗？的对话框中，点击允许。
+
+5. 选择使用配对码配对设备，使用弹窗中的 IP 地址和端口号。
+
+  ```sh
+  adb pair ipaddr:port
+  ```
+
+6. 提示`Enter pairing code: `时输入弹窗中的配对码，成功后会显示`Successfully paired to ...`。
+
+7. 使用无线调试下的 **IP 地址和端口**。
+
+  ```sh
+  adb connect ipaddr:port
+  ```
+
+8. 确认连接状态。
+
+   ```sh
+   adb devices
+   ```
+
+   如果能看到
+
+   ```sh
+   ipaddr:port device
+   ```
+
+说明连接成功。
 
 ### 无线连接（需要借助 USB 线）
 
