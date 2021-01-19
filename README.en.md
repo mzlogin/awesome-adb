@@ -329,7 +329,7 @@ To use wireless debugging, you need to pair your device to your workstation usin
   Successfully paired to ...
   ```
 
-8. (For Linux or Microsoft Windows only) Run `adb connect ipaddr:port`. Use the IP address and port under **Wireless debugging**.
+9. (For Linux or Microsoft Windows only) Run `adb connect ipaddr:port`. Use the IP address and port under **Wireless debugging**.
 
 ### Wireless connection (need to use the USB cable)
 
