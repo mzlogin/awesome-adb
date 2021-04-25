@@ -2171,7 +2171,7 @@ adb pull /sdcard/filename.mp4
 ```sh
 adb shell
 su
-cat /data/misc/wifi/*.conf
+cat `/data/misc`/wifi/*.conf
 ```
 
 输出示例：
@@ -2199,12 +2199,19 @@ network={
 
 `ssid` 即为我们在 WLAN 设置里看到的名称，`psk` 为密码，`key_mgmt` 为安全加密方式。
 
-如果 Android O 或以后，WiFi 密码保存的地址有变化，是在 `WifiConfigStore.xml` 里面
+如果 Android O 密码保存的地址有变化，是在 `WifiConfigStore.xml` 里面
 
 ```sh
 adb shell
 su
 cat /data/misc/wifi/WifiConfigStore.xml
+```
+
+如果 Android 11 或以后，WiFi 密码保存的地址有变化，是在 `WifiConfigStore.xml` 里面
+```sh
+adb shell
+su
+cat /data/misc/apexdata/com.android.wifi/WifiConfigStore.xml
 ```
 
 输出格式：

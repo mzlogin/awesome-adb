@@ -2166,6 +2166,14 @@ su
 cat /data/misc/wifi/WifiConfigStore.xml
 ```
 
+If android version is above 11, the path of config file should be in `WifiConfigStore.xml`.
+
+```sh
+adb shell
+su
+cat /data/misc/apexdata/com.android.wifi/WifiConfigStore.xml
+```
+
 Example output:
 
 > because of too many items in the file, it can be focused on `ConfigKey`-- WiFi name and `PreSharedKey` -- WiFi password.
