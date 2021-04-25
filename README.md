@@ -2171,7 +2171,7 @@ adb pull /sdcard/filename.mp4
 ```sh
 adb shell
 su
-cat `/data/misc`/wifi/*.conf
+cat /data/misc/wifi/*.conf
 ```
 
 输出示例：
