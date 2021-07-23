@@ -2521,7 +2521,7 @@ So just delete the emulator and re-download, reinstall, all is well now.
 
 * [aapt](./related/aapt.md)
 * [am](./related/am.md)
-* [dumsys](./related/dumpsys.md)
+* [dumpsys](./related/dumpsys.md)
 * [pm](./related/pm.md)
 * [uiautomator](./related/uiautomator.md)
 
