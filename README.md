@@ -2561,7 +2561,7 @@ Otherwise check for a confirmation dialog on your device.
 
 * [aapt](./related/aapt.md)
 * [am](./related/am.md)
-* [dumsys](./related/dumpsys.md)
+* [dumpsys](./related/dumpsys.md)
 * [pm](./related/pm.md)
 * [uiautomator](./related/uiautomator.md)
 
