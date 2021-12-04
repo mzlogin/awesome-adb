@@ -530,14 +530,15 @@ parameter:
 
 `Adb install` may be followed by some optional parameters to control the behavior of the installation APK, available parameters and their meanings are as follows:
 
-| Parameter | Meaning                                                                                                   |
-|-----------|-----------------------------------------------------------------------------------------------------------|
-| -l        | Will be applied to protect the installation directory / mnt / asec                                        |
-| -r        | Allowed to cover the installation                                                                         |
-| -t        | Allowed to install application specified in AndroidManifest.xml `android: testOnly =" true "` Application |
-| -s        | Install apps to sdcard                                                                                    |
-| -d        | Downgrade coverage allows installation                                                                    |
-| -g        | Grant all runtime permissions                                                                             |
+| Parameter            | Meaning                                                                                                    |
+|----------------------|------------------------------------------------------------------------------------------------------------|
+| -l                   | Will be applied to protect the installation directory / mnt / asec                                         |
+| -r                   | Allowed to cover the installation                                                                          |
+| -t                   | Allowed to install application specified in AndroidManifest.xml `android: testOnly =" true "` Application  |
+| -s                   | Install apps to sdcard                                                                                     |
+| -d                   | Downgrade coverage allows installation                                                                     |
+| -g                   | Grant all runtime permissions                                                                              |
+| --abi abi-identifier | Force install an apk for a specific ABI, abi-identifier could be armeabi-v7a、arm64-v8a、v86、x86_64, etc. |
 
 After you run the command to see if similar to the following output (status is `Success`) represents the installation was successful:
 

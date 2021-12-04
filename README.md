@@ -557,14 +557,15 @@ adb install [-lrtsdg] <path_to_apk>
 
 `adb install` 后面可以跟一些可选参数来控制安装 APK 的行为，可用参数及含义如下：
 
-| 参数 | 含义                                                                              |
-|------|-----------------------------------------------------------------------------------|
-| -l   | 将应用安装到保护目录 /mnt/asec                                                    |
-| -r   | 允许覆盖安装                                                                      |
-| -t   | 允许安装 AndroidManifest.xml 里 application 指定 `android:testOnly="true"` 的应用 |
-| -s   | 将应用安装到 sdcard                                                               |
-| -d   | 允许降级覆盖安装                                                                  |
-| -g   | 授予所有运行时权限                                                                |
+| 参数                 | 含义                                                                                  |
+|----------------------|---------------------------------------------------------------------------------------|
+| -l                   | 将应用安装到保护目录 /mnt/asec                                                        |
+| -r                   | 允许覆盖安装                                                                          |
+| -t                   | 允许安装 AndroidManifest.xml 里 application 指定 `android:testOnly="true"` 的应用     |
+| -s                   | 将应用安装到 sdcard                                                                   |
+| -d                   | 允许降级覆盖安装                                                                      |
+| -g                   | 授予所有运行时权限                                                                    |
+| --abi abi-identifier | 为特定 ABI 强制安装 apk，abi-identifier 可以是 armeabi-v7a、arm64-v8a、v86、x86_64 等 |
 
 运行命令后如果见到类似如下输出（状态为 `Success`）代表安装成功：
 
