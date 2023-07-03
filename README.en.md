@@ -1,5 +1,204 @@
 # ![Awesome Adb](./assets/title.png)
+whois.com
+LOGIN
+SIGN UP
+DOMAINS
+WEBSITE
+CLOUD
+HOSTING
+SERVERS
+EMAIL
+SECURITY
+WHOIS
+SUPPORT
+0
+markmonitor.com
+Updated 20 hours ago
+Domain Information
+Domain:markmonitor.com
+Registrar:MarkMonitor Inc.
+Registered On:1999-04-23
+Expires On:2025-04-23
+Updated On:2023-03-22
+Status:clientDeleteProhibited
+clientTransferProhibited
+clientUpdateProhibited
+serverDeleteProhibited
+serverTransferProhibited
+serverUpdateProhibited
+Name Servers:ha2.markmonitor.zone
+ha4.markmonitor.zone
+ns1.markmonitor.com
+ns2.markmonitor.com
+ns3.markmonitor.com
+ns4.markmonitor.com
+ns5.markmonitor.com
+ns6.markmonitor.com
+ns7.markmonitor.com
+Registrant Contact
+Name:Domain Administrator
+Organization:MarkMonitor Inc.
+Street:3540 East Longwing Lane, Suite 300
+City:Meridian
+State:ID
+Postal Code:83646
+Country:US
+Phone:+1.2083895740
+Email:email@markmonitor.com
+Administrative Contact
+Name:Domain Administrator
+Organization:MarkMonitor Inc.
+Street:3540 East Longwing Lane, Suite 300
+City:Meridian
+State:ID
+Postal Code:83646
+Country:US
+Phone:+1.2083895740
+Email:email@markmonitor.com
+Technical Contact
+Name:Domain Administrator
+Organization:MarkMonitor Inc.
+Street:3540 East Longwing Lane, Suite 300
+City:Meridian
+State:ID
+Postal Code:83646
+Country:US
+Phone:+1.2083895740
+Email:email@markmonitor.com
+Raw Whois Data
+Domain Name: markmonitor.com
+Registry Domain ID: 5604337_DOMAIN_COM-VRSN
+Registrar WHOIS Server: whois.markmonitor.com
+Registrar URL: http://www.markmonitor.com
+Updated Date: 2023-03-22T09:02:33+0000
+Creation Date: 1999-04-23T07:00:00+0000
+Registrar Registration Expiration Date: 2025-04-23T00:00:00+0000
+Registrar: MarkMonitor, Inc.
+Registrar IANA ID: 292
+Registrar Abuse Contact Email: email@markmonitor.com
+Registrar Abuse Contact Phone: +1.2086851750
+Domain Status: clientUpdateProhibited (https://www.icann.org/epp#clientUpdateProhibited)
+Domain Status: clientTransferProhibited (https://www.icann.org/epp#clientTransferProhibited)
+Domain Status: clientDeleteProhibited (https://www.icann.org/epp#clientDeleteProhibited)
+Domain Status: serverUpdateProhibited (https://www.icann.org/epp#serverUpdateProhibited)
+Domain Status: serverTransferProhibited (https://www.icann.org/epp#serverTransferProhibited)
+Domain Status: serverDeleteProhibited (https://www.icann.org/epp#serverDeleteProhibited)
+Registry Registrant ID: 
+Registrant Name: Domain Administrator
+Registrant Organization: MarkMonitor Inc.
+Registrant Street: 3540 East Longwing Lane, Suite 300
+Registrant City: Meridian
+Registrant State/Province: ID
+Registrant Postal Code: 83646
+Registrant Country: US
+Registrant Phone: +1.2083895740
+Registrant Phone Ext: 
+Registrant Fax: 
+Registrant Fax Ext: 
+Registrant Email: email@markmonitor.com
+Registry Admin ID: 
+Admin Name: Domain Administrator
+Admin Organization: MarkMonitor Inc.
+Admin Street: 3540 East Longwing Lane, Suite 300
+Admin City: Meridian
+Admin State/Province: ID
+Admin Postal Code: 83646
+Admin Country: US
+Admin Phone: +1.2083895740
+Admin Phone Ext: 
+Admin Fax: 
+Admin Fax Ext: 
+Admin Email: email@markmonitor.com
+Registry Tech ID: 
+Tech Name: Domain Administrator
+Tech Organization: MarkMonitor Inc.
+Tech Street: 3540 East Longwing Lane, Suite 300
+Tech City: Meridian
+Tech State/Province: ID
+Tech Postal Code: 83646
+Tech Country: US
+Tech Phone: +1.2083895740
+Tech Phone Ext: 
+Tech Fax: 
+Tech Fax Ext: 
+Tech Email: email@markmonitor.com
+Name Server: ns1.markmonitor.com
+Name Server: ha4.markmonitor.zone
+Name Server: ns3.markmonitor.com
+Name Server: ns6.markmonitor.com
+Name Server: ha2.markmonitor.zone
+Name Server: ns4.markmonitor.com
+Name Server: ns2.markmonitor.com
+Name Server: ns7.markmonitor.com
+Name Server: ns5.markmonitor.com
+DNSSEC: unsigned
+URL of the ICANN WHOIS Data Problem Reporting System: http://wdprs.internic.net/
+>>> Last update of WHOIS database: 2023-07-02T04:09:11+0000 <<<
 
+For more information on WHOIS status codes, please visit:
+  https://www.icann.org/resources/pages/epp-status-codes
+
+If you wish to contact this domain’s Registrant, Administrative, or Technical
+contact, and such email address is not visible above, you may do so via our web
+form, pursuant to ICANN’s Temporary Specification. To verify that you are not a
+robot, please enter your email address to receive a link to a page that
+facilitates email communication with the relevant contact(s).
+
+Web-based WHOIS:
+  https://domains.markmonitor.com/whois
+
+If you have a legitimate interest in viewing the non-public WHOIS details, send
+your request and the reasons for your request to email@markmonitor.com
+and specify the domain name in the subject line. We will review that request and
+may ask for supporting documentation and explanation.
+
+The data in MarkMonitor’s WHOIS database is provided for information purposes,
+and to assist persons in obtaining information about or related to a domain
+name’s registration record. While MarkMonitor believes the data to be accurate,
+the data is provided "as is" with no guarantee or warranties regarding its
+accuracy.
+
+By submitting a WHOIS query, you agree that you will use this data only for
+lawful purposes and that, under no circumstances will you use this data to:
+  (1) allow, enable, or otherwise support the transmission by email, telephone,
+or facsimile of mass, unsolicited, commercial advertising, or spam; or
+  (2) enable high volume, automated, or electronic processes that send queries,
+data, or email to MarkMonitor (or its systems) or the domain name contacts (or
+its systems).
+
+MarkMonitor reserves the right to modify these terms at any time.
+
+By submitting this query, you agree to abide by this policy.
+
+MarkMonitor Domain Management(TM)
+Protecting companies and consumers in a digital world.
+
+Visit MarkMonitor at https://www.markmonitor.com
+Contact us at +1.8007459229
+In Europe, at +44.02032062220
+----
+Interested in similar domains?
+markanalyzer.comBuy Now
+markmonitorapp.comBuy Now
+datamarkmonitor.comBuy Now
+markmonitor24.comBuy Now
+marktracker.netBuy Now
+markdashboard.comBuy Now
+.space
+$24.88 $0.88
+BUY NOW
+
+*while stocks last
+ 
+On Sale!
+.co
+.CO @ $14.88 $31.88
+ WordPress Hosting
+related domain names
+icann.orgmarkmonitor.zoneinternic.net
+View Knowledge Base | Contact Support
+Copyright © Whois.com. All rights reserved
+Legal AgreementPrivacy Policy
 The [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html) (ADB) is a toolkit included in the Android SDK package, it is not only a powerful tool for Android developers and testers, but also a good toy for Android fans.
 
 This repository renews continually, Pull Requests and Issues are welcomed. If you found [this](https://github.com/mzlogin/awesome-adb) is useful, you can star it and conveniently back here to view when necessary.
