@@ -33,6 +33,9 @@ Other languages: [:cn: Chinese](./README.md)
         * [Application package name contains a string](#application-package-name-contains-a-string)
     * [Install APK](#install-apk)
     * [Uninstalling](#uninstalling)
+    * [Disable or enable apps](#disable-or-enable-apps)
+        * [Disable apps](#disable-apps)
+        * [Enable apps](#enable-apps)
     * [Clear app cache data](#clear-app-cache-data)
     * [View Reception Activity](#view-reception-activity)
     * [View Running Services](#view-running-services)
@@ -656,6 +659,42 @@ adb uninstall com.qihoo360.mobilesafe
 ```
 
 Uninstall represents 360 mobile guards.
+
+### Disable or enable apps
+
+List all apps enabled:
+
+```sh
+adb shell pm list packages -e
+```
+
+#### Disable apps
+
+command:
+
+```sh
+adb shell pm disable-user <packagename>
+```
+
+Command Example:
+
+```sh
+adb shell pm disable-user com.qihoo360.mobilesafe
+```
+
+#### Enable apps
+
+command:
+
+```sh
+adb shell pm enable <packagename>
+```
+
+Command Example:
+
+```sh
+adb shell pm enable com.qihoo360.mobilesafe
+```
 
 ### Clear app cache data
 

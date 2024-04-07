@@ -37,6 +37,9 @@ Other languages: [:gb: English](./README.en.md)
         * [包名包含某字符串的应用](#包名包含某字符串的应用)
     * [安装 APK](#安装-apk)
     * [卸载应用](#卸载应用)
+    * [停用/启用应用](#停用启用应用)
+        * [停用应用](#停用应用)
+        * [启用应用](#启用应用)
     * [清除应用数据与缓存](#清除应用数据与缓存)
     * [查看前台 Activity](#查看前台-activity)
     * [查看正在运行的 Services](#查看正在运行的-services)
@@ -683,6 +686,42 @@ adb uninstall com.qihoo360.mobilesafe
 ```
 
 表示卸载 360 手机卫士。
+
+### 停用/启用应用
+
+查看启用的应用列表：
+
+```sh
+adb shell pm list packages -e
+```
+
+#### 停用应用
+
+命令：
+
+```sh
+adb shell pm disable-user <packagename>
+```
+
+命令示例：
+
+```sh
+adb shell pm disable-user com.qihoo360.mobilesafe
+```
+
+#### 启用应用
+
+命令：
+
+```sh
+adb shell pm enable <packagename>
+```
+
+命令示例：
+
+```sh
+adb shell pm enable com.qihoo360.mobilesafe
+```
 
 ### 清除应用数据与缓存
 
