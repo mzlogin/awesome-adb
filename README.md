@@ -1,4 +1,6 @@
 # ![Awesome Adb](./assets/title.png)
+[![Backers on Open Collective](https://opencollective.com/awesome-adb/backers/badge.svg)](#backers)
+ [![Sponsors on Open Collective](https://opencollective.com/awesome-adb/sponsors/badge.svg)](#sponsors) 
 
 ADB，即 [Android Debug Bridge](https://developer.android.com/studio/command-line/adb.html)，它是 Android 开发/测试人员不可替代的强大工具，也是 Android 设备玩家的好玩具。
 
@@ -2626,3 +2628,33 @@ Otherwise check for a confirmation dialog on your device.
 * [像高手一样使用ADB命令行（2）](http://cabins.github.io/2016/03/25/UseAdbLikeAPro-2/)
 
 [1]: #ip-地址
+
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="graphs/contributors"><img src="https://opencollective.com/awesome-adb/contributors.svg?width=890" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/awesome-adb#backer)]
+
+<a href="https://opencollective.com/awesome-adb#backers" target="_blank"><img src="https://opencollective.com/awesome-adb/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/awesome-adb#sponsor)]
+
+<a href="https://opencollective.com/awesome-adb/sponsor/0/website" target="_blank"><img src="https://opencollective.com/awesome-adb/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/awesome-adb/sponsor/1/website" target="_blank"><img src="https://opencollective.com/awesome-adb/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/awesome-adb/sponsor/2/website" target="_blank"><img src="https://opencollective.com/awesome-adb/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/awesome-adb/sponsor/3/website" target="_blank"><img src="https://opencollective.com/awesome-adb/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/awesome-adb/sponsor/4/website" target="_blank"><img src="https://opencollective.com/awesome-adb/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/awesome-adb/sponsor/5/website" target="_blank"><img src="https://opencollective.com/awesome-adb/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/awesome-adb/sponsor/6/website" target="_blank"><img src="https://opencollective.com/awesome-adb/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/awesome-adb/sponsor/7/website" target="_blank"><img src="https://opencollective.com/awesome-adb/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/awesome-adb/sponsor/8/website" target="_blank"><img src="https://opencollective.com/awesome-adb/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/awesome-adb/sponsor/9/website" target="_blank"><img src="https://opencollective.com/awesome-adb/sponsor/9/avatar.svg"></a>
+
+
