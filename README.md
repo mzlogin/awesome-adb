@@ -993,6 +993,12 @@ adb shell am stopservice [options] <INTENT>
 adb shell am broadcast [options] <INTENT>
 ```
 
+添加文件到媒体数据库:
+
+```sh
+adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/Download/test2.png
+```
+
 可以向所有组件广播，也可以只向指定组件广播。
 
 例如，向所有组件广播 `BOOT_COMPLETED`：
