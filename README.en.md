@@ -1291,7 +1291,19 @@ command:
 adb shell input text hello
 ```
 
-`Hello` now appear in the text box.
+`hello` now appear in the text box.
+
+If you want to input Chinese, you can install [ADBKeyBoard.apk](https://github.com/senzhk/ADBKeyBoard), detailed documentation refer to [here](https://github.com/senzhk/ADBKeyBoard).
+
+Then execute the commands:
+
+```sh
+# 1. Set the current input method to ADBKeyBoard
+adb shell ime set com.android.adbkeyboard/.AdbIME   
+
+# 2. Input Chinese
+adb shell am broadcast -a ADB_INPUT_TEXT --es msg '你好'
+```
 
 ## View Log
 

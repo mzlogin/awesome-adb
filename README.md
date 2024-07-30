@@ -1311,13 +1311,15 @@ adb shell input text hello
 
 现在 `hello` 出现在文本框了。
 
-如果输入的是中文的话,需要在手机中安装[ADBKeyboard.apk](https://github.com/senzhk/ADBKeyBoard),详细文档见[这里](https://github.com/senzhk/ADBKeyBoard)
+如果想输入中文，可以在设备上安装 [ADBKeyBoard.apk](https://github.com/senzhk/ADBKeyBoard)，详细文档参考 [这里](https://github.com/senzhk/ADBKeyBoard)。
 
 然后执行命令:
-```
-1. 设置当前输入法为:ADBKeyBoard
+
+```sh
+# 1. 设置当前输入法为 ADBKeyBoard
 adb shell ime set com.android.adbkeyboard/.AdbIME   
-2. 输入中文
+
+# 2. 输入中文
 adb shell am broadcast -a ADB_INPUT_TEXT --es msg '你好'
 ```
 
