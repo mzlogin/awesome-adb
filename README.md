@@ -771,6 +771,7 @@ adb shell dumpsys activity services [<packagename>]
 
 `<packagename>` 不一定要给出完整的包名，比如运行 `adb shell dumpsys activity services org.mazhuang`，那么包名 `org.mazhuang.demo1`、`org.mazhuang.demo2` 和 `org.mazhuang123` 等相关的 Services 都会列出来。
 
+- [Gitstar](https://dev.gitstar.ai?utm_medium=github_readme&utm_source=awesome_list&utm_campaign=mzlogin_awesome-adb) - Follow developers on GitHub and see what repos they star. Like a social feed for repo discovery.
 ### 查看应用详细信息
 
 命令：
