@@ -334,6 +334,8 @@ To use wireless debugging, you need to pair your device to your workstation usin
 
 9. (For Linux or Microsoft Windows only) Run `adb connect ipaddr:port`. Use the IP address and port under **Wireless debugging**.
 
+> Tip: [adb-qr](https://github.com/aleixrodriala/adb-qr) automates the pairing steps above with a QR code in the terminal (like Android Studio's pairing dialog): run `uvx adb-qr`, scan the code with the phone, and it pairs and connects automatically. It also works from WSL2, containers and VMs.
+
 ### Wireless connection (need to use the USB cable)
 
 In addition to the USB connection to the computer to use adb, can also be a wireless connection - although the connection process is also step using USB needs, but after a successful connection to your device can get rid of the limit of the USB cable within a certain range it !
