@@ -2609,6 +2609,7 @@ Otherwise check for a confirmation dialog on your device.
 ## adb 的非官方实现
 
 * [fb-adb](https://github.com/facebook/fb-adb) - A better shell for Android devices (for Mac).
+* [Ghost in the Droid](https://github.com/ghost-in-the-droid/android-agent) - Python MCP server exposing 62 ADB tools as MCP calls — tap, swipe, screenshot, UI accessibility tree, app launch, ADB shell, and on-device LLM inference. Lets AI agents (Claude, Cursor, etc.) control real Android devices and iOS devices via WebDriverAgent. `pip install ghost-in-the-droid`
 
 ## 相关命令
 
