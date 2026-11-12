@@ -2300,6 +2300,14 @@ adb shell svc wifi disable
 
 If successfully implemented, the output is empty; if not get root privileges to execute this command will fail, output `Killed`.
 
+### Tidy up home screen icons with input motionevent
+
+Tablet builds (e.g. Xiaomi HyperOS tablets) have no "shake to fill gaps" gesture like Xiaomi phones: holes left on the home screen by uninstalls are never refilled, and the built-in "auto-refill after uninstall" option only affects *future* uninstalls. `adb shell input draganddrop` is too blunt for the job: no per-move verification, and page-crossing drags are unreliable.
+
+A finer approach is scripting the whole gesture with `input motionevent`: long-press to pick the icon up, a chain of MOVE steps, hover against the screen edge for ~0.35 s to trigger a page flip, then release on the target cell. Confirm page flips in real time by watching the page-indicator dots. HyperOS refills the gap the moment an icon leaves it, invalidating previously measured coordinates — so keep the rhythm *move one icon → verify → re-read the grid → move the next*.
+
+A field report (three AI agents cooperating, 4 messy home-screen pages rebuilt into 2, entirely over wireless ADB): [three-ai-agents-tidy-a-tablet](https://github.com/Pierce6688/three-ai-agents-tidy-a-tablet)
+
 ## Flashing-Phone related commands
 
 ### Restart to Recovery mode
