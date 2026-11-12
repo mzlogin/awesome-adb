@@ -2340,6 +2340,14 @@ adb shell svc wifi disable
 
 若执行成功，输出为空；若未取得 root 权限执行此命令，将执行失败，输出 `Killed`。
 
+### 用 input motionevent 整理桌面图标
+
+平板版系统（如小米 HyperOS 平板）没有手机上的「摇一摇补位」手势，卸载应用留下的桌面空格不会自动填平；内置的「卸载后自动补位」选项也只对之后的卸载生效。`adb shell input draganddrop` 又太粗糙：无法逐步验证，跨页拖拽不可靠。
+
+更精细的做法是用 `input motionevent` 脚本化整个手势：长按抓起图标 → 一串 MOVE 分段移动 → 贴屏幕边缘悬停约 0.35 秒触发翻页 → 在目标格释放。翻页是否成功，可通过实时读取桌面指示圆点确认。HyperOS 会在图标离开原格的瞬间自动补位，之前量好的坐标随即作废，因此要遵守「搬一个 → 验证 → 重读网格 → 再搬下一个」的节奏。
+
+一个实战记录（三台 AI 代理协作，4 页图标整理成 2 页，全程无线 ADB）：[three-ai-agents-tidy-a-tablet](https://github.com/Pierce6688/three-ai-agents-tidy-a-tablet)
+
 ## 刷机相关命令
 
 ### 重启到 Recovery 模式
