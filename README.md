@@ -2611,6 +2611,7 @@ Otherwise check for a confirmation dialog on your device.
 ## adb 的非官方实现
 
 * [fb-adb](https://github.com/facebook/fb-adb) - A better shell for Android devices (for Mac).
+* [droid-agent](https://github.com/hyusband/droid-agent) - 让 AI agent 通过原生 adb 直接控制 Android 设备的 CLI + MCP server（uiautomator 节点编号、tap/type/swipe，设备端零安装零依赖）.
 
 ## 相关命令
 
