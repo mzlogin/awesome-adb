@@ -2571,6 +2571,7 @@ So just delete the emulator and re-download, reinstall, all is well now.
 ## adb unofficial implementation
 
 * [fb-adb](https://github.com/facebook/fb-adb) - A better shell for Android devices (for Mac).
+* [droid-agent](https://github.com/hyusband/droid-agent) - CLI + MCP server that lets AI agents control Android over stock adb: numbered UI refs, tap/type/swipe, zero on-device install.
 
 ## related commands
 
