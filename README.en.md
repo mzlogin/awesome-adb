@@ -2571,6 +2571,7 @@ So just delete the emulator and re-download, reinstall, all is well now.
 ## adb unofficial implementation
 
 * [fb-adb](https://github.com/facebook/fb-adb) - A better shell for Android devices (for Mac).
+* [ADBLink](https://github.com/MostafaAshry513/ADBLink) - Runs the real adb from Termux against a second Android phone over a USB OTG cable. No computer, and no root on the host phone.
 
 ## related commands
 
